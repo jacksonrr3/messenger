@@ -4,8 +4,8 @@
   "description": "simple messenger",
   "source": "static/index.html",
   "scripts": {
-    "dev": "parcel",
-    "build": "parcel build",
+    "dev": "parcel --no-cache",
+    "build": "parcel build --no-cache",
     "start": "npm run build && node ./server.js"
   },
   "repository": {

@@ -1,14 +1,14 @@
 ---
+title: auth
 inputs:
   - title: Имя
-    id: name
+    id: auth_name
     type: text
-    placeholder: Имя
   - title: Пароль
-    id: password
-    type: text
-    placeholder: Пароль
-buttonName: регистрация 
+    id: auth_password
+    type: password
+authButton: Авторизоваться
+noAccButton: Нет аккаунта? 
 ---
 
 {{!< base}}
@@ -17,9 +17,10 @@ buttonName: регистрация
 	<form class="form__auth">
 		<p>Вход</p>
 		{{#each inputs}}
-  			{{>input }}
+  			{{>input_block }}
 		{{/each}}
-		{{> button button_name=кнопка }}
+		{{> button_block text=authButton }}
+		{{> button_block text=noAccButton }}
 		</div>
 	</form>
 </div>
