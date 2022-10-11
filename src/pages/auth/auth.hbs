@@ -10,7 +10,7 @@ inputs:
     type: password
 auth_text: Авторизоваться
 no_acc_text: Нет аккаунта?
-
+span: true
 ---
 
 {{!< base}}
@@ -19,7 +19,7 @@ no_acc_text: Нет аккаунта?
 		<form class="form">
 			<h2 class="title">Вход</h2>
 			{{#each inputs}}
-				{{>input_item }}
+				{{>input_item span=../span}}
 			{{/each}}
 			{{>button_block text=auth_text}}
 			<a href="../reg/reg.hbs">{{no_acc_text}}</a>
