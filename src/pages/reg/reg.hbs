@@ -1,0 +1,40 @@
+---
+title: reg
+stylesheet: ./reg.scss
+inputs:
+  - title: Почта
+    id: reg_mail
+    type: email
+  - title: Логин
+    id: reg_login
+    type: text
+  - title: Имя
+    id: reg_name
+    type: text
+  - title: Фамилия
+    id: reg_surname
+    type: text
+  - title: Телефон
+    is: reg_phone
+    type: tel
+  - title: Пароль
+    id: reg_password
+    type: password
+registration: Зарегистрироваться
+enter: Войти
+---
+
+{{!< base}}
+
+<div class="container">
+	<div class="form-container">
+		<form class="form">
+      <h2 class="title">Регистрация</h2>
+      {{#each inputs}}
+          {{>input_item }}
+      {{/each}}
+      {{>button_block text=registration}}
+      <a href="../auth/auth.hbs">{{enter}}</a>
+    </form>
+  </div>
+</div>
