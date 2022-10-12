@@ -1,6 +1,6 @@
 ---
-title: user_settings
-stylesheet: ./user_settings.scss
+title: user_profile
+stylesheet: ./user_profile.scss
 inputs:
   - title: Почта
     id: email
@@ -20,8 +20,6 @@ inputs:
   - title: Телефон
     id: phone
     type: tel
-save: Сохранить
-span: false
 ---
 {{!< base}}
 
@@ -33,11 +31,19 @@ span: false
         <div class="avatar">
           <img src="/static/pictures/default_avatar.svg">
         </div>
-        <form class="settings">
+        <div class="info">
             {{#each inputs}}
-                {{>input_item}}
+                {{>input_item disabled='disabled'}}
             {{/each}}
-            {{>button_block text=save}}
-        </form>
+        </div>
+        <div class="links">
+          <div class="link">
+            <a href="../user_settings/user_settings.hbs">Изменить данные</a>
+          </div>
+          <div class="link">
+            <a href="../change_password/change_password.hbs">Изменить пароль</a>
+          </div>
+          <a href="/">Выйти</a>
+        </div>
     </div
 </div>

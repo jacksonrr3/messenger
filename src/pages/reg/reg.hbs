@@ -3,22 +3,25 @@ title: reg
 stylesheet: ./reg.scss
 inputs:
   - title: Почта
-    id: reg_mail
+    id: email
     type: email
   - title: Логин
-    id: reg_login
+    id: login
     type: text
   - title: Имя
-    id: reg_name
+    id:  first_name
     type: text
   - title: Фамилия
     id: reg_surname
     type: text
   - title: Телефон
-    is: reg_phone
+    id: phone
     type: tel
   - title: Пароль
-    id: reg_password
+    id: password
+    type: password
+  - title: Подтвердить пароль
+    id: confirm_password
     type: password
 registration: Зарегистрироваться
 enter: Войти
