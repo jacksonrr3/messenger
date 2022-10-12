@@ -1,20 +1,15 @@
 .container {
     display: flex;
     flex-direction: column;
-    // justify-content: center;
+
     align-items: center;
     height: 615px;
     width: 340px;
     margin: 70px auto;
 
-    // border-style: groove;
     background: #FFFFFF;
     box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
     border-radius: 12px;
-
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 500;
 
     .form-container {
         height: inherit;
@@ -27,22 +22,16 @@
             
             .title {
                 margin-bottom: 40px;
-                font-family: 'Inter';
-                font-style: normal;
-                font-weight: 500;
                 font-size: 20px;
                 line-height: 20px;
-                /* identical to box height, or 100% */
 
                 text-align: center;
-
                 color: #1E1E1E;
             }
 
             .input-item {
                 display: flex;
                 flex-direction: column;
-                // align-items: center;
                 justify-content: center;
 
                 label {
@@ -95,7 +84,6 @@
 
                 font-size: 11px;
                 line-height: 11px;
-                /* identical to box height, or 100% */
 
                 color: #3369F3;
             }
