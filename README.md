@@ -8,7 +8,6 @@
 
 
 ### 
-
 - «[Ссылка на проект](https://deploy--dashing-kangaroo-f099e9.netlify.app/)»,
 - «[Макет дизайна](https://www.figma.com/file/jF5fFFzgGOxQeB4CmKWTiE/Chat_external_link?node-id=0%3A1)»,
 
