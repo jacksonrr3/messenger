@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{{title}}</title>
+    <link href="../../styles/base.scss" rel="stylesheet" />
+    <link href="{{stylesheet}}" rel="stylesheet" />
+  </head>
+
+  <body>
+    {{> header}}
+    <main>
+    {{{body}}}
+    </main>
+    {{> footer}}
+
+    {{#each scripts}}
+    <script defer src="{{this}}"></script>
+    {{/each}}
+  </body>
+</html>

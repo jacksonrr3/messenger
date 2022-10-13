@@ -1,0 +1,49 @@
+---
+title: user_profile
+stylesheet: ./user_profile.scss
+inputs:
+  - title: Почта
+    id: email
+    type: email
+  - title: Логин
+    id:  login
+    type: text
+  - title: Имя
+    id: first_name
+    type: text
+  - title: Фамилия
+    id: second_name
+    type: text
+  - title: Имя в чате
+    id: display_name
+    type: display_name
+  - title: Телефон
+    id: phone
+    type: tel
+---
+{{!< base}}
+
+<div class="container">
+    <div class="back">
+        <a href="/"></a>
+    </div>
+    <div class="user">
+        <div class="avatar">
+          <img src="/static/pictures/default_avatar.svg" alt="user_avatar">
+        </div>
+        <div class="info">
+            {{#each inputs}}
+                {{>input_item disabled='disabled'}}
+            {{/each}}
+        </div>
+        <div class="links">
+          <div class="link">
+            <a href="../user_settings/user_settings.hbs">Изменить данные</a>
+          </div>
+          <div class="link">
+            <a href="../change_password/change_password.hbs">Изменить пароль</a>
+          </div>
+          <a href="/">Выйти</a>
+        </div>
+    </div>
+</div>

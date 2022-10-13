@@ -1,0 +1,29 @@
+---
+title: auth
+stylesheet: ./auth.scss
+inputs:
+  - title: Имя
+    id: login
+    type: text
+  - title: Пароль
+    id: password
+    type: password
+auth_text: Авторизоваться
+no_acc_text: Нет аккаунта?
+span: true
+---
+
+{{!< base}}
+<div class="container">
+	<div class="form-container">
+		<form class="form">
+			<h2 class="title">Вход</h2>
+			{{#each inputs}}
+				{{>input_item span=../span}}
+			{{/each}}
+			{{>button_block text=auth_text}}
+			<a href="../reg/reg.hbs">{{no_acc_text}}</a>
+			</div>
+		</form>
+	</div>
+</div>
