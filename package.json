@@ -4,9 +4,10 @@
   "description": "simple messenger",
   "source": "static/index.html",
   "scripts": {
-    "dev": "parcel --no-cache",
-    "build": "parcel build --no-cache",
-    "start": "npm run build && node ./server.js"
+    "dev": "parcel --no-cache src/index.html",
+    "build": "parcel build --no-cache src/index.html",
+    "start": "npm run build && node ./server.js",
+    "lint": "eslint ."
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,9 @@
   "devDependencies": {
     "@anikin/parcel-transformer-handlebars": "1.0.9",
     "@parcel/transformer-sass": "2.7.0",
+    "@typescript-eslint/eslint-plugin": "^5.41.0",
+    "@typescript-eslint/parser": "^5.41.0",
+    "eslint": "^8.26.0",
     "express": "4.18.1",
     "parcel": "2.7.0"
   },
