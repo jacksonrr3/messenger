@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+        "outDir": "dist",
+        "target": "es2022",
+        "declaration": true,
+        // "module": "commonjs",
+        "esModuleInterop": true,
+        "strictNullChecks": true,
+        "noImplicitAny": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "sourceMap": true,
+        "baseUrl": "./src",
+        "lib": ["ES2022"]
+        // "typeRoots": ["node_modules/@types", "types/app.d.ts"]
+    }
+}

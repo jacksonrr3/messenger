@@ -5,6 +5,7 @@
     },
     "extends": [
         "eslint:recommended",
+        // "airbnb",
         "plugin:@typescript-eslint/recommended"
     ],
     "parser": "@typescript-eslint/parser",
@@ -16,5 +17,16 @@
         "@typescript-eslint"
     ],
     "rules": {
+        "ignoreRestArgs": "off",
+        "no-underscore-dangle": "off",
+        "import/extensions": "off",
+        // "import/no-unresolved": "warn",
+        "import/prefer-default-export": "off",
+        "no-shadow": "warn",
+        "no-param-reassign": "warn",
+        "class-methods-use-this": "warn",
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/no-explicit-any": "off"
     }
 }
