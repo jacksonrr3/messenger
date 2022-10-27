@@ -19,7 +19,7 @@ export default class EventBus {
       throw new Error(`Нет события: ${event}`);
     }
     this.listeners[event] = this.listeners[event].filter(
-      (handler) => handler !== callback
+      (handler) => handler !== callback,
     );
   }
 
