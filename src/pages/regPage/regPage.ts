@@ -71,7 +71,6 @@ export default class RegPage extends Block {
       confirmPasswordInput,
       regButton,
       enter: 'Войти',
-      span: true,
     });
   }
 

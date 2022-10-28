@@ -31,7 +31,6 @@ export default class AuthPage extends Block {
       passwordInput,
       authButton,
       noAccText: 'Нет аккаунта?',
-      span: true,
     });
   }
 

@@ -7,6 +7,7 @@ import AuthPage from './pages/authPage';
 import RegPage from './pages/regPage';
 import UserProfilePage from './pages/userProfilePage';
 import UserSettingsPage from './pages/userSettingsPage';
+import ChangePasswordPage from './pages/changePasswordPage';
 
 // const routes = {
 //   // '/auth': authPage,
@@ -48,6 +49,9 @@ switch (window.location.pathname) {
     break;
   case '/user_settings':
     renderDom('root', new UserSettingsPage({}));
+    break;
+  case '/change_password':
+    renderDom('root', new ChangePasswordPage({}));
     break;
   default:
     if (el) {
