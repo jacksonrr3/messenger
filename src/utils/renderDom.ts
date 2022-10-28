@@ -1,6 +1,11 @@
-export default (selector: string, compiledTemplate: string) => {
-  const el = document.getElementById(selector);
-  if (el) {
-    el.innerHTML = compiledTemplate;
+import Block from '../core/Block';
+
+export default (query: string, block: Block) => {
+  const root = document.getElementById(query);
+  if (root) {
+    root.appendChild(block.getContent());
   }
+
+  block.dispatchComponentDidMount();
+  return root;
 };

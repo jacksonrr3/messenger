@@ -2,31 +2,31 @@ export default `
   <nav>
     <ul>
       <li>
-        <a href="/src/pages/auth/auth.hbs" style="display:block">Authorization</a>
+        <a href="/auth" style="display:block">Authorization</a>
       </li>
       <li>
-        <a href="/src/pages/reg/reg.hbs" style="display:block">Registration</a>
+        <a href="/reg" style="display:block">Registration</a>
       </li>
       <li>
-        <a href="../src/pages/chats/chats.hbs">Chats</a>
+        <a href="/chats">Chats</a>
       </li>
       <li>
-        <a href="/src/pages/404/404.hbs" style="display:block">404</a>
+        <a href="/404" style="display:block">404</a>
       </li>
       <li>
-        <a href="/src/pages/500/500.hbs" style="display:block">500</a>
+        <a href="/500" style="display:block">500</a>
       </li>
       <li>
-        <a href="../src/pages/user_profile/user_profile.hbs">User profile</a>
-      </li>	
-      <li>
-        <a href="/src/pages/user_settings/user_settings.hbs">User settings</a>
+        <a href="/user_profile">User profile</a>
       </li>
       <li>
-        <a href="../src/pages/change_password/change_password.hbs">Change password</a>
+        <a href="/user_settings">User settings</a>
       </li>
       <li>
-        <a href="../src/pages/change_avatar/change_avatar.hbs">Change avatar</a>
+        <a href="/change_password">Change password</a>
+      </li>
+      <li>
+        <a href="/change_avatar">Change avatar</a>
       </li>
     </ul>
   </nav>

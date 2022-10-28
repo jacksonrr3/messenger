@@ -1,9 +1,19 @@
-import { v4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
+import Handlebars from 'handlebars';
 import EventBus from './EventBus';
 
-type Props = object;
-type Children = object;
-type Meta = object;
+export type Children = Record<string, any>;
+export type Props = {
+  [key: string]: any;
+  class?: string;
+  children?: Children;
+  events?: Record<string, (...args: any) => void>;
+  attr?: string[][];
+};
+type Meta = {
+  tagName: string,
+  props: Props,
+};
 
 export default class Block {
   static EVENTS = {
@@ -13,29 +23,25 @@ export default class Block {
     FLOW_CDU: 'flow:component-did-update',
   };
 
-  props: Props;
-  eventBus: () => EventBus;
+  _props: Props;
+  _eventBus: () => EventBus;
   _children: Children;
-  _id: typeof v4;
+  _id: string;
   _element: HTMLElement;
   _meta: Meta;
   _setUpdate: boolean;
 
-  // /** JSDoc
-  //  * @param {string} tagName
-  //  * @param {Object} props
-  //  *
-  //  * @returns {void}
-  //  */
-  constructor(tagName = 'div', props: Props = {}) {
-    this._meta = {
-      tagName,
-      props,
-    };
+  constructor(tagName = 'div', propsAndChildren: Props = {}) {
+    const { props, children } = this._getChildren(propsAndChildren);
 
-    this.props = this._makePropsProxy(props);
     const eventBus = new EventBus();
-    this.eventBus = () => eventBus;
+    this._eventBus = () => eventBus;
+    this._id = uuidv4();
+    // this._children = children;
+    this._children = this._makePropsProxy(children);
+    this._props = this._makePropsProxy({ ...props, _id: this._id });
+    this._meta = { tagName, props };
+
     this._registerEvents(eventBus);
     eventBus.emit(Block.EVENTS.INIT);
   }
@@ -54,30 +60,35 @@ export default class Block {
 
   init() {
     this._createResources();
-    this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
-    this.eventBus().emit(Block.EVENTS.FLOW_CDM);
+    this._eventBus().emit(Block.EVENTS.FLOW_RENDER);
+    this._eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
   _componentDidMount() {
     this.componentDidMount();
+
+    Object.values(this._children).forEach((child) => {
+      child.dispatchComponentDidMount();
+    });
   }
 
   // Может переопределять пользователь, необязательно трогать
-  componentDidMount(oldProps: Props) {}
+  // componentDidMount(oldProps: Props) {}
+  componentDidMount() {}
 
-  dispatchComponentDidMoun() {
-    this.eventBus().emit(Block.EVENTS.FLOW_CDM);
+  dispatchComponentDidMount() {
+    this._eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
   _componentDidUpdate(oldProps: Props, newProps: Props) {
     const response = this.componentDidUpdate(oldProps, newProps);
     if (response) {
-      this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+      this._eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
   }
 
   // Может переопределять пользователь, необязательно трогать
-  componentDidUpdate(oldProps: Props, newProps: Props) {
+  componentDidUpdate(oldProps: Props, newProps: Props): boolean {
     return true;
   }
 
@@ -86,7 +97,7 @@ export default class Block {
       return;
     }
 
-    Object.assign(this.props, nextProps);
+    Object.assign(this._props, nextProps);
   };
 
   get element() {
@@ -99,13 +110,15 @@ export default class Block {
     // Используйте шаблонизатор из npm или напишите свой безопасный
     // Нужно не в строку компилировать (или делать это правильно),
     // либо сразу в DOM-элементы возвращать из compile DOM-ноду
-    this._element.innerHTML = block;
+    this._removeEvents();
+    this._element.innerHTML = '';
+    this._element.appendChild(block);
+    this._addEvents();
+    this._addAttributes();
   }
 
   // Может переопределять пользователь, необязательно трогать
-  render(): string {
-    return '';
-  }
+  render() {}
 
   getContent() {
     return this.element;
@@ -114,27 +127,92 @@ export default class Block {
   _makePropsProxy(props: Props) {
   // Можно и так передать this
   // Такой способ больше не применяется с приходом ES6+
-    const self = this;
-    props = new Proxy(props, {
-      set(target, prop, value) {
+    // const self = this;
+    return new Proxy(props, {
+      set: (target, prop, value) => {
         const oldProps = { ...target };
         if (oldProps[prop] !== value) {
           target[prop] = value;
-          self.eventBus().emit(Block.EVENTS.FLOW_CDU, oldProps, target);
+          this._eventBus().emit(Block.EVENTS.FLOW_CDU, oldProps, target);
           return true;
         }
+        return Reflect.set(target, prop, value);
       },
-      deleteProperty() {
+      deleteProperty: () => {
         throw new Error('нет доступа');
       },
     });
-
-    return props;
   }
 
-  _createDocumentElement(tagName) {
-  // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
-    return document.createElement(tagName);
+  _createDocumentElement(tagName: string) {
+    const element = document.createElement(tagName);
+    element.setAttribute('data-id', this._id);
+    return element;
+  }
+
+  _addEvents() {
+    const { events = {} } = this._props;
+
+    Object.keys(events).forEach((eventName) => {
+      this._element.addEventListener(eventName, events[eventName]);
+    });
+  }
+
+  _removeEvents() {
+    const { events = {} } = this._props;
+
+    Object.keys(events).forEach((eventName) => {
+      this._element.removeEventListener(eventName, events[eventName]);
+    });
+  }
+
+  _addAttributes() {
+    const { attr = [] } = this._props;
+    attr.forEach(([key, ...values]) => {
+      this._element.setAttribute(key, ...values);
+    });
+  }
+
+  _getChildren(propsAndChildren: Props) {
+    const children = {};
+    const props = {};
+
+    Object.entries(propsAndChildren).forEach(([key, value]) => {
+      if (value instanceof Block) {
+        children[key] = value;
+      } else {
+        props[key] = value;
+      }
+    });
+
+    return { children, props };
+  }
+
+  compile(template: string, props: Props) {
+    // const propsAndStubs = { ...props };
+
+    // Object.entries(this._children).forEach(([key, child]) => {
+    //   propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
+    // });
+
+    // return Handlebars.compile(template)(propsAndStubs);
+    const propsAndStubs = { ...props };
+
+    Object.entries(this._children).forEach(([key, child]) => {
+      propsAndStubs[key] = `<div data-id="${child.id}"></div>`;
+    });
+
+    const fragment = this._createDocumentElement('template');
+
+    fragment.innerHTML = Handlebars.compile(template)(propsAndStubs);
+
+    Object.values(this._children).forEach((child) => {
+      const stub = fragment.content.querySelector(`[data-id="${child.id}"]`);
+
+      stub.replaceWith(child.getContent());
+    });
+
+    return fragment.content;
   }
 
   show() {
