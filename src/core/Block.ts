@@ -168,8 +168,8 @@ export default class Block {
 
   _addAttributes() {
     const { attr = [] } = this._props;
-    attr.forEach(([key, ...values]) => {
-      this._element.setAttribute(key, ...values);
+    attr.forEach(([key, value]) => {
+      this._element.setAttribute(key, value);
     });
   }
 
