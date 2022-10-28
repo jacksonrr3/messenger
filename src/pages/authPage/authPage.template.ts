@@ -5,7 +5,7 @@ export default `
       {{{loginInput}}}
       {{{passwordInput}}}
       {{{authButton}}}
-      <a href="../reg/reg.hbs">{{no_acc_text}}</a>
+      <a href="/reg">{{noAccText}}</a>
       </div>
     </form>
   </div>`;

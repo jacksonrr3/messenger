@@ -30,8 +30,7 @@ export default class AuthPage extends Block {
       loginInput,
       passwordInput,
       authButton,
-      // auth_text: 'Авторизоваться',
-      no_acc_text: 'Нет аккаунта?',
+      noAccText: 'Нет аккаунта?',
       span: true,
     });
   }
