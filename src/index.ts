@@ -8,6 +8,7 @@ import RegPage from './pages/regPage';
 import UserProfilePage from './pages/userProfilePage';
 import UserSettingsPage from './pages/userSettingsPage';
 import ChangePasswordPage from './pages/changePasswordPage';
+import ChangeAvatarPage from './pages/changeAvatarPage';
 
 // const routes = {
 //   // '/auth': authPage,
@@ -52,6 +53,9 @@ switch (window.location.pathname) {
     break;
   case '/change_password':
     renderDom('root', new ChangePasswordPage({}));
+    break;
+  case '/change_avatar':
+    renderDom('root', new ChangeAvatarPage({}));
     break;
   default:
     if (el) {

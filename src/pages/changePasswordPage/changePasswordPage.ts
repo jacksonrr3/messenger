@@ -33,7 +33,7 @@ export default class ChangePasswordPage extends Block {
 
     super('div', {
       ...props,
-      attr: [['class', 'change-passvord-container']],
+      attr: [['class', 'change-password-container']],
       oldPassword,
       newPassword,
       repeatNewPassword,
