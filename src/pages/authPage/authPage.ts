@@ -1,8 +1,8 @@
 import Block, { Props } from '../../core/Block';
 import './auth.scss';
 import authTemplate from './authPage.template';
-import { Input } from '../../components/input';
-import Button from '../../components/button/button';
+import Input from '../../components/input';
+import Button from '../../components/button';
 
 export default class AuthPage extends Block {
   constructor(props: Props) {
@@ -26,7 +26,7 @@ export default class AuthPage extends Block {
 
     super('div', {
       ...props,
-      attr: [['class', 'container']],
+      attr: [['class', 'auth-container']],
       loginInput,
       passwordInput,
       authButton,

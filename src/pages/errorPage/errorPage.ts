@@ -5,7 +5,10 @@ import './errorPage.scss';
 
 export default class ErrorPage extends Block {
   constructor(props: Props) {
-    super('div', { ...props, attr: [['class', 'container']] });
+    super('div', {
+      ...props,
+      attr: [['class', 'err-container']],
+    });
   }
 
   render() {

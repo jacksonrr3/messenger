@@ -1,81 +1,71 @@
 import Block, { Props } from '../../core/Block';
-import './reg.scss';
-import regTemplate from './regPage.template';
 import Input from '../../components/input';
 import Button from '../../components/button';
+import './userSettingsPage.scss';
+import userSettingsTemplate from './userSettingsPage.template';
 
-export default class RegPage extends Block {
+export default class UserSettingsPage extends Block {
   constructor(props: Props) {
     const emailInput = new Input({
       title: 'Почта',
       id: 'email',
       type: 'email',
-      span: true,
+      // span: true,
     });
 
     const loginInput = new Input({
       title: 'Имя',
       id: 'login',
       type: 'text',
-      span: true,
+      // span: true,
     });
 
     const firstNameInput = new Input({
       title: 'Имя',
       id: 'first_name',
       type: 'text',
-      span: true,
+      // span: true,
     });
 
     const secondNameInput = new Input({
       title: 'Фамилия',
       id: 'second_name',
       type: 'text',
-      span: true,
+      // span: true,
+    });
+
+    const displayName = new Input({
+      title: 'Имя в чате',
+      id: 'display_name',
+      type: 'text',
+      // span: true,
     });
 
     const phoneInput = new Input({
       title: 'Телефон',
       id: 'phone',
       type: 'tel',
-      span: true,
+      // span: true,
     });
 
-    const passwordInput = new Input({
-      title: 'Пароль',
-      id: 'password',
-      type: 'password',
-      span: true,
-    });
-
-    const confirmPasswordInput = new Input({
-      title: 'Подтвердить пароль',
-      id: 'confirm_password',
-      type: 'password',
-      span: true,
-    });
-
-    const regButton = new Button({
-      text: 'Зарегистрироваться',
+    const saveButton = new Button({
+      text: 'Сохранить',
     });
 
     super('div', {
       ...props,
-      attr: [['class', 'reg-container']],
+      attr: [['class', 'user-settings-container']],
       emailInput,
       loginInput,
       firstNameInput,
       secondNameInput,
+      displayName,
       phoneInput,
-      passwordInput,
-      confirmPasswordInput,
-      regButton,
-      enter: 'Войти',
-      span: true,
+      saveButton,
     });
   }
 
   render() {
-    return this.compile(regTemplate, this._props);
+    return this.compile(userSettingsTemplate, this._props);
   }
 }

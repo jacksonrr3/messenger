@@ -5,6 +5,8 @@ import renderDom from './utils/renderDom';
 import ErrorPage from './pages/errorPage';
 import AuthPage from './pages/authPage';
 import RegPage from './pages/regPage';
+import UserProfilePage from './pages/userProfilePage';
+import UserSettingsPage from './pages/userSettingsPage';
 
 // const routes = {
 //   // '/auth': authPage,
@@ -40,6 +42,12 @@ switch (window.location.pathname) {
       message: 'Мы уже фиксим',
       title: 500,
     }));
+    break;
+  case '/user_profile':
+    renderDom('root', new UserProfilePage({}));
+    break;
+  case '/user_settings':
+    renderDom('root', new UserSettingsPage({}));
     break;
   default:
     if (el) {
