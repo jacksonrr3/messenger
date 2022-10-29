@@ -35,12 +35,12 @@ export default `
         <img src="/static/pictures/default_avatar.svg" alt="user_avatar">
       </div>
       <form class="settings">
-          {{{emailInput}}}
-          {{{loginInput}}}
-          {{{firstNameInput}}}
-          {{{secondNameInput}}}
+          {{{email}}}
+          {{{login}}}
+          {{{firstName}}}
+          {{{secondName}}}
           {{{displayName}}}
-          {{{phoneInput}}}
+          {{{phone}}}
           {{{saveButton}}}
       </form>
   </div>

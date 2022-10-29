@@ -6,28 +6,28 @@ import userSettingsTemplate from './userSettingsPage.template';
 
 export default class UserSettingsPage extends Block {
   constructor(props: Props) {
-    const emailInput = new Input({
+    const email = new Input({
       title: 'Почта',
       id: 'email',
       type: 'email',
       // span: true,
     });
 
-    const loginInput = new Input({
-      title: 'Имя',
+    const login = new Input({
+      title: 'Логин',
       id: 'login',
       type: 'text',
       // span: true,
     });
 
-    const firstNameInput = new Input({
+    const firstName = new Input({
       title: 'Имя',
       id: 'first_name',
       type: 'text',
       // span: true,
     });
 
-    const secondNameInput = new Input({
+    const secondName = new Input({
       title: 'Фамилия',
       id: 'second_name',
       type: 'text',
@@ -41,7 +41,7 @@ export default class UserSettingsPage extends Block {
       // span: true,
     });
 
-    const phoneInput = new Input({
+    const phone = new Input({
       title: 'Телефон',
       id: 'phone',
       type: 'tel',
@@ -55,12 +55,12 @@ export default class UserSettingsPage extends Block {
     super('div', {
       ...props,
       attr: [['class', 'user-settings-container']],
-      emailInput,
-      loginInput,
-      firstNameInput,
-      secondNameInput,
+      email,
+      login,
+      firstName,
+      secondName,
       displayName,
-      phoneInput,
+      phoneInput: phone,
       saveButton,
     });
   }

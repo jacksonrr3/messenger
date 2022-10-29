@@ -7,12 +7,12 @@ export default `
         <img src="/static/pictures/default_avatar.svg" alt="user_avatar">
       </div>
       <div class="info">
-          {{{emailInput}}}
-          {{{loginInput}}}
-          {{{firstNameInput}}}
-          {{{secondNameInput}}}
+          {{{email}}}
+          {{{login}}}
+          {{{firstName}}}
+          {{{secondName}}}
           {{{displayName}}}
-          {{{phoneInput}}}
+          {{{phone}}}
       </div>
       <div class="links">
         <div class="link">

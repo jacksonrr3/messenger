@@ -2,13 +2,13 @@ export default `
   <div class="form-container">
     <form class="form">
       <h2 class="title">Регистрация</h2>
-      {{{emailInput}}}
-      {{{loginInput}}}
-      {{{firstNameInput}}}
-      {{{secondNameInput}}}
-      {{{phoneInput}}}
-      {{{passwordInput}}}
-      {{{confirmPasswordInput}}}
+      {{{email}}}
+      {{{login}}}
+      {{{firstName}}}
+      {{{secondName}}}
+      {{{phone}}}
+      {{{password}}}
+      {{{confirmPassword}}}
       {{{regButton}}}
       <a href="/auth">{{enter}}</a>
     </form>

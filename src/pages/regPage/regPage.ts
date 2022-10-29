@@ -6,49 +6,49 @@ import Button from '../../components/button';
 
 export default class RegPage extends Block {
   constructor(props: Props) {
-    const emailInput = new Input({
+    const email = new Input({
       title: 'Почта',
       id: 'email',
       type: 'email',
       span: true,
     });
 
-    const loginInput = new Input({
+    const login = new Input({
       title: 'Имя',
       id: 'login',
       type: 'text',
       span: true,
     });
 
-    const firstNameInput = new Input({
+    const firstName = new Input({
       title: 'Имя',
       id: 'first_name',
       type: 'text',
       span: true,
     });
 
-    const secondNameInput = new Input({
+    const secondName = new Input({
       title: 'Фамилия',
       id: 'second_name',
       type: 'text',
       span: true,
     });
 
-    const phoneInput = new Input({
+    const phone = new Input({
       title: 'Телефон',
       id: 'phone',
       type: 'tel',
       span: true,
     });
 
-    const passwordInput = new Input({
+    const password = new Input({
       title: 'Пароль',
       id: 'password',
       type: 'password',
       span: true,
     });
 
-    const confirmPasswordInput = new Input({
+    const confirmPassword = new Input({
       title: 'Подтвердить пароль',
       id: 'confirm_password',
       type: 'password',
@@ -62,13 +62,13 @@ export default class RegPage extends Block {
     super('div', {
       ...props,
       attr: [['class', 'reg-container']],
-      emailInput,
-      loginInput,
-      firstNameInput,
-      secondNameInput,
-      phoneInput,
-      passwordInput,
-      confirmPasswordInput,
+      email,
+      login,
+      firstName,
+      secondName,
+      phone,
+      password,
+      confirmPassword,
       regButton,
       enter: 'Войти',
     });
