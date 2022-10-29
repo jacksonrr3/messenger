@@ -121,7 +121,6 @@ export default abstract class Block {
         return typeof value === 'function' ? value.bind(target) : value;
       },
       set: (target, prop, value) => {
-        // const oldProps = { ...target };
         if (target[prop] !== value) {
           target[prop] = value;
           // this._eventBus().emit(Block.EVENTS.FLOW_CDU, oldProps, target);
@@ -154,7 +153,7 @@ export default abstract class Block {
   }
 
   // Может переопределять пользователь, необязательно трогать
-  abstract render(): string;
+  abstract render(): DocumentFragment;
 
   getContent() {
     return this.element;

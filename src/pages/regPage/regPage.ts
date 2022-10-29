@@ -1,5 +1,5 @@
 import Block, { Props } from '../../core/Block';
-import './reg.scss';
+import './regPage.scss';
 import regTemplate from './regPage.template';
 import Input from '../../components/input';
 import Button from '../../components/button';
