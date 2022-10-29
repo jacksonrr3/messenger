@@ -1,7 +1,7 @@
 import Block, { Props } from '../../core/Block';
 import './regPage.scss';
 import regTemplate from './regPage.template';
-import Input from '../../components/input';
+import Input from '../../components/inputBlock';
 import Button from '../../components/button';
 
 export default class RegPage extends Block {

@@ -1,14 +1,14 @@
 import Block, { Props } from '../../core/Block';
-import linkTemplate from './link.template';
+import spanTemplate from './span.template';
 
 export default class Button extends Block {
   constructor(props: Props) {
-    super('a', {
+    super('span', {
       ...props,
     });
   }
 
   render() {
-    return this.compile(linkTemplate, this._props);
+    return this.compile(spanTemplate, this._props);
   }
 }

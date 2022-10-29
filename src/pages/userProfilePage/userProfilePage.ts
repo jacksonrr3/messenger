@@ -1,5 +1,5 @@
 import Block, { Props } from '../../core/Block';
-import Input from '../../components/input';
+import Input from '../../components/inputBlock/index';
 import './userProfilePage.scss';
 import userProfileTemplate from './userProfilePage.template';
 
@@ -9,42 +9,42 @@ export default class userProfilePage extends Block {
       title: 'Почта',
       id: 'email',
       type: 'email',
-      disabled: true,
+      disabled: 'disabled',
     });
 
     const loginInput = new Input({
       title: 'Имя',
       id: 'login',
       type: 'text',
-      disabled: true,
+      disabled: 'disabled',
     });
 
     const firstNameInput = new Input({
       title: 'Имя',
       id: 'first_name',
       type: 'text',
-      disabled: true,
+      disabled: 'disabled',
     });
 
     const secondNameInput = new Input({
       title: 'Фамилия',
       id: 'second_name',
       type: 'text',
-      disabled: true,
+      disabled: 'disabled',
     });
 
     const displayName = new Input({
       title: 'Имя в чате',
       id: 'display_name',
       type: 'text',
-      disabled: true,
+      disabled: 'disabled',
     });
 
     const phoneInput = new Input({
       title: 'Телефон',
       id: 'phone',
       type: 'tel',
-      disabled: true,
+      disabled: 'disabled',
     });
 
     super('div', {

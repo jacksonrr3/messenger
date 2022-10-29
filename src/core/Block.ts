@@ -139,6 +139,10 @@ export default abstract class Block {
     return this._element;
   }
 
+  get children() {
+    return this._children;
+  }
+
   _render() {
     const block = this.render();
     // Этот небезопасный метод для упрощения логики
@@ -150,7 +154,10 @@ export default abstract class Block {
     this._element.appendChild(block);
     this._addEvents();
     this._addAttributes();
+    this.addInnerEvents();
   }
+
+  addInnerEvents() {}
 
   // Может переопределять пользователь, необязательно трогать
   abstract render(): DocumentFragment;

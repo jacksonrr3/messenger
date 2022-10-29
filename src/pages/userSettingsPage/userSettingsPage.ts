@@ -1,5 +1,5 @@
 import Block, { Props } from '../../core/Block';
-import Input from '../../components/input';
+import Input from '../../components/inputBlock';
 import Button from '../../components/button';
 import './userSettingsPage.scss';
 import userSettingsTemplate from './userSettingsPage.template';

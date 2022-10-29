@@ -1,7 +1,7 @@
 import Block, { Props } from '../../core/Block';
 import './changePasswordPage.scss';
 import changePasswordTemplate from './changePasswordPage.template';
-import Input from '../../components/input';
+import Input from '../../components/inputBlock/index';
 import Button from '../../components/button';
 
 export default class ChangePasswordPage extends Block {
