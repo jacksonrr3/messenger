@@ -11,6 +11,7 @@ export default class RegPage extends Block {
       title: 'Почта',
       id: 'email',
       type: 'email',
+      label: true,
       span: true,
     });
 
@@ -18,6 +19,7 @@ export default class RegPage extends Block {
       title: 'Логин',
       id: 'login',
       type: 'text',
+      label: true,
       span: true,
     });
 
@@ -25,6 +27,7 @@ export default class RegPage extends Block {
       title: 'Имя',
       id: 'first_name',
       type: 'text',
+      label: true,
       span: true,
     });
 
@@ -32,6 +35,7 @@ export default class RegPage extends Block {
       title: 'Фамилия',
       id: 'second_name',
       type: 'text',
+      label: true,
       span: true,
     });
 
@@ -39,6 +43,7 @@ export default class RegPage extends Block {
       title: 'Телефон',
       id: 'phone',
       type: 'tel',
+      label: true,
       span: true,
     });
 
@@ -46,6 +51,7 @@ export default class RegPage extends Block {
       title: 'Пароль',
       id: 'password',
       type: 'password',
+      label: true,
       span: true,
     });
 
@@ -53,6 +59,7 @@ export default class RegPage extends Block {
       title: 'Подтвердить пароль',
       id: 'confirm_password',
       type: 'password',
+      label: true,
       span: true,
     });
 

@@ -11,6 +11,7 @@ export default class AuthPage extends Block {
       title: 'Имя',
       id: 'login',
       type: 'text',
+      label: true,
       span: true,
     });
 
@@ -18,6 +19,7 @@ export default class AuthPage extends Block {
       title: 'Пароль',
       id: 'password',
       type: 'password',
+      label: true,
       span: true,
     });
 

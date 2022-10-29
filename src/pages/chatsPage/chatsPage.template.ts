@@ -21,9 +21,7 @@ export default `
     <div class="conversation"></div>
     <div class="message-block">
       <img src="/static/pictures/append.svg" alt="append_file">
-      <div class="input-block">
-        <input class="message-input" type="text" name="message" placeholder="Сообщение">
-      </div>
+      {{{messageInput}}}
       <button>
         <img src="/static/pictures/right_arrow.svg" alt="send_button">
       </button>
