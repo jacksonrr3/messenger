@@ -2,7 +2,7 @@ import Block, { Props } from '../../core/Block';
 import './inputBlock.scss';
 import inputTemplate from './inputBlock.template';
 import Span from '../span';
-import { inputValidation } from '../../utils/validation';
+import { validationErrorMessage , isValidInput } from '../../utils/validation';
 
 export default class Input extends Block {
   constructor(props: Props) {
@@ -19,18 +19,21 @@ export default class Input extends Block {
 
   addInnerEvents() {
     const input = this.element.querySelector('input');
-    input?.addEventListener('focus', (e) => {
-      console.log(`input focus, id: ${e.target?.id}, value: ${e.target?.value}`);
-      // const spanText = inputValidation(e?.target);
-      this.children.errorMessageSpan.setProps({
-        spanText: 'focus',
-      });
+    input?.addEventListener('focus', ({ target }) => {
+      console.log(`input focus, id: ${target?.id}, value: ${target?.value}`);
+      console.log(`isValid: ${isValidInput(target)}, valMess: ${validationErrorMessage[target.id]}`)
+      if (!isValidInput(target)) {
+        this.children.errorMessageSpan.setProps({
+          spanText: validationErrorMessage[target.id],
+        });
+      }
+      // console.log('spanText', spanText)
     });
 
-    input?.addEventListener('blur', (e) => {
-      console.log(`input blur, id: ${e.target?.id}, value: ${e.target?.value}`);
+    input?.addEventListener('blur', () => {
+      // console.log(`input blur, id: ${e.target?.id}, value: ${e.target?.value}`);
       this.children.errorMessageSpan.setProps({
-        spanText: 'blur',
+        spanText: '',
       });
     });
   }

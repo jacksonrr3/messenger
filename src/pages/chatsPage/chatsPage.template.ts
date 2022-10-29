@@ -19,9 +19,11 @@ export default `
       </button>
     </div>
     <div class="conversation"></div>
-    <div class="message-input">
+    <div class="message-block">
       <img src="/static/pictures/append.svg" alt="append_file">
-      <input type="text" name="message" placeholder="Сообщение">
+      <div class="input-block">
+        <input class="message-input" type="text" name="message" placeholder="Сообщение">
+      </div>
       <button>
         <img src="/static/pictures/right_arrow.svg" alt="send_button">
       </button>

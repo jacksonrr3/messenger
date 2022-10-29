@@ -5,7 +5,7 @@ export default `
       {{{login}}}
       {{{password}}}
       {{{authButton}}}
-      <a href="/reg">{{noAccText}}</a>
+      <a href='/'>{{noAccText}}</a>
       </div>
     </form>
   </div>`;

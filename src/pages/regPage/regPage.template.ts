@@ -10,6 +10,6 @@ export default `
       {{{password}}}
       {{{confirmPassword}}}
       {{{regButton}}}
-      <a href="/auth">{{enter}}</a>
+      <a href="/">{{enter}}</a>
     </form>
   </div>`;

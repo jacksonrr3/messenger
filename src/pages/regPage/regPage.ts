@@ -3,6 +3,7 @@ import './regPage.scss';
 import regTemplate from './regPage.template';
 import Input from '../../components/inputBlock';
 import Button from '../../components/button';
+import { isValidInput } from '../../utils/validation';
 
 export default class RegPage extends Block {
   constructor(props: Props) {
@@ -14,7 +15,7 @@ export default class RegPage extends Block {
     });
 
     const login = new Input({
-      title: 'Имя',
+      title: 'Логин',
       id: 'login',
       type: 'text',
       span: true,
@@ -71,6 +72,21 @@ export default class RegPage extends Block {
       confirmPassword,
       regButton,
       enter: 'Войти',
+    });
+  }
+
+  addInnerEvents() {
+    const form = this.element.querySelector('form');
+    const formInputs = form?.querySelectorAll('input');
+
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const formDataObject = Object.fromEntries(formData.entries());
+      const isValid = Array.from(formInputs)
+        .reduce((acc, input) => (acc && isValidInput(input)), true);
+
+      console.log('submit', formDataObject, isValid);
     });
   }
 

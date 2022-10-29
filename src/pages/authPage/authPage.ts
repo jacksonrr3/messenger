@@ -3,6 +3,7 @@ import './auth.scss';
 import authTemplate from './authPage.template';
 import Input from '../../components/inputBlock';
 import Button from '../../components/button';
+import { isValidInput } from '../../utils/validation';
 
 export default class AuthPage extends Block {
   constructor(props: Props) {
@@ -37,13 +38,16 @@ export default class AuthPage extends Block {
   addInnerEvents() {
     const form = this.element.querySelector('form');
     const formInputs = form?.querySelectorAll('input');
-    const blockInputs = Array.from(formInputs).map((input) => this.children[input.id]);
 
-    const formData = new FormData(form);
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const formDataObject = Object.fromEntries(formData.entries());
+      const isValid = Array.from(formInputs)
+        .reduce((acc, input) => (acc && isValidInput(input)), true);
 
-    console.log(form);
-    console.log(formInputs);
-    console.log(blockInputs)
+      console.log('submit', formDataObject, isValid);
+    });
   }
 
   render() {
