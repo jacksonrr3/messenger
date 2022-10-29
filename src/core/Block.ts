@@ -15,7 +15,7 @@ type Meta = {
   props: Props,
 };
 
-export default class Block {
+export default abstract class Block {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -92,13 +92,49 @@ export default class Block {
     return true;
   }
 
-  setProps = (nextProps: Props) => {
-    if (!nextProps) {
+  setProps = (newProps: Props) => {
+    if (!newProps) {
       return;
     }
 
-    Object.assign(this._props, nextProps);
+    this._setUpdate = false;
+    const oldValue = { ...this._props };
+
+    const { children, props } = this._getChildren(newProps);
+
+    if (Object.values(children).length) {
+      Object.assign(this._children, children);
+    }
+    if (Object.values(props).length) {
+      Object.assign(this._props, props);
+    }
+    if (this._setUpdate) {
+      this._eventBus().emit(Block.EVENTS.FLOW_CDU, oldValue, this._props);
+      this._setUpdate = false;
+    }
   };
+
+  _makePropsProxy(props: Props) {
+    return new Proxy(props, {
+      get: (target, prop) => {
+        const value = target[prop];
+        return typeof value === 'function' ? value.bind(target) : value;
+      },
+      set: (target, prop, value) => {
+        // const oldProps = { ...target };
+        if (target[prop] !== value) {
+          target[prop] = value;
+          // this._eventBus().emit(Block.EVENTS.FLOW_CDU, oldProps, target);
+          this._setUpdate = true;
+        }
+        return true;
+        // return Reflect.set(target, prop, value);
+      },
+      deleteProperty: () => {
+        throw new Error('нет доступа');
+      },
+    });
+  }
 
   get element() {
     return this._element;
@@ -118,30 +154,10 @@ export default class Block {
   }
 
   // Может переопределять пользователь, необязательно трогать
-  render() {}
+  abstract render(): string;
 
   getContent() {
     return this.element;
-  }
-
-  _makePropsProxy(props: Props) {
-  // Можно и так передать this
-  // Такой способ больше не применяется с приходом ES6+
-    // const self = this;
-    return new Proxy(props, {
-      set: (target, prop, value) => {
-        const oldProps = { ...target };
-        if (oldProps[prop] !== value) {
-          target[prop] = value;
-          this._eventBus().emit(Block.EVENTS.FLOW_CDU, oldProps, target);
-          return true;
-        }
-        return Reflect.set(target, prop, value);
-      },
-      deleteProperty: () => {
-        throw new Error('нет доступа');
-      },
-    });
   }
 
   _createDocumentElement(tagName: string) {
@@ -189,27 +205,21 @@ export default class Block {
   }
 
   compile(template: string, props: Props) {
-    // const propsAndStubs = { ...props };
-
-    // Object.entries(this._children).forEach(([key, child]) => {
-    //   propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
-    // });
-
-    // return Handlebars.compile(template)(propsAndStubs);
     const propsAndStubs = { ...props };
 
     Object.entries(this._children).forEach(([key, child]) => {
       propsAndStubs[key] = `<div data-id="${child.id}"></div>`;
     });
 
-    const fragment = this._createDocumentElement('template');
+    const fragment = document.createElement('template');
 
     fragment.innerHTML = Handlebars.compile(template)(propsAndStubs);
 
     Object.values(this._children).forEach((child) => {
       const stub = fragment.content.querySelector(`[data-id="${child.id}"]`);
-
-      stub.replaceWith(child.getContent());
+      if (stub) {
+        stub.replaceWith(child.getContent());
+      }
     });
 
     return fragment.content;
