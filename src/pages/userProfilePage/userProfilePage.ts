@@ -9,6 +9,7 @@ export default class userProfilePage extends Block {
       title: 'Почта',
       id: 'email',
       type: 'email',
+      label: true,
       disabled: 'disabled',
     });
 
@@ -16,6 +17,7 @@ export default class userProfilePage extends Block {
       title: 'Имя',
       id: 'login',
       type: 'text',
+      label: true,
       disabled: 'disabled',
     });
 
@@ -23,6 +25,7 @@ export default class userProfilePage extends Block {
       title: 'Имя',
       id: 'first_name',
       type: 'text',
+      label: true,
       disabled: 'disabled',
     });
 
@@ -30,6 +33,7 @@ export default class userProfilePage extends Block {
       title: 'Фамилия',
       id: 'second_name',
       type: 'text',
+      label: true,
       disabled: 'disabled',
     });
 
@@ -37,6 +41,7 @@ export default class userProfilePage extends Block {
       title: 'Имя в чате',
       id: 'display_name',
       type: 'text',
+      label: true,
       disabled: 'disabled',
     });
 
@@ -44,6 +49,7 @@ export default class userProfilePage extends Block {
       title: 'Телефон',
       id: 'phone',
       type: 'tel',
+      label: true,
       disabled: 'disabled',
     });
 

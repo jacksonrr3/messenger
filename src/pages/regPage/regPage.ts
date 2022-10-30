@@ -93,7 +93,7 @@ export default class RegPage extends Block {
       const isValid = Array.from(formInputs)
         .reduce((acc, input) => (acc && isValidInput(input)), true);
 
-      console.log('submit', formDataObject, isValid);
+      console.log('submit', formDataObject, isValid ? 'форма валидна' : 'форма не валидна');
     });
   }
 

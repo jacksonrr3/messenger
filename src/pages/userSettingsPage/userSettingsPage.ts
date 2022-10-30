@@ -3,6 +3,7 @@ import Input from '../../components/inputBlock';
 import Button from '../../components/button';
 import './userSettingsPage.scss';
 import userSettingsTemplate from './userSettingsPage.template';
+import { isValidInput } from '../../utils/validation';
 
 export default class UserSettingsPage extends Block {
   constructor(props: Props) {
@@ -10,42 +11,48 @@ export default class UserSettingsPage extends Block {
       title: 'Почта',
       id: 'email',
       type: 'email',
-      // span: true,
+      label: true,
+      middleSpan: true,
     });
 
     const login = new Input({
       title: 'Логин',
       id: 'login',
       type: 'text',
-      // span: true,
+      label: true,
+      middleSpan: true,
     });
 
     const firstName = new Input({
       title: 'Имя',
       id: 'first_name',
       type: 'text',
-      // span: true,
+      label: true,
+      middleSpan: true,
     });
 
     const secondName = new Input({
       title: 'Фамилия',
       id: 'second_name',
       type: 'text',
-      // span: true,
+      label: true,
+      middleSpan: true,
     });
 
     const displayName = new Input({
       title: 'Имя в чате',
       id: 'display_name',
       type: 'text',
-      // span: true,
+      label: true,
+      middleSpan: true,
     });
 
     const phone = new Input({
       title: 'Телефон',
       id: 'phone',
       type: 'tel',
-      // span: true,
+      label: true,
+      middleSpan: true,
     });
 
     const saveButton = new Button({
@@ -60,8 +67,23 @@ export default class UserSettingsPage extends Block {
       firstName,
       secondName,
       displayName,
-      phoneInput: phone,
+      phone,
       saveButton,
+    });
+  }
+
+  addInnerEvents() {
+    const form = this.element.querySelector('form');
+    const formInputs = form?.querySelectorAll('input');
+
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const formDataObject = Object.fromEntries(formData.entries());
+      const isValid = Array.from(formInputs)
+        .reduce((acc, input) => (acc && isValidInput(input)), true);
+
+      console.log('submit', formDataObject, isValid ? 'форма валидна' : 'форма не валидна');
     });
   }
 

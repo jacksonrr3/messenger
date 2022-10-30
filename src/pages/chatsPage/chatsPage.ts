@@ -19,6 +19,7 @@ export default class ChatsPage extends Block {
       type: 'text',
       id: 'message',
       title: 'Сообщение',
+      middleSpan: true,
     });
 
     super('div', {

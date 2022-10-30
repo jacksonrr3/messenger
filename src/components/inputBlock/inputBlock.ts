@@ -20,18 +20,14 @@ export default class Input extends Block {
   addInnerEvents() {
     const input = this.element.querySelector('input');
     input?.addEventListener('focus', ({ target }) => {
-      console.log(`input focus, id: ${target?.id}, value: ${target?.value}`);
-      console.log(`isValid: ${isValidInput(target)}, valMess: ${validationErrorMessage[target.id]}`)
       if (!isValidInput(target)) {
         this.children.errorMessageSpan.setProps({
           spanText: validationErrorMessage[target.id],
         });
       }
-      // console.log('spanText', spanText)
     });
 
     input?.addEventListener('blur', () => {
-      // console.log(`input blur, id: ${e.target?.id}, value: ${e.target?.value}`);
       this.children.errorMessageSpan.setProps({
         spanText: '',
       });
