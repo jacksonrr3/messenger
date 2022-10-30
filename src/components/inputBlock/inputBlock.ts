@@ -2,7 +2,7 @@ import Block, { Props } from '../../core/Block';
 import './inputBlock.scss';
 import inputTemplate from './inputBlock.template';
 import Span from '../span';
-import { validationErrorMessage , isValidInput } from '../../utils/validation';
+import { validationErrorMessage, isValidInput } from '../../utils/validation';
 
 export default class Input extends Block {
   constructor(props: Props) {

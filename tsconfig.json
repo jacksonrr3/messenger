@@ -6,7 +6,7 @@
         // "module": "commonjs",
         "esModuleInterop": true,
         "strictNullChecks": true,
-        "noImplicitAny": true,
+        "noImplicitAny": false,
         "noUnusedLocals": true,
         "noUnusedParameters": false,
         "sourceMap": true,

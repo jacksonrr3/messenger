@@ -7,6 +7,7 @@ import Button from '../../components/button';
 export default class ChangeAvatarPage extends Block {
   constructor(props: Props) {
     const avatarInput = new Input({
+      label: true,
       title: 'Выбрать файл на компьютере',
       id: 'avatarInput',
       type: 'file',
