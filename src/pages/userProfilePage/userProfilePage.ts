@@ -1,6 +1,7 @@
 import Block, { Props } from '../../core/Block';
 import Input from '../../components/inputBlock/index';
 import './userProfilePage.scss';
+import defaultAvatar from '../../../static/pictures/default_avatar.svg';
 import userProfileTemplate from './userProfilePage.template';
 
 export default class userProfilePage extends Block {
@@ -56,6 +57,7 @@ export default class userProfilePage extends Block {
     super('div', {
       ...props,
       attr: [['class', 'user-profile-container']],
+      defaultAvatar,
       email,
       login,
       firstName,

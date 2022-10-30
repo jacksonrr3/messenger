@@ -1,7 +1,10 @@
 import Block, { Props } from '../../core/Block';
 import './chatsPage.scss';
+import round3434 from '../../../static/pictures/round_34_34.svg';
+import threePoints from '../../../static/pictures/three_points.svg';
+import append from '../../../static/pictures/append.svg';
+import rightArrow from '/static/pictures/right_arrow.svg';
 import chatsTemplate from './chatsPage.template';
-// import Button from '../../components/button';
 import ChatItem from '../../components/chatItem';
 import InputBlock from '../../components/inputBlock';
 
@@ -25,6 +28,10 @@ export default class ChatsPage extends Block {
     super('div', {
       ...props,
       attr: [['class', 'chats-page-container']],
+      round3434,
+      threePoints,
+      append,
+      rightArrow,
       chatItem,
       messageInput,
     });

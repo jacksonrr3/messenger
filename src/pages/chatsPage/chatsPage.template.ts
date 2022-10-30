@@ -12,18 +12,18 @@ export default `
   </div>
   <div class="chat">
     <div class="user">
-      <img src="/static/pictures/round_34_34.svg" alt="user_avatar">
+      <img src="{{round3434}}" alt="user_avatar">
       <p>Имя</p>
       <button>
-        <img src="/static/pictures/three_points.svg" alt="three_points_button">
+        <img src="{{threePoints}}" alt="three_points_button">
       </button>
     </div>
     <div class="conversation"></div>
     <div class="message-block">
-      <img src="/static/pictures/append.svg" alt="append_file">
+      <img src="{{append}}" alt="append_file">
       {{{messageInput}}}
       <button>
-        <img src="/static/pictures/right_arrow.svg" alt="send_button">
+        <img src="{{rightArrow}}" alt="send_button">
       </button>
     </div>
   </div>

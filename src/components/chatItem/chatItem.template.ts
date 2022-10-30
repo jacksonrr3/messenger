@@ -1,6 +1,6 @@
 export default `
   <div class="col-0">
-    <img src="/static/pictures/round_47_47.svg" alt="user_avatar">
+    <img src="{{round4747}}" alt="user_avatar">
   </div>
   <div class="col-1">
     <h3>{{userName}}</h3>

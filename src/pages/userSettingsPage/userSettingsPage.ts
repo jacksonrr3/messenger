@@ -2,6 +2,7 @@ import Block, { Props } from '../../core/Block';
 import Input from '../../components/inputBlock';
 import Button from '../../components/button';
 import './userSettingsPage.scss';
+import defaultAvatar from '../../../static/pictures/default_avatar.svg';
 import userSettingsTemplate from './userSettingsPage.template';
 import { isValidInput } from '../../utils/validation';
 
@@ -62,6 +63,7 @@ export default class UserSettingsPage extends Block {
     super('div', {
       ...props,
       attr: [['class', 'user-settings-container']],
+      defaultAvatar,
       email,
       login,
       firstName,

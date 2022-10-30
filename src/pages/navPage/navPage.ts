@@ -103,6 +103,7 @@ export default class NavPage extends Block {
 
     super('div', {
       ...props,
+      attr: [['class', 'nav-page']],
       authLink,
       regLink,
       chatsLink,

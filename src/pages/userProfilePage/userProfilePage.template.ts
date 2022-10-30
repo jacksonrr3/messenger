@@ -4,7 +4,7 @@ export default `
   </div>
   <div class="user">
       <div class="avatar">
-        <img src="/static/pictures/default_avatar.svg" alt="user_avatar">
+        <img src="{{defaultAvatar}}" alt="user_avatar">
       </div>
       <div class="info">
           {{{email}}}

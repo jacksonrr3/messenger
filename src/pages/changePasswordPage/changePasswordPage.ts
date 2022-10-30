@@ -1,5 +1,6 @@
 import Block, { Props } from '../../core/Block';
 import './changePasswordPage.scss';
+import defaultAvatar from '../../../static/pictures/default_avatar.svg';
 import changePasswordTemplate from './changePasswordPage.template';
 import Input from '../../components/inputBlock/index';
 import Button from '../../components/button';
@@ -34,6 +35,7 @@ export default class ChangePasswordPage extends Block {
     super('div', {
       ...props,
       attr: [['class', 'change-password-container']],
+      defaultAvatar,
       oldPassword,
       newPassword,
       repeatNewPassword,
