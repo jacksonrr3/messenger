@@ -11,21 +11,24 @@ export default class ChangePasswordPage extends Block {
       title: 'Старый пароль',
       id: 'oldPassword',
       type: 'password',
-      // span: true,
+      label: true,
+      middleSpan: true,
     });
 
     const newPassword = new Input({
       title: 'Новый пароль',
       id: 'newPassword',
       type: 'password',
-      // span: true,
+      label: true,
+      middleSpan: true,
     });
 
     const repeatNewPassword = new Input({
       title: 'Повторите новый пароль',
-      id: 'repeatNewPassword',
+      id: 'password',
       type: 'password',
-      // span: true,
+      label: true,
+      middleSpan: true,
     });
 
     const saveButton = new Button({

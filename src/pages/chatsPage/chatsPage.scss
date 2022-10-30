@@ -1,3 +1,5 @@
+@import "../../styles/variables.scss";
+
 html, body, main
 {
     height: 100vh;
@@ -26,7 +28,7 @@ html, body, main
                 
                 text-decoration: none;
     
-                color: #999999;
+                color: $gray;
             }
         }
 
@@ -44,7 +46,7 @@ html, body, main
                 font-size: 12px;
                 line-height: 12px;
 
-                color: #999999;
+                color: $gray;
             }
         }
 
@@ -83,14 +85,14 @@ html, body, main
                         font-size: 13px;
                         line-height: 13px;
 
-                        color: #1e1e1e;
+                        color: $black;
                     }
 
                     p {
                         font-size: 12px;
                         line-height: 15px;
 
-                        color: #999999;
+                        color: $gray;
                     }
                 }
 
@@ -105,7 +107,7 @@ html, body, main
                         font-size: 9px;
                         line-height: 13px;
 
-                        color: #999999;
+                        color: $gray;
                     }
 
                     .unread-messages {
@@ -123,7 +125,7 @@ html, body, main
                             font-size: 11px;
                             line-height: 12px;
     
-                            color: #ffffff;
+                            color: $white;
                         }
                     }
                 }
@@ -191,7 +193,7 @@ html, body, main
                     font-size: 12px;
                     line-height: 12px;
     
-                    color: #999999;
+                    color: $gray;
                 }
             }
 

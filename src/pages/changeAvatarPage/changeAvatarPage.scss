@@ -1,3 +1,5 @@
+@import "../../styles/variables.scss";
+
 html, body, main
 {
     height: 100vh;
@@ -32,7 +34,7 @@ html, body, main
             font-size: 15px;
             line-height: 20px;
 
-            color: #1e1e1e;
+            color: $black;
         }
 
         .input-item {
@@ -47,7 +49,7 @@ html, body, main
                 text-align: center;
                 text-decoration-line: underline;
 
-                color: #3369f3;
+                color: $blue;
             }
 
             input {
@@ -71,7 +73,7 @@ html, body, main
                 font-size: 13px;
                 line-height: 13px;
     
-                color: #ffffff;
+                color: $white;
             }
         }
     }

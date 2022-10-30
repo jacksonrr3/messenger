@@ -1,3 +1,5 @@
+@import "../../styles/variables.scss";
+
 html, body, main
 {
     height: 100vh;
@@ -76,7 +78,7 @@ html, body, main
                 padding-bottom: 10px;
 
                 a {
-                    color: #3369f3;
+                    color: $blue;
                 }
             }
 
@@ -85,7 +87,7 @@ html, body, main
                 font-size: 13px;
                 line-height: 13px;
 
-                color: #ff0000;
+                color: $orange;
             }
         }
 

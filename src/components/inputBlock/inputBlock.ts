@@ -4,6 +4,13 @@ import inputTemplate from './inputBlock.template';
 import Span from '../span';
 import { validationErrorMessage, isValidInput } from '../../utils/validation';
 
+const focusBlurHandler = (spanElement: Block) => ({ target } : Event) => {
+  const spanText = isValidInput(target as HTMLInputElement) ? '' : validationErrorMessage[target.id];
+  spanElement.setProps({
+    spanText,
+  });
+};
+
 export default class Input extends Block {
   constructor(props: Props) {
     const errorMessageSpan = new Span({
@@ -19,19 +26,8 @@ export default class Input extends Block {
 
   addInnerEvents() {
     const input = this.element.querySelector('input');
-    input?.addEventListener('focus', ({ target }) => {
-      if (!isValidInput(target)) {
-        this.children.errorMessageSpan.setProps({
-          spanText: validationErrorMessage[target.id],
-        });
-      }
-    });
-
-    input?.addEventListener('blur', () => {
-      this.children.errorMessageSpan.setProps({
-        spanText: '',
-      });
-    });
+    input?.addEventListener('focus', focusBlurHandler(this.children.errorMessageSpan));
+    input?.addEventListener('blur', focusBlurHandler(this.children.errorMessageSpan));
   }
 
   render() {
