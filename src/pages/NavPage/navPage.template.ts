@@ -1,0 +1,33 @@
+export default `
+  <nav>
+    <ul>
+      <li>
+        {{{authLink}}}
+      </li>
+      <li>
+        {{{regLink}}}
+      </li>
+      <li>
+        {{{chatsLink}}}
+      </li>
+      <li>
+        {{{page404Link}}}
+      </li>
+      <li>
+        {{{page500Link}}}
+      </li>
+      <li>
+        {{{userProfileLink}}}
+      </li>
+      <li>
+        {{{userSettingsLink}}}
+      </li>
+      <li>
+        {{{changePasswordLink}}}
+      </li>
+      <li>
+        {{{changeAvatarlink}}}
+      </li>
+    </ul>
+  </nav>
+`;

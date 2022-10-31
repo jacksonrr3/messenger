@@ -1,0 +1,11 @@
+export default `
+  <div class="form-container">
+    <h2 class="title">{{titleText}}</h2>
+    {{{form}}}
+    <div class="link-container">
+      {{{link}}}
+    </div>
+  </div>
+`;
+// <h2 class="title">Регистрация</h2>
+// <a href="/">{{enter}}</a>
