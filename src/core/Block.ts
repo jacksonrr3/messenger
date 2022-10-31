@@ -37,7 +37,6 @@ export default abstract class Block {
     const eventBus = new EventBus();
     this._eventBus = () => eventBus;
     this._id = uuidv4();
-    // this._children = children;
     this._children = this._makePropsProxy(children);
     this._props = this._makePropsProxy({ ...props, _id: this._id });
     this._meta = { tagName, props };
@@ -73,8 +72,7 @@ export default abstract class Block {
   }
 
   // Может переопределять пользователь, необязательно трогать
-  // componentDidMount(oldProps: Props) {}
-  componentDidMount() {}
+  componentDidMount(/* oldProps: Props */) {}
 
   dispatchComponentDidMount() {
     this._eventBus().emit(Block.EVENTS.FLOW_CDM);
@@ -88,7 +86,8 @@ export default abstract class Block {
   }
 
   // Может переопределять пользователь, необязательно трогать
-  componentDidUpdate(oldProps: Props, newProps: Props): boolean {
+  // Добавить логику сравнения props
+  componentDidUpdate(/* oldProps: Props, newProps: Props */): boolean {
     return true;
   }
 
@@ -214,15 +213,14 @@ export default abstract class Block {
     const propsAndStubs = { ...props };
 
     Object.entries(this._children).forEach(([key, child]) => {
-      propsAndStubs[key] = `<div data-id="${child.id}"></div>`;
+      propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
     });
 
     const fragment = document.createElement('template');
-
     fragment.innerHTML = Handlebars.compile(template)(propsAndStubs);
 
     Object.values(this._children).forEach((child) => {
-      const stub = fragment.content.querySelector(`[data-id="${child.id}"]`);
+      const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
       if (stub) {
         stub.replaceWith(child.getContent());
       }

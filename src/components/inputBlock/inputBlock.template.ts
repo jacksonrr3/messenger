@@ -3,9 +3,10 @@ export default `
     <label for="{{id}}">{{title}}</label>
   {{/if}}
   {{#if middleSpan}}
-    {{{errorMessageSpan}}}
+    {{{messageSpan}}}
   {{/if}}
-  <input type="{{type}}" id="{{id}}" name="{{id}}" placeholder="{{title}}" {{disabled}}>
+  {{{inputElement}}}
   {{#if span}}
-    {{{errorMessageSpan}}}
-  {{/if}}`;
+    {{{messageSpan}}}
+  {{/if}}
+`;

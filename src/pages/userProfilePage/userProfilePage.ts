@@ -11,6 +11,7 @@ export default class userProfilePage extends Block {
       id: 'email',
       type: 'email',
       label: true,
+      // middleSpan: true,
       disabled: 'disabled',
     });
 
@@ -19,6 +20,7 @@ export default class userProfilePage extends Block {
       id: 'login',
       type: 'text',
       label: true,
+      middleSpan: true,
       disabled: 'disabled',
     });
 
@@ -27,6 +29,7 @@ export default class userProfilePage extends Block {
       id: 'first_name',
       type: 'text',
       label: true,
+      middleSpan: true,
       disabled: 'disabled',
     });
 
@@ -35,6 +38,7 @@ export default class userProfilePage extends Block {
       id: 'second_name',
       type: 'text',
       label: true,
+      middleSpan: true,
       disabled: 'disabled',
     });
 
@@ -43,6 +47,7 @@ export default class userProfilePage extends Block {
       id: 'display_name',
       type: 'text',
       label: true,
+      middleSpan: true,
       disabled: 'disabled',
     });
 
@@ -51,6 +56,7 @@ export default class userProfilePage extends Block {
       id: 'phone',
       type: 'tel',
       label: true,
+      middleSpan: true,
       disabled: 'disabled',
     });
 
