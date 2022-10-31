@@ -29,9 +29,6 @@ export default class Input extends Block {
     }
 
     super('input', {
-      type,
-      id,
-      title,
       attr,
       events: {
         focus: focusBlurHandler(spanElement),

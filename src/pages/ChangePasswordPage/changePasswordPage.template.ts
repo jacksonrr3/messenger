@@ -6,11 +6,6 @@ export default `
       <div class="avatar">
         <img src="{{defaultAvatar}}" alt="default_avatar">
       </div>
-      <form class="settings">
-          {{{oldPassword}}}
-          {{{newPassword}}}
-          {{{repeatNewPassword}}}
-          {{{saveButton}}}
-      </form>
+      {{{form}}}
   </div>
 `;

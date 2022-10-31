@@ -20,7 +20,7 @@ function queryStringify(data: object) {
 type RequestOptions = {
   headers?: Record<string, string>,
   method?: string,
-  data?: object | Document | XMLHttpRequestBodyInit | null | undefined,
+  data?: object,
   timeout?: number,
   tries?: number,
 }
@@ -29,11 +29,14 @@ type HTTPMethod = (url: string, options?: RequestOptions) => Promise<any>;
 type HTTPRequest = (url: string, options: RequestOptions, timeout?: number) => Promise<any>;
 
 class HTTPTransport {
-  get: HTTPMethod = (url, options = {}) => this.request(
-    url,
-    { ...options, method: METHODS.GET },
-    options.timeout,
-  );
+  get: HTTPMethod = (url, options = {}) => {
+    const { data = {} } = options;
+    return this.request(
+      `${url}${queryStringify(data)}`,
+      { ...options, method: METHODS.GET },
+      options.timeout,
+    );
+  };
 
   post : HTTPMethod = (url, options = {}) => this.request(
     url,
@@ -65,12 +68,7 @@ class HTTPTransport {
       const xhr = new XMLHttpRequest();
       const isGet = method === METHODS.GET;
 
-      xhr.open(
-        method,
-        isGet && !!data
-          ? `${url}${queryStringify(data)}`
-          : url,
-      );
+      xhr.open(method, url);
 
       Object.keys(headers).forEach((key) => {
         xhr.setRequestHeader(key, headers[key]);

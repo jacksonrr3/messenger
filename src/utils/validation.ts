@@ -1,3 +1,9 @@
+type ValidationFunc = (value: string) => boolean
+
+type ValidateionObject = {
+  [key: string]: ValidationFunc
+}
+
 export const validationErrorMessage = {
   login: 'Некорректный логин',
   password: 'Некорректный пароль',
@@ -12,14 +18,14 @@ export const validationErrorMessage = {
   message: 'Сообщение не должно быть пустым',
 };
 
-const loginCheck = (value: string): boolean => /[(\w+)]{3,20}/.test(value) && value.length < 21;
-const passwordFieldCheck = (value: string): boolean => /[(\w+)]{8,40}/.test(value) && value.length < 41;
-const nameCheck = (value: string): boolean => /^[A-Z][a-zа-я-]{0,}/.test(value);
-const emailCheck = (value: string): boolean => /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/.test(value);
-const phoneCheck = (value: string): boolean => /^([+]?\d){10,15}$/.test(value);
-const messageCheck = (value: string): boolean => value.length !== 0;
+const loginCheck: ValidationFunc = (value) => /[(\w+)]{3,20}/.test(value) && value.length < 21;
+const passwordFieldCheck: ValidationFunc = (value) => /[(\w+)]{8,40}/.test(value) && value.length < 41;
+const nameCheck: ValidationFunc = (value) => /^[A-Z][a-zа-я-]{0,}/.test(value);
+const emailCheck: ValidationFunc = (value) => /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+(\.\w+)?[^.\W])$/.test(value);
+const phoneCheck: ValidationFunc = (value) => /^([+]?\d){10,15}$/.test(value);
+const messageCheck: ValidationFunc = (value) => value.length !== 0;
 
-const validate = {
+const validate: ValidateionObject = {
   login: loginCheck,
   password: passwordFieldCheck,
   confirm_password: passwordFieldCheck,
