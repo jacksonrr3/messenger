@@ -1,12 +1,12 @@
-import Block, { Props } from '../../core/Block';
+import Block from '../../core/Block';
 import './regPage.scss';
 import regTemplate from './regPage.template';
 import InputBlock from '../../components/InputBlock';
-import Button from '../../components/Button';
-import { isValidInput } from '../../utils/validation';
+import Form from '../../components/Form';
+import Link from '../../components/Link';
 
 export default class RegPage extends Block {
-  constructor(props: Props) {
+  constructor() {
     const email = new InputBlock({
       title: 'Почта',
       id: 'email',
@@ -63,13 +63,9 @@ export default class RegPage extends Block {
       span: true,
     });
 
-    const regButton = new Button({
-      text: 'Зарегистрироваться',
-    });
-
-    super('div', {
-      ...props,
-      attr: [['class', 'reg-container']],
+    const form = new Form({
+      className: 'form',
+      inputs: ['email', 'login', 'firstName', 'secondName', 'phone', 'password', 'confirmPassword'],
       email,
       login,
       firstName,
@@ -77,23 +73,20 @@ export default class RegPage extends Block {
       phone,
       password,
       confirmPassword,
-      regButton,
-      enter: 'Войти',
+      formButtontext: 'Зарегистрироваться',
     });
-  }
 
-  addInnerEvents() {
-    const form = this.element.querySelector('form');
-    const formInputs = form?.querySelectorAll('input');
+    const link = new Link({
+      text: 'Войти',
+      className: 'form-link',
+    });
 
-    form?.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const formData = new FormData(form);
-      const formDataObject = Object.fromEntries(formData.entries());
-      const isValid = Array.from(formInputs)
-        .reduce((acc, input) => (acc && isValidInput(input)), true);
-
-      console.log('submit', formDataObject, isValid ? 'форма валидна' : 'форма не валидна');
+    super('div', {
+      // ...props,
+      attr: [['class', 'reg-container']],
+      titleText: 'Регистрация',
+      form,
+      link,
     });
   }
 

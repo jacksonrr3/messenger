@@ -18,18 +18,19 @@
         width: inherit;
         padding: 50px 30px 40px 30px;
 
+        .title {
+            margin-bottom: 40px;
+            font-size: 20px;
+            line-height: 20px;
+
+            text-align: center;
+            color: $black;
+        }
+
         .form {
             display: flex;
             flex-direction: column;
             
-            .title {
-                margin-bottom: 40px;
-                font-size: 20px;
-                line-height: 20px;
-
-                text-align: center;
-                color: $black;
-            }
 
             .input-item {
                 display: flex;
@@ -78,12 +79,13 @@
                     color: $white;
                 }
             }
+        }
 
-            a {
-                text-align: center;
+        .link-container {
+            text-align: center;
+            margin-top: 14px;
 
-                margin-top: 14px;
-
+            .form-link {
                 font-size: 11px;
                 line-height: 11px;
 

@@ -19,15 +19,16 @@ const submitHandler = (e: Event) => {
 
 export default class Form extends Block {
   constructor(props: Props) {
-    const authButton = new Button({
-      text: 'Авторизоваться',
+    const formButton = new Button({
+      text: props.formButtontext,
     });
 
     const { inputs, className } = props;
+
     super('form', {
       template: formTemplate(inputs),
-      authButton,
-      noAccText: 'Нет аккаунта?',
+      formButton,
+      // noAccText: 'Нет аккаунта?',
       attr: [['class', className]],
       events: {
         submit: submitHandler,
