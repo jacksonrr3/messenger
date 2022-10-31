@@ -1,10 +1,9 @@
 import Block, { Props } from '../../core/Block';
 import InputBlock from '../../components/InputBlock';
-import Button from '../../components/Button';
 import './userSettingsPage.scss';
 import defaultAvatar from '../../../static/pictures/default_avatar.svg';
 import userSettingsTemplate from './userSettingsPage.template';
-import { isValidInput } from '../../utils/validation';
+import Form from '../../components/Form';
 
 export default class UserSettingsPage extends Block {
   constructor(props: Props) {
@@ -56,36 +55,22 @@ export default class UserSettingsPage extends Block {
       middleSpan: true,
     });
 
-    const saveButton = new Button({
-      text: 'Сохранить',
-    });
-
-    super('div', {
-      ...props,
-      attr: [['class', 'user-settings-container']],
-      defaultAvatar,
+    const form = new Form({
+      className: 'settings',
+      inputs: ['email', 'login', 'firstName', 'secondName', 'displayName', 'phone'],
       email,
       login,
       firstName,
       secondName,
       displayName,
       phone,
-      saveButton,
     });
-  }
 
-  addInnerEvents() {
-    const form = this.element.querySelector('form');
-    const formInputs = form?.querySelectorAll('input');
-
-    form?.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const formData = new FormData(form);
-      const formDataObject = Object.fromEntries(formData.entries());
-      const isValid = Array.from(formInputs)
-        .reduce((acc, input) => (acc && isValidInput(input)), true);
-
-      console.log('submit', formDataObject, isValid ? 'форма валидна' : 'форма не валидна');
+    super('div', {
+      ...props,
+      attr: [['class', 'user-settings-container']],
+      defaultAvatar,
+      form,
     });
   }
 

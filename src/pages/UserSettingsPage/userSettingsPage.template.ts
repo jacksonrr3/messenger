@@ -6,14 +6,6 @@ export default `
       <div class="avatar">
         <img src="{{defaultAvatar}}" alt="user_avatar">
       </div>
-      <form class="settings">
-          {{{email}}}
-          {{{login}}}
-          {{{firstName}}}
-          {{{secondName}}}
-          {{{displayName}}}
-          {{{phone}}}
-          {{{saveButton}}}
-      </form>
+      {{{form}}}
   </div>
 `;

@@ -23,12 +23,12 @@ export default class Form extends Block {
       text: 'Авторизоваться',
     });
 
-    const { inputs, formClass } = props;
+    const { inputs, className } = props;
     super('form', {
       template: formTemplate(inputs),
       authButton,
       noAccText: 'Нет аккаунта?',
-      attr: [['class', formClass]],
+      attr: [['class', className]],
       events: {
         submit: submitHandler,
       },

@@ -28,7 +28,7 @@ export default class AuthPage extends Block {
       inputs: ['login', 'password'],
       login,
       password,
-      formClass: 'form',
+      className: 'form',
     });
 
     const link = new Link({
