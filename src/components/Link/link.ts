@@ -4,9 +4,10 @@ import './link.scss';
 
 export default class Button extends Block {
   constructor(props: Props) {
+    const className = props.className || 'nav-link';
     super('a', {
+      attr: [['class', className]],
       ...props,
-      attr: [['class', 'nav-link']],
     });
   }
 

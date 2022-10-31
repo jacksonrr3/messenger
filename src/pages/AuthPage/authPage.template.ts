@@ -1,11 +1,8 @@
 export default `
   <div class="form-container">
-    <form class="form">
-      <h2 class="title">Вход</h2>
-      {{{login}}}
-      {{{password}}}
-      {{{authButton}}}
-      <a href='/'>{{noAccText}}</a>
-      </div>
-    </form>
+    <h2 class="title">{{titleText}}</h2>
+      {{{form}}}
+    <div class="link-container">
+      {{{link}}}
+    </div>
   </div>`;

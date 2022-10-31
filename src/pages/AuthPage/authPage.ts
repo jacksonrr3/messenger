@@ -1,13 +1,13 @@
-import Block, { Props } from '../../core/Block';
+import Block from '../../core/Block';
 import './auth.scss';
 import authTemplate from './authPage.template';
-import Input from '../../components/InputBlock';
-import Button from '../../components/Button';
-import { isValidInput } from '../../utils/validation';
+import InputBlock from '../../components/InputBlock';
+import Form from '../../components/Form';
+import Link from '../../components/Link';
 
 export default class AuthPage extends Block {
-  constructor(props: Props) {
-    const login = new Input({
+  constructor() {
+    const login = new InputBlock({
       title: 'Имя',
       id: 'login',
       type: 'text',
@@ -15,7 +15,7 @@ export default class AuthPage extends Block {
       span: true,
     });
 
-    const password = new Input({
+    const password = new InputBlock({
       title: 'Пароль',
       id: 'password',
       type: 'password',
@@ -23,32 +23,25 @@ export default class AuthPage extends Block {
       span: true,
     });
 
-    const authButton = new Button({
-      text: 'Авторизоваться',
+    const form = new Form({
+      linkText: 'Нет аккаунта?',
+      inputs: ['login', 'password'],
+      login,
+      password,
+      formClass: 'form',
+    });
+
+    const link = new Link({
+      text: 'Нет аккаунта?',
+      className: 'form-link',
     });
 
     super('div', {
-      ...props,
+      // ...props,
       attr: [['class', 'auth-container']],
-      login,
-      password,
-      authButton,
-      noAccText: 'Нет аккаунта?',
-    });
-  }
-
-  addInnerEvents() {
-    const form = this.element.querySelector('form');
-    const formInputs = form?.querySelectorAll('input');
-
-    form?.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const formData = new FormData(form);
-      const formDataObject = Object.fromEntries(formData.entries());
-      const isValid = Array.from(formInputs)
-        .reduce((acc, input) => (acc && isValidInput(input)), true);
-
-      console.log('submit', formDataObject, isValid ? 'форма валидна' : 'форма не валидна');
+      titleText: 'Вход',
+      form,
+      link,
     });
   }
 

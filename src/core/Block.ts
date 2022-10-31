@@ -78,8 +78,8 @@ export default abstract class Block {
     this._eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
-  _componentDidUpdate(oldProps: Props, newProps: Props) {
-    const response = this.componentDidUpdate(oldProps, newProps);
+  _componentDidUpdate(/* oldProps: Props, newProps: Props */) {
+    const response = this.componentDidUpdate(/* oldProps, newProps */);
     if (response) {
       this._eventBus().emit(Block.EVENTS.FLOW_RENDER);
     }
@@ -122,7 +122,6 @@ export default abstract class Block {
       set: (target, prop, value) => {
         if (target[prop] !== value) {
           target[prop] = value;
-          // this._eventBus().emit(Block.EVENTS.FLOW_CDU, oldProps, target);
           this._setUpdate = true;
         }
         return true;
@@ -162,7 +161,7 @@ export default abstract class Block {
   abstract render(): DocumentFragment;
 
   getContent() {
-    return this.element;
+    return this._element;
   }
 
   _createDocumentElement(tagName: string) {
