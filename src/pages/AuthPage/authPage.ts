@@ -1,8 +1,8 @@
 import Block, { Props } from '../../core/Block';
 import './auth.scss';
 import authTemplate from './authPage.template';
-import Input from '../../components/inputBlock';
-import Button from '../../components/button';
+import Input from '../../components/InputBlock';
+import Button from '../../components/Button';
 import { isValidInput } from '../../utils/validation';
 
 export default class AuthPage extends Block {

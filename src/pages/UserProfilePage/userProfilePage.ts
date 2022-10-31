@@ -1,27 +1,27 @@
 import Block, { Props } from '../../core/Block';
-import InputBlock from '../../components/inputBlock';
-import Button from '../../components/button';
-import './userSettingsPage.scss';
+import InputBlock from '../../components/InputBlock/index';
+import './userProfilePage.scss';
 import defaultAvatar from '../../../static/pictures/default_avatar.svg';
-import userSettingsTemplate from './userSettingsPage.template';
-import { isValidInput } from '../../utils/validation';
+import userProfileTemplate from './userProfilePage.template';
 
-export default class UserSettingsPage extends Block {
+export default class userProfilePage extends Block {
   constructor(props: Props) {
     const email = new InputBlock({
       title: 'Почта',
       id: 'email',
       type: 'email',
       label: true,
-      middleSpan: true,
+      // middleSpan: true,
+      disabled: 'disabled',
     });
 
     const login = new InputBlock({
-      title: 'Логин',
+      title: 'Имя',
       id: 'login',
       type: 'text',
       label: true,
       middleSpan: true,
+      disabled: 'disabled',
     });
 
     const firstName = new InputBlock({
@@ -30,6 +30,7 @@ export default class UserSettingsPage extends Block {
       type: 'text',
       label: true,
       middleSpan: true,
+      disabled: 'disabled',
     });
 
     const secondName = new InputBlock({
@@ -38,6 +39,7 @@ export default class UserSettingsPage extends Block {
       type: 'text',
       label: true,
       middleSpan: true,
+      disabled: 'disabled',
     });
 
     const displayName = new InputBlock({
@@ -46,6 +48,7 @@ export default class UserSettingsPage extends Block {
       type: 'text',
       label: true,
       middleSpan: true,
+      disabled: 'disabled',
     });
 
     const phone = new InputBlock({
@@ -54,42 +57,23 @@ export default class UserSettingsPage extends Block {
       type: 'tel',
       label: true,
       middleSpan: true,
-    });
-
-    const saveButton = new Button({
-      text: 'Сохранить',
+      disabled: 'disabled',
     });
 
     super('div', {
       ...props,
-      attr: [['class', 'user-settings-container']],
+      attr: [['class', 'user-profile-container']],
       defaultAvatar,
       email,
       login,
       firstName,
       secondName,
       displayName,
-      phone,
-      saveButton,
-    });
-  }
-
-  addInnerEvents() {
-    const form = this.element.querySelector('form');
-    const formInputs = form?.querySelectorAll('input');
-
-    form?.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const formData = new FormData(form);
-      const formDataObject = Object.fromEntries(formData.entries());
-      const isValid = Array.from(formInputs)
-        .reduce((acc, input) => (acc && isValidInput(input)), true);
-
-      console.log('submit', formDataObject, isValid ? 'форма валидна' : 'форма не валидна');
+      phoneInput: phone,
     });
   }
 
   render() {
-    return this.compile(userSettingsTemplate, this._props);
+    return this.compile(userProfileTemplate, this._props);
   }
 }

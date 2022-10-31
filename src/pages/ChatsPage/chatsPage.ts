@@ -5,8 +5,8 @@ import threePoints from '../../../static/pictures/three_points.svg';
 import append from '../../../static/pictures/append.svg';
 import rightArrow from '../../../static/pictures/right_arrow.svg';
 import chatsTemplate from './chatsPage.template';
-import ChatItem from '../../components/chatItem';
-import InputBlock from '../../components/inputBlock';
+import ChatItem from '../../components/ChatItem';
+import InputBlock from '../../components/InputBlock';
 
 export default class ChatsPage extends Block {
   constructor(props: Props) {

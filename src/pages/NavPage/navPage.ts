@@ -1,16 +1,16 @@
 import Block, { Props } from '../../core/Block';
 import './navPage.scss';
 import regTemplate from './navPage.template';
-import Link from '../../components/link';
+import Link from '../../components/Link';
 import renderDom from '../../utils/renderDom';
-import AuthPage from '../authPage';
-import ErrorPage from '../errorPage';
-import RegPage from '../regPage';
-import UserProfilePage from '../userProfilePage';
-import UserSettingsPage from '../userSettingsPage';
-import ChangePasswordPage from '../changePasswordPage';
-import ChangeAvatarPage from '../changeAvatarPage';
-import ChatsPage from '../chatsPage/chatsPage';
+import AuthPage from '../AuthPage';
+import ErrorPage from '../ErrorPage';
+import RegPage from '../RegPage';
+import UserProfilePage from '../UserProfilePage';
+import UserSettingsPage from '../UserSettingsPage';
+import ChangePasswordPage from '../ChangePasswordPage';
+import ChangeAvatarPage from '../ChangeAvatarPage';
+import ChatsPage from '../ChatsPage/chatsPage';
 
 export default class NavPage extends Block {
   constructor(props: Props) {

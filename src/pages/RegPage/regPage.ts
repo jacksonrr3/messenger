@@ -1,8 +1,8 @@
 import Block, { Props } from '../../core/Block';
 import './regPage.scss';
 import regTemplate from './regPage.template';
-import InputBlock from '../../components/inputBlock';
-import Button from '../../components/button';
+import InputBlock from '../../components/InputBlock';
+import Button from '../../components/Button';
 import { isValidInput } from '../../utils/validation';
 
 export default class RegPage extends Block {

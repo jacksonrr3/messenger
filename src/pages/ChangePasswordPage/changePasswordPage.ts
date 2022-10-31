@@ -2,8 +2,8 @@ import Block, { Props } from '../../core/Block';
 import './changePasswordPage.scss';
 import defaultAvatar from '../../../static/pictures/default_avatar.svg';
 import changePasswordTemplate from './changePasswordPage.template';
-import InputBlock from '../../components/inputBlock/index';
-import Button from '../../components/button';
+import InputBlock from '../../components/InputBlock/index';
+import Button from '../../components/Button';
 import { isValidInput } from '../../utils/validation';
 
 export default class ChangePasswordPage extends Block {

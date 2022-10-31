@@ -1,8 +1,8 @@
 import Block, { Props } from '../../core/Block';
 import './inputBlock.scss';
 import inputTemplate from './inputBlock.template';
-import Span from '../span';
-import Input from '../input';
+import Span from '../Span';
+import Input from '../Input';
 
 export default class InputBlock extends Block {
   constructor(props: Props) {

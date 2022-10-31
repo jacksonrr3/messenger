@@ -1,8 +1,8 @@
 import Block, { Props } from '../../core/Block';
 import './changeAvatarPage.scss';
 import changeAvatarTemplate from './changeAvatarPage.template';
-import InputBlock from '../../components/inputBlock/index';
-import Button from '../../components/button';
+import InputBlock from '../../components/InputBlock/index';
+import Button from '../../components/Button';
 
 export default class ChangeAvatarPage extends Block {
   constructor(props: Props) {

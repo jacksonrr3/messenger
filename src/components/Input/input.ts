@@ -2,7 +2,7 @@ import Block, { Props } from '../../core/Block';
 import './input.scss';
 import inputTemplate from './input.template';
 import { validationErrorMessage, isValidInput } from '../../utils/validation';
-import Span from '../span';
+import Span from '../Span';
 
 const focusBlurHandler = (spanElement = new Span({})) => ({ target } : Event) => {
   const spanText = isValidInput(target as HTMLInputElement) ? '' : validationErrorMessage[target.id];

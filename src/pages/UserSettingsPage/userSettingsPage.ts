@@ -1,27 +1,27 @@
 import Block, { Props } from '../../core/Block';
-import InputBlock from '../../components/inputBlock/index';
-import './userProfilePage.scss';
+import InputBlock from '../../components/InputBlock';
+import Button from '../../components/Button';
+import './userSettingsPage.scss';
 import defaultAvatar from '../../../static/pictures/default_avatar.svg';
-import userProfileTemplate from './userProfilePage.template';
+import userSettingsTemplate from './userSettingsPage.template';
+import { isValidInput } from '../../utils/validation';
 
-export default class userProfilePage extends Block {
+export default class UserSettingsPage extends Block {
   constructor(props: Props) {
     const email = new InputBlock({
       title: 'Почта',
       id: 'email',
       type: 'email',
       label: true,
-      // middleSpan: true,
-      disabled: 'disabled',
+      middleSpan: true,
     });
 
     const login = new InputBlock({
-      title: 'Имя',
+      title: 'Логин',
       id: 'login',
       type: 'text',
       label: true,
       middleSpan: true,
-      disabled: 'disabled',
     });
 
     const firstName = new InputBlock({
@@ -30,7 +30,6 @@ export default class userProfilePage extends Block {
       type: 'text',
       label: true,
       middleSpan: true,
-      disabled: 'disabled',
     });
 
     const secondName = new InputBlock({
@@ -39,7 +38,6 @@ export default class userProfilePage extends Block {
       type: 'text',
       label: true,
       middleSpan: true,
-      disabled: 'disabled',
     });
 
     const displayName = new InputBlock({
@@ -48,7 +46,6 @@ export default class userProfilePage extends Block {
       type: 'text',
       label: true,
       middleSpan: true,
-      disabled: 'disabled',
     });
 
     const phone = new InputBlock({
@@ -57,23 +54,42 @@ export default class userProfilePage extends Block {
       type: 'tel',
       label: true,
       middleSpan: true,
-      disabled: 'disabled',
+    });
+
+    const saveButton = new Button({
+      text: 'Сохранить',
     });
 
     super('div', {
       ...props,
-      attr: [['class', 'user-profile-container']],
+      attr: [['class', 'user-settings-container']],
       defaultAvatar,
       email,
       login,
       firstName,
       secondName,
       displayName,
-      phoneInput: phone,
+      phone,
+      saveButton,
+    });
+  }
+
+  addInnerEvents() {
+    const form = this.element.querySelector('form');
+    const formInputs = form?.querySelectorAll('input');
+
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const formDataObject = Object.fromEntries(formData.entries());
+      const isValid = Array.from(formInputs)
+        .reduce((acc, input) => (acc && isValidInput(input)), true);
+
+      console.log('submit', formDataObject, isValid ? 'форма валидна' : 'форма не валидна');
     });
   }
 
   render() {
-    return this.compile(userProfileTemplate, this._props);
+    return this.compile(userSettingsTemplate, this._props);
   }
 }
