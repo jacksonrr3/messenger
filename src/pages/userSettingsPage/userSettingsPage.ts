@@ -1,5 +1,5 @@
 import Block, { Props } from '../../core/Block';
-import Input from '../../components/inputBlock';
+import InputBlock from '../../components/inputBlock';
 import Button from '../../components/button';
 import './userSettingsPage.scss';
 import defaultAvatar from '../../../static/pictures/default_avatar.svg';
@@ -8,7 +8,7 @@ import { isValidInput } from '../../utils/validation';
 
 export default class UserSettingsPage extends Block {
   constructor(props: Props) {
-    const email = new Input({
+    const email = new InputBlock({
       title: 'Почта',
       id: 'email',
       type: 'email',
@@ -16,7 +16,7 @@ export default class UserSettingsPage extends Block {
       middleSpan: true,
     });
 
-    const login = new Input({
+    const login = new InputBlock({
       title: 'Логин',
       id: 'login',
       type: 'text',
@@ -24,7 +24,7 @@ export default class UserSettingsPage extends Block {
       middleSpan: true,
     });
 
-    const firstName = new Input({
+    const firstName = new InputBlock({
       title: 'Имя',
       id: 'first_name',
       type: 'text',
@@ -32,7 +32,7 @@ export default class UserSettingsPage extends Block {
       middleSpan: true,
     });
 
-    const secondName = new Input({
+    const secondName = new InputBlock({
       title: 'Фамилия',
       id: 'second_name',
       type: 'text',
@@ -40,7 +40,7 @@ export default class UserSettingsPage extends Block {
       middleSpan: true,
     });
 
-    const displayName = new Input({
+    const displayName = new InputBlock({
       title: 'Имя в чате',
       id: 'display_name',
       type: 'text',
@@ -48,7 +48,7 @@ export default class UserSettingsPage extends Block {
       middleSpan: true,
     });
 
-    const phone = new Input({
+    const phone = new InputBlock({
       title: 'Телефон',
       id: 'phone',
       type: 'tel',

@@ -11,7 +11,7 @@ const focusBlurHandler = (spanElement: Block) => ({ target } : Event) => {
   });
 };
 
-export default class Input extends Block {
+export default class InputBlock extends Block {
   constructor(props: Props) {
     const errorMessageSpan = new Span({
       attr: [['class', 'error-message']],

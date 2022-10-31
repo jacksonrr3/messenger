@@ -5,7 +5,7 @@ export default `
   {{#if middleSpan}}
     {{{errorMessageSpan}}}
   {{/if}}
-  <input class="{{class}}" type="{{type}}" id="{{id}}" name="{{id}}" placeholder="{{title}}" {{disabled}}>
+  <input type="{{type}}" id="{{id}}" name="{{id}}" placeholder="{{title}}" {{disabled}}>
   {{#if span}}
     {{{errorMessageSpan}}}
   {{/if}}`;

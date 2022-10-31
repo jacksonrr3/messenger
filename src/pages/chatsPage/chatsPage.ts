@@ -18,7 +18,6 @@ export default class ChatsPage extends Block {
     });
 
     const messageInput = new InputBlock({
-      class: 'message-input',
       type: 'text',
       id: 'message',
       title: 'Сообщение',

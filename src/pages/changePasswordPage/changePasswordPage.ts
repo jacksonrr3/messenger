@@ -2,12 +2,13 @@ import Block, { Props } from '../../core/Block';
 import './changePasswordPage.scss';
 import defaultAvatar from '../../../static/pictures/default_avatar.svg';
 import changePasswordTemplate from './changePasswordPage.template';
-import Input from '../../components/inputBlock/index';
+import InputBlock from '../../components/inputBlock/index';
 import Button from '../../components/button';
+import { isValidInput } from '../../utils/validation';
 
 export default class ChangePasswordPage extends Block {
   constructor(props: Props) {
-    const oldPassword = new Input({
+    const oldPassword = new InputBlock({
       title: 'Старый пароль',
       id: 'oldPassword',
       type: 'password',
@@ -15,7 +16,7 @@ export default class ChangePasswordPage extends Block {
       middleSpan: true,
     });
 
-    const newPassword = new Input({
+    const newPassword = new InputBlock({
       title: 'Новый пароль',
       id: 'newPassword',
       type: 'password',
@@ -23,7 +24,7 @@ export default class ChangePasswordPage extends Block {
       middleSpan: true,
     });
 
-    const repeatNewPassword = new Input({
+    const repeatNewPassword = new InputBlock({
       title: 'Повторите новый пароль',
       id: 'password',
       type: 'password',
@@ -44,6 +45,21 @@ export default class ChangePasswordPage extends Block {
       repeatNewPassword,
       saveButton,
       enter: 'Войти',
+    });
+  }
+
+  addInnerEvents() {
+    const form = this.element.querySelector('form');
+    const formInputs = form?.querySelectorAll('input');
+
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const formDataObject = Object.fromEntries(formData.entries());
+      const isValid = Array.from(formInputs)
+        .reduce((acc, input) => (acc && isValidInput(input)), true);
+
+      console.log('submit', formDataObject, isValid ? 'форма валидна' : 'форма не валидна');
     });
   }
 
