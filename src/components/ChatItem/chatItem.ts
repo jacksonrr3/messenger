@@ -7,7 +7,7 @@ export default class ChatItem extends Block {
   constructor(props: Props) {
     super('div', {
       ...props,
-      attr: [['class', 'chat-item']],
+      attr: { class: 'chat-item' },
       round4747,
     });
   }

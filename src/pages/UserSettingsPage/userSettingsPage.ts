@@ -1,4 +1,4 @@
-import Block, { Props } from '../../core/Block';
+import Block from '../../core/Block';
 import InputBlock from '../../components/InputBlock';
 import './userSettingsPage.scss';
 import defaultAvatar from '../../../static/pictures/default_avatar.svg';
@@ -6,7 +6,7 @@ import userSettingsTemplate from './userSettingsPage.template';
 import Form from '../../components/Form';
 
 export default class UserSettingsPage extends Block {
-  constructor(props: Props) {
+  constructor() {
     const email = new InputBlock({
       title: 'Почта',
       id: 'email',
@@ -64,11 +64,11 @@ export default class UserSettingsPage extends Block {
       secondName,
       displayName,
       phone,
+      formButtonText: 'Сохранить',
     });
 
     super('div', {
-      ...props,
-      attr: [['class', 'user-settings-container']],
+      attr: { class: 'user-settings-container' },
       defaultAvatar,
       form,
     });

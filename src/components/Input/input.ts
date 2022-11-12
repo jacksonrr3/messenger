@@ -17,15 +17,16 @@ export default class Input extends Block {
       type, id, title, disabled, spanElement,
     } = props;
 
-    const attr = [
-      ['type', type],
-      ['id', id],
-      ['name', id],
-      ['placeholder', title],
-    ];
+    const attr = {
+      type,
+      id,
+      name: id,
+      placeholder: title,
+
+    };
 
     if (disabled) {
-      attr.push(['disabled', disabled]);
+      attr.disabled = disabled;
     }
 
     super('input', {

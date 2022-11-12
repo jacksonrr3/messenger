@@ -12,7 +12,7 @@ function merge(lhs: Indexed, rhs: Indexed): Indexed {
     merge(lhs[key] as Indexed, rhs[key] as Indexed);
   });
   // Код здесь
-  console.log(lhs)
+  console.log(lhs);
   return lhs;
 }
 

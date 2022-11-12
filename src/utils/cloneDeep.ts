@@ -63,11 +63,15 @@ function cloneDeep<T extends object = object>(obj: T) {
 
       // Handle:
       // * Object.symbol
-      Object.getOwnPropertySymbols(item).forEach((s) => (copy[s] = _cloneDeep(item[s])));
+      Object.getOwnPropertySymbols(item).forEach((s) => {
+        copy[s] = _cloneDeep(item[s]);
+      });
 
       // Handle:
       // * Object.name (other)
-      Object.keys(item).forEach((k) => (copy[k] = _cloneDeep(item[k])));
+      Object.keys(item).forEach((k) => {
+        copy[k] = _cloneDeep(item[k]);
+      });
 
       return copy;
     }

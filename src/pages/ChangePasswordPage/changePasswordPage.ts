@@ -37,11 +37,11 @@ export default class ChangePasswordPage extends Block {
       oldPassword,
       newPassword,
       repeatNewPassword,
-      formButtontext: 'Сохранить',
+      formButtonText: 'Сохранить',
     });
 
     super('div', {
-      attr: [['class', 'change-password-container']],
+      attr: { class: 'change-password-container' },
       defaultAvatar,
       form,
     });

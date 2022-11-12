@@ -6,7 +6,7 @@ export default class Span extends Block {
   constructor(props: Props) {
     super('span', {
       ...props,
-      attr: [['class', 'error-validation-text']],
+      attr: { class: 'error-validation-text' },
     });
   }
 

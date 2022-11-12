@@ -16,10 +16,10 @@ export default `
       </div>
       <div class="links">
         <div class="link">
-          <a href="/userSettingsPage">Изменить данные</a>
+          <a href="/user_settings">Изменить данные</a>
         </div>
         <div class="link">
-          <a href="/changePasswordPage">Изменить пароль</a>
+          <a href="/change_password">Изменить пароль</a>
         </div>
         <a href="/">Выйти</a>
       </div>

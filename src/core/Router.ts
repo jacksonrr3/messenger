@@ -1,19 +1,32 @@
 import Block from './Block';
-import Route from './Route';
+import { Route } from './Route';
 
-function isEqual(lhs, rhs) {
-  return lhs === rhs;
-}
+// function isEqual(lhs: , rhs) {
+//   return lhs === rhs;
+// }
 
-function render(query, block) {
-  const root = document.querySelector(query);
-  root.textContent = block.getContent();
-  return root;
-}
+// function render(query, block) {
+//   const root = document.querySelector(query);
+//   root.textContent = block.getContent();
+//   return root;
+// }
+
+// interface IRouter {
+//   // static __instance: any;
+
+// }
 
 export class Router {
-  constructor(rootQuery) {
+  static __instance: any;
+
+  routes: Route[];
+  history: History;
+  _currentRoute: null | Route;
+  _rootQuery: string;
+
+  constructor(rootQuery: string) {
     if (Router.__instance) {
+      // eslint-disable-next-line no-constructor-return
       return Router.__instance;
     }
 
@@ -25,7 +38,7 @@ export class Router {
     Router.__instance = this;
   }
 
-  use(pathname, block) {
+  use(pathname: string, block: typeof Block) {
     const route = new Route(pathname, block, { rootQuery: this._rootQuery });
     this.routes.push(route);
 
@@ -33,15 +46,14 @@ export class Router {
   }
 
   start() {
-    window.onpopstate = (event) => {
-      // console.log('onpopstate');
-      this._onRoute(event.currentTarget.location.pathname);
+    window.onpopstate = () => {
+      this._onRoute(window.location.pathname);
     };
 
     this._onRoute(window.location.pathname);
   }
 
-  _onRoute(pathname) {
+  _onRoute(pathname: string) {
     const route = this.getRoute(pathname);
 
     if (this._currentRoute && this._currentRoute !== route) {
@@ -49,29 +61,24 @@ export class Router {
     }
 
     this._currentRoute = route;
-    route.render(route, pathname);
+    route?.render();
   }
 
-  go(pathname) {
+  go(pathname: string) {
     this.history.pushState({ pathname }, '', pathname);
     this._onRoute(pathname);
   }
 
   back() {
     this.history.back();
-    const { pathname } = this.history.state;
-    // console.log('back', this.history.state);
-    // pathname && this._onRoute(pathname);
   }
 
   forward() {
     this.history.forward();
-    const { pathname } = this.history.state;
-    // console.log('forward', this.history.state);
-    // pathname && this._onRoute(pathname);
   }
 
-  getRoute(pathname) {
-    return this.routes.find((route) => route.match(pathname));
+  getRoute(pathname: string): Route | null {
+    const expectedRoute = this.routes.find((route) => route.match(pathname));
+    return expectedRoute || null;
   }
 }

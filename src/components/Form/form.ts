@@ -20,7 +20,7 @@ const submitHandler = (e: Event) => {
 export default class Form extends Block {
   constructor(props: Props) {
     const formButton = new Button({
-      text: props.formButtontext,
+      text: props.formButtonText,
     });
 
     const { inputs, className } = props;
@@ -28,8 +28,7 @@ export default class Form extends Block {
     super('form', {
       template: formTemplate(inputs),
       formButton,
-      // noAccText: 'Нет аккаунта?',
-      attr: [['class', className]],
+      attr: { class: className },
       events: {
         submit: submitHandler,
       },

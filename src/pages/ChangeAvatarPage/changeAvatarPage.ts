@@ -1,11 +1,11 @@
-import Block, { Props } from '../../core/Block';
+import Block from '../../core/Block';
 import './changeAvatarPage.scss';
 import changeAvatarTemplate from './changeAvatarPage.template';
 import InputBlock from '../../components/InputBlock/index';
 import Button from '../../components/Button';
 
 export default class ChangeAvatarPage extends Block {
-  constructor(props: Props) {
+  constructor() {
     const avatarInput = new InputBlock({
       label: true,
       title: 'Выбрать файл на компьютере',
@@ -18,8 +18,7 @@ export default class ChangeAvatarPage extends Block {
     });
 
     super('div', {
-      ...props,
-      attr: [['class', 'change-avatar-container']],
+      attr: { class: 'change-avatar-container' },
       avatarInput,
       saveButton,
       enter: 'Войти',

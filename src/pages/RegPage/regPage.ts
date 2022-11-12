@@ -73,17 +73,17 @@ export default class RegPage extends Block {
       phone,
       password,
       confirmPassword,
-      formButtontext: 'Зарегистрироваться',
+      formButtonText: 'Зарегистрироваться',
     });
 
     const link = new Link({
       text: 'Войти',
       className: 'form-link',
+      href: '/auth',
     });
 
     super('div', {
-      // ...props,
-      attr: [['class', 'reg-container']],
+      attr: { class: 'reg-container' },
       titleText: 'Регистрация',
       form,
       link,

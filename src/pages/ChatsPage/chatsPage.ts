@@ -1,4 +1,4 @@
-import Block, { Props } from '../../core/Block';
+import Block from '../../core/Block';
 import './chatsPage.scss';
 import round3434 from '../../../static/pictures/round_34_34.svg';
 import threePoints from '../../../static/pictures/three_points.svg';
@@ -9,7 +9,7 @@ import ChatItem from '../../components/ChatItem';
 import InputBlock from '../../components/InputBlock';
 
 export default class ChatsPage extends Block {
-  constructor(props: Props) {
+  constructor(/* props: Props */) {
     const chatItem = new ChatItem({
       userName: 'Андрей',
       textPreview: 'Изображение',
@@ -25,8 +25,8 @@ export default class ChatsPage extends Block {
     });
 
     super('div', {
-      ...props,
-      attr: [['class', 'chats-page-container']],
+      // ...props,
+      attr: { class: 'chats-page-container' },
       round3434,
       threePoints,
       append,

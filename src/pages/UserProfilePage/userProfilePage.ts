@@ -1,11 +1,11 @@
-import Block, { Props } from '../../core/Block';
+import Block from '../../core/Block';
 import InputBlock from '../../components/InputBlock/index';
 import './userProfilePage.scss';
 import defaultAvatar from '../../../static/pictures/default_avatar.svg';
 import userProfileTemplate from './userProfilePage.template';
 
 export default class userProfilePage extends Block {
-  constructor(props: Props) {
+  constructor() {
     const email = new InputBlock({
       title: 'Почта',
       id: 'email',
@@ -61,8 +61,7 @@ export default class userProfilePage extends Block {
     });
 
     super('div', {
-      ...props,
-      attr: [['class', 'user-profile-container']],
+      attr: { class: 'user-profile-container' },
       defaultAvatar,
       email,
       login,

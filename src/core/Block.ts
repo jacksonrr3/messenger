@@ -3,19 +3,20 @@ import Handlebars from 'handlebars';
 import EventBus from './EventBus';
 
 export type Children = Record<string, any>;
+export type Attrs = Record<string, string>;
 export type Props = {
   [key: string]: any;
   class?: string;
   children?: Children;
   events?: Record<string, (...args: any) => void>;
-  attr?: string[][];
+  attr?: Attrs;
 };
 type Meta = {
   tagName: string,
   props: Props,
 };
 
-export default abstract class Block {
+export default class Block {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -121,11 +122,11 @@ export default abstract class Block {
       },
       set: (target, prop, value) => {
         if (target[prop] !== value) {
+          // eslint-disable-next-line no-param-reassign
           target[prop] = value;
           this._setUpdate = true;
         }
         return true;
-        // return Reflect.set(target, prop, value);
       },
       deleteProperty: () => {
         throw new Error('нет доступа');
@@ -158,7 +159,9 @@ export default abstract class Block {
   addInnerEvents() {}
 
   // Может переопределять пользователь, необязательно трогать
-  abstract render(): DocumentFragment;
+  render(): DocumentFragment {
+    return new DocumentFragment();
+  }
 
   getContent() {
     return this._element;
@@ -187,8 +190,8 @@ export default abstract class Block {
   }
 
   _addAttributes() {
-    const { attr = [] } = this._props;
-    attr.forEach(([key, value]) => {
+    const { attr = {} as Attrs } = this._props;
+    Object.entries(attr).forEach(([key, value]) => {
       this._element.setAttribute(key, value);
     });
   }

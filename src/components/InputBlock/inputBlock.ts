@@ -7,7 +7,7 @@ import Input from '../Input';
 export default class InputBlock extends Block {
   constructor(props: Props) {
     const messageSpan = new Span({
-      attr: [['class', 'error-message']],
+      attr: { class: 'error-message' },
     });
 
     const inputElement = new Input({
@@ -19,7 +19,7 @@ export default class InputBlock extends Block {
       ...props,
       inputElement,
       messageSpan,
-      attr: [['class', 'input-item']],
+      attr: { class: 'input-item' },
     });
   }
 

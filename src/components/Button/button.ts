@@ -5,7 +5,7 @@ export default class Button extends Block {
   constructor(props: Props) {
     super('div', {
       ...props,
-      attr: [['class', 'btn']],
+      attr: { class: 'btn' },
     });
   }
 

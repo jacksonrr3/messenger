@@ -28,16 +28,17 @@ export default class AuthPage extends Block {
       inputs: ['login', 'password'],
       login,
       password,
-      formButtontext: 'Авторизоваться',
+      formButtonText: 'Авторизоваться',
     });
 
     const link = new Link({
       className: 'form-link',
       text: 'Нет аккаунта?',
+      href: '/reg',
     });
 
     super('div', {
-      attr: [['class', 'auth-container']],
+      attr: { class: 'auth-container' },
       titleText: 'Вход',
       form,
       link,
