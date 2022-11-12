@@ -7,7 +7,7 @@ export type Attrs = Record<string, string>;
 export type Props = {
   [key: string]: any;
   class?: string;
-  children?: Children;
+  // children?: Children;
   events?: Record<string, (...args: any) => void>;
   attr?: Attrs;
 };
@@ -121,7 +121,7 @@ export default class Block {
         return typeof value === 'function' ? value.bind(target) : value;
       },
       set: (target, prop, value) => {
-        if (target[prop] !== value) {
+        if (typeof prop !== 'symbol' && target[prop] !== value) {
           // eslint-disable-next-line no-param-reassign
           target[prop] = value;
           this._setUpdate = true;
@@ -197,8 +197,8 @@ export default class Block {
   }
 
   _getChildren(propsAndChildren: Props) {
-    const children = {};
-    const props = {};
+    const children = {} as Children;
+    const props = {} as Props;
 
     Object.entries(propsAndChildren).forEach(([key, value]) => {
       if (value instanceof Block) {

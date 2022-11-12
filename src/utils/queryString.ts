@@ -1,40 +1,39 @@
 type StringIndexed = Record<string, any>;
 
-const objectQueryStringify = (data: StringIndexed | any[], prefix: string): string[] => {
+const isArrayOrObject = (value: any[] | object): boolean => {
+  const result = Array.isArray(value) || typeof value === 'object';
+  return result;
+};
+
+const getKey = (key: string, parentKey?: string): string => {
+  const result = parentKey ? `${parentKey}[${key}]` : key;
+  return result;
+};
+
+const getParams = (data: StringIndexed, parent?: string): string[] => {
   const res: string[] = [];
   Object.entries(data).forEach(([key, value]) => {
-    if (Array.isArray(value) || typeof value === 'object') {
-      const vals = objectQueryStringify(value, `${prefix}[${key}]`);
-      res.push(...vals);
-      return;
+    const currentKey = getKey(key, parent);
+    if (isArrayOrObject(value)) {
+      res.push(...getParams(value, currentKey));
+    } else {
+      res.push(`${currentKey}=${value}`);
     }
-
-    res.push(`${prefix}[${key}]=${value}`);
   });
-
   return res;
 };
 
-function queryStringify(data: StringIndexed): string | never {
+const queryStringify = (data: StringIndexed): string => {
   if (typeof data !== 'object') {
     throw new Error('input must be an object');
   }
-  const res: string[] = [];
-  Object.entries(data).forEach(([key, value]) => {
-    if (Array.isArray(value) || typeof value === 'object') {
-      const vals = objectQueryStringify(value, `${key}`);
-      res.push(...vals);
-      return;
-    }
-    res.push(`${key}=${value}`);
-  });
 
-  return res.join('&');
-}
+  return getParams(data).join('&');
+};
 
 export default queryStringify;
 
-// рефакторить (см. теорию)
+// // рефакторить (см. теорию)
 // const obj: StringIndexed = {
 //     key: 1,
 //     key2: 'test',
@@ -44,5 +43,5 @@ export default queryStringify;
 //     key6: {a: 1},
 //     key7: {b: {d: 2}},
 // };
-// queryStringify(obj);
-// 'key=1&key2=test&key3=false&key4=true&key5[0]=1&key5[1]=2&key5[2]=3&key6[a]=1&key7[b][d]=2'
+// console.log(queryStringify(obj));
+// // 'key=1&key2=test&key3=false&key4=true&key5[0]=1&key5[1]=2&key5[2]=3&key6[a]=1&key7[b][d]=2'

@@ -10,6 +10,7 @@
         "noUnusedParameters": true,
         "sourceMap": true,
         "baseUrl": "./src",
-        "moduleResolution": "Node"
+        "moduleResolution": "Node",
+        "lib": ["ES2020", "ES2017.Object"],
     }
 }
