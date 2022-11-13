@@ -3,7 +3,8 @@ import InputBlock from '../../components/InputBlock/index';
 import './userProfilePage.scss';
 import defaultAvatar from '../../../static/pictures/default_avatar.svg';
 import userProfileTemplate from './userProfilePage.template';
-import Button from '../../components/ButtonBlock';
+import Button from '../../components/Button';
+import { AuthController } from '../../controllers/AuthController';
 
 export default class userProfilePage extends Block {
   constructor() {
@@ -63,9 +64,10 @@ export default class userProfilePage extends Block {
 
     const exitButton = new Button({
       text: 'Выйти',
-      event: {
-        click: (e) => {
-          console.log('button');
+      events: {
+        click: () => {
+          console.log('logout');
+          AuthController.logout();
         },
       },
     });

@@ -6,7 +6,6 @@ import Form from '../../components/Form';
 import Link from '../../components/Link';
 import { AuthController } from '../../controllers/AuthController';
 import { isValidInput } from '../../utils/validation';
-import { Router } from '../../core/Router';
 
 const submitHandler = (e: Event) => {
   e.preventDefault();
@@ -18,14 +17,7 @@ const submitHandler = (e: Event) => {
     .reduce((acc, input) => (acc && isValidInput(input as HTMLInputElement)), true);
 
   if (isValid) {
-    AuthController
-      .singIn(formData)
-      .then(() => {
-        Router.getInstanse().go('/messenger');
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    AuthController.singIn(formData);
   } else {
     console.log('invalud form data');
   }
