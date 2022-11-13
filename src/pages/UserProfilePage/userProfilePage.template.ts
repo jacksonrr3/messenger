@@ -1,6 +1,6 @@
 export default `
   <div class="back">
-      <a href="/chats"></a>
+      <a href="/messenger"></a>
   </div>
   <div class="user">
       <div class="avatar">

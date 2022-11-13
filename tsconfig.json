@@ -1,7 +1,7 @@
 {
 	"compilerOptions": {
         "outDir": "dist",
-        "target": "es2022",
+        "target": "ESNext",
         "declaration": true,
         "esModuleInterop": true,
         "strictNullChecks": true,
@@ -11,6 +11,5 @@
         "sourceMap": true,
         "baseUrl": "./src",
         "moduleResolution": "Node",
-        "lib": ["ES2020", "ES2017.Object"],
     }
 }

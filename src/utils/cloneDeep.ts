@@ -81,23 +81,3 @@ function cloneDeep<T extends object = object>(obj: T) {
 }
 
 export default cloneDeep;
-
-// function cloneDeep<T extends object = object>(obj: T) {
-// // Код здесь
-//   if (Array.isArray(obj)) {
-//     const res: any[] = [];
-//     obj.forEach((val) => {
-//       res.push(cloneDeep(val));
-//     });
-//     return res;
-//   }
-//   if (typeof obj === 'object') {
-//     const res = {} as T;
-//     Object.entries(obj).forEach(([key, value]) => {
-//       res[key as keyof T] = cloneDeep(value);
-//     });
-//     return res;
-//   }
-//   const res = obj;
-//   return obj;
-// }

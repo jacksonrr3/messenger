@@ -1,5 +1,4 @@
 import { Router } from './core/Router';
-import NavPage from './pages/NavPage';
 import AuthPage from './pages/AuthPage';
 import RegPage from './pages/RegPage';
 import ChatsPage from './pages/ChatsPage';
@@ -12,10 +11,10 @@ import ChangeAvatarPage from './pages/ChangeAvatarPage';
 
 const AppRouter = new Router('#root');
 AppRouter
-  .use('/', NavPage)
-  .use('/auth', AuthPage)
+  // .use('/', NavPage)
+  .use('/', AuthPage)
   .use('/reg', RegPage)
-  .use('/chats', ChatsPage)
+  .use('/messenger', ChatsPage)
   .use('/404', Page404)
   .use('/500', Page500)
   .use('/user_profile', UserProfilePage)

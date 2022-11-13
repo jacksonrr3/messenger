@@ -11,12 +11,12 @@ export default class userProfilePage extends Block {
       id: 'email',
       type: 'email',
       label: true,
-      // middleSpan: true,
+      middleSpan: true,
       disabled: 'disabled',
     });
 
     const login = new InputBlock({
-      title: 'Имя',
+      title: 'Логин',
       id: 'login',
       type: 'text',
       label: true,
@@ -68,7 +68,7 @@ export default class userProfilePage extends Block {
       firstName,
       secondName,
       displayName,
-      phoneInput: phone,
+      phone,
     });
   }
 

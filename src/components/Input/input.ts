@@ -26,7 +26,7 @@ export default class Input extends Block {
     };
 
     if (disabled) {
-      attr.disabled = disabled;
+      // attr.disabled = disabled;
     }
 
     super('input', {
@@ -35,10 +35,19 @@ export default class Input extends Block {
         focus: focusBlurHandler(spanElement),
         blur: focusBlurHandler(spanElement),
       },
+      disabled,
     });
   }
 
   render() {
+    const input = this.getContent() as HTMLInputElement;
+    input.disabled = this._props.disabled;
     return this.compile(inputTemplate, this._props);
+  }
+
+  setDisabled(disabled: boolean) {
+    this.setProps({
+      disabled,
+    });
   }
 }

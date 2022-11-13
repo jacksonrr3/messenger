@@ -79,7 +79,7 @@ export default class RegPage extends Block {
     const link = new Link({
       text: 'Войти',
       className: 'form-link',
-      href: '/auth',
+      href: '/',
     });
 
     super('div', {

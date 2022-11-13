@@ -7,7 +7,7 @@ export default class NavPage extends Block {
   constructor() {
     const authLink = new Link({
       text: 'Авторизация',
-      href: '/auth',
+      href: '/',
     });
 
     const regLink = new Link({
@@ -17,7 +17,7 @@ export default class NavPage extends Block {
 
     const chatsLink = new Link({
       text: 'Чаты',
-      href: '/chats',
+      href: '/messenger',
     });
 
     const page404Link = new Link({

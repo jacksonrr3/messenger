@@ -121,15 +121,21 @@ export default class Block {
         return typeof value === 'function' ? value.bind(target) : value;
       },
       set: (target, prop, value) => {
-        if (typeof prop !== 'symbol' && target[prop] !== value) {
+        if (target[prop] !== value) {
           // eslint-disable-next-line no-param-reassign
           target[prop] = value;
           this._setUpdate = true;
         }
         return true;
       },
-      deleteProperty: () => {
-        throw new Error('нет доступа');
+      deleteProperty: (target, prop) => {
+        if (target[prop]) {
+          // eslint-disable-next-line no-param-reassign
+          delete target[prop];
+          this._setUpdate = true;
+          return true;
+        }
+        return false;
       },
     });
   }
