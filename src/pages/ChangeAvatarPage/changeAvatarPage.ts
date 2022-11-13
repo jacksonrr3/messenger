@@ -2,7 +2,7 @@ import Block from '../../core/Block';
 import './changeAvatarPage.scss';
 import changeAvatarTemplate from './changeAvatarPage.template';
 import InputBlock from '../../components/InputBlock/index';
-import Button from '../../components/Button';
+import Button from '../../components/ButtonBlock';
 
 export default class ChangeAvatarPage extends Block {
   constructor() {

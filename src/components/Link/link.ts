@@ -2,7 +2,7 @@ import Block, { Props } from '../../core/Block';
 import linkTemplate from './link.template';
 import './link.scss';
 
-export default class Button extends Block {
+export default class Link extends Block {
   constructor(props: Props) {
     const { className = '', href = '#' } = props;
     super('a', {

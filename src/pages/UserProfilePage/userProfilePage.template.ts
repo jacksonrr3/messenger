@@ -21,7 +21,7 @@ export default `
         <div class="link">
           <a href="/change_password">Изменить пароль</a>
         </div>
-        <a href="/">Выйти</a>
+        {{{exitButton}}}
       </div>
   </div>
 `;

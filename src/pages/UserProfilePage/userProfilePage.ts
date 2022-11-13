@@ -3,6 +3,7 @@ import InputBlock from '../../components/InputBlock/index';
 import './userProfilePage.scss';
 import defaultAvatar from '../../../static/pictures/default_avatar.svg';
 import userProfileTemplate from './userProfilePage.template';
+import Button from '../../components/ButtonBlock';
 
 export default class userProfilePage extends Block {
   constructor() {
@@ -60,6 +61,15 @@ export default class userProfilePage extends Block {
       disabled: 'disabled',
     });
 
+    const exitButton = new Button({
+      text: 'Выйти',
+      event: {
+        click: (e) => {
+          console.log('button');
+        },
+      },
+    });
+
     super('div', {
       attr: { class: 'user-profile-container' },
       defaultAvatar,
@@ -69,6 +79,7 @@ export default class userProfilePage extends Block {
       secondName,
       displayName,
       phone,
+      exitButton,
     });
   }
 

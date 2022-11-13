@@ -38,6 +38,10 @@ export class Router {
     Router.__instance = this;
   }
 
+  static getInstanse() {
+    return Router.__instance;
+  }
+
   use(pathname: string, block: typeof Block) {
     const route = new Route(pathname, block, { rootQuery: this._rootQuery });
     this.routes.push(route);

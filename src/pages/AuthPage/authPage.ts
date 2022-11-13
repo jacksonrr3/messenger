@@ -4,6 +4,32 @@ import authTemplate from './authPage.template';
 import InputBlock from '../../components/InputBlock';
 import Form from '../../components/Form';
 import Link from '../../components/Link';
+import { AuthController } from '../../controllers/AuthController';
+import { isValidInput } from '../../utils/validation';
+import { Router } from '../../core/Router';
+
+const submitHandler = (e: Event) => {
+  e.preventDefault();
+  const { target } = e;
+  const formData = new FormData(target as HTMLFormElement);
+  const formInputs = target.querySelectorAll('input');
+
+  const isValid = Array.from(formInputs)
+    .reduce((acc, input) => (acc && isValidInput(input as HTMLInputElement)), true);
+
+  if (isValid) {
+    AuthController
+      .singIn(formData)
+      .then(() => {
+        Router.getInstanse().go('/messenger');
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  } else {
+    console.log('invalud form data');
+  }
+};
 
 export default class AuthPage extends Block {
   constructor() {
@@ -29,6 +55,7 @@ export default class AuthPage extends Block {
       login,
       password,
       formButtonText: 'Авторизоваться',
+      submitHandler,
     });
 
     const link = new Link({

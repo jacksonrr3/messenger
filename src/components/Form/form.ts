@@ -1,9 +1,9 @@
 import Block, { Props } from '../../core/Block';
 import formTemplate from './form.template';
-import Button from '../Button';
+import ButtonBlock from '../ButtonBlock';
 import { isValidInput } from '../../utils/validation';
 
-const submitHandler = (e: Event) => {
+const defaultSubmitHandler = (e: Event) => {
   e.preventDefault();
   const { target } = e;
   if (target) {
@@ -19,18 +19,18 @@ const submitHandler = (e: Event) => {
 
 export default class Form extends Block {
   constructor(props: Props) {
-    const formButton = new Button({
+    const formButton = new ButtonBlock({
       text: props.formButtonText,
     });
 
-    const { inputs, className } = props;
+    const { inputs, className, submitHandler } = props;
 
     super('form', {
       template: formTemplate(inputs),
       formButton,
       attr: { class: className },
       events: {
-        submit: submitHandler,
+        submit: submitHandler ?? defaultSubmitHandler,
       },
       ...props,
     });
