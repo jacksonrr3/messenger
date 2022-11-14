@@ -1,6 +1,6 @@
 export default `
   <div class="back">
-      <a href="/user_profile"></a>
+      {{{userProfileLink}}}
   </div>
   <div class="user">
       <div class="avatar">

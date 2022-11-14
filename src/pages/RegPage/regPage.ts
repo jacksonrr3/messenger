@@ -6,6 +6,7 @@ import Form from '../../components/Form';
 import Link from '../../components/Link';
 import { AuthController } from '../../controllers/AuthController';
 import { isValidInput } from '../../utils/validation';
+import { Router } from '../../core/Router';
 
 const submitHandler = (e: Event) => {
   e.preventDefault();
@@ -99,7 +100,12 @@ export default class RegPage extends Block {
     const link = new Link({
       text: 'Войти',
       className: 'form-link',
-      href: '/',
+      events: {
+        click: (e) => {
+          e.preventDefault();
+          Router.getInstanse().go('/');
+        },
+      },
     });
 
     super('div', {

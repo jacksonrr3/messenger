@@ -4,9 +4,20 @@ import defaultAvatar from '../../../static/pictures/default_avatar.svg';
 import changePasswordTemplate from './changePasswordPage.template';
 import InputBlock from '../../components/InputBlock/index';
 import Form from '../../components/Form';
+import Link from '../../components/Link';
+import { Router } from '../../core/Router';
 
 export default class ChangePasswordPage extends Block {
   constructor() {
+    const userProfileLink = new Link({
+      events: {
+        click: (e) => {
+          e.preventDefault();
+          Router.getInstanse().go('/user_profile');
+        },
+      },
+    });
+
     const oldPassword = new InputBlock({
       title: 'Старый пароль',
       id: 'oldPassword',
@@ -44,6 +55,7 @@ export default class ChangePasswordPage extends Block {
       attr: { class: 'change-password-container' },
       defaultAvatar,
       form,
+      userProfileLink,
     });
   }
 

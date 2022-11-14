@@ -19,8 +19,27 @@ export default class userProfilePage extends Block {
       events: {
         click: (e) => {
           e.preventDefault();
-          console.log('link');
           Router.getInstanse().go('/messenger');
+        },
+      },
+    });
+
+    const userSettingsLink = new Link({
+      text: 'Изменить данные',
+      events: {
+        click: (e) => {
+          e.preventDefault();
+          Router.getInstanse().go('/user_settings');
+        },
+      },
+    });
+
+    const changePasswordLink = new Link({
+      text: 'Изменить пароль',
+      events: {
+        click: (e) => {
+          e.preventDefault();
+          Router.getInstanse().go('/change_password');
         },
       },
     });
@@ -123,10 +142,12 @@ export default class userProfilePage extends Block {
       secondName,
       displayName,
       phone,
-      exitButton,
       messengerLink,
       userSettings,
       changePassword,
+      userSettingsLink,
+      changePasswordLink,
+      exitButton,
     });
   }
 

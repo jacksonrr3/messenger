@@ -6,6 +6,7 @@ import Form from '../../components/Form';
 import Link from '../../components/Link';
 import { AuthController } from '../../controllers/AuthController';
 import { isValidInput } from '../../utils/validation';
+import { Router } from '../../core/Router';
 
 const submitHandler = (e: Event) => {
   e.preventDefault();
@@ -53,7 +54,12 @@ export default class AuthPage extends Block {
     const link = new Link({
       className: 'form-link',
       text: 'Нет аккаунта?',
-      href: '/reg',
+      events: {
+        click: (e) => {
+          e.preventDefault();
+          Router.getInstanse().go('/reg');
+        },
+      },
     });
 
     super('div', {

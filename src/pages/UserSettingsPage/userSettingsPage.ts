@@ -4,9 +4,20 @@ import './userSettingsPage.scss';
 import defaultAvatar from '../../../static/pictures/default_avatar.svg';
 import userSettingsTemplate from './userSettingsPage.template';
 import Form from '../../components/Form';
+import Link from '../../components/Link';
+import { Router } from '../../core/Router';
 
 export default class UserSettingsPage extends Block {
   constructor() {
+    const userProfilePage = new Link({
+      events: {
+        click: (e) => {
+          e.preventDefault();
+          Router.getInstanse().go('/user_profile');
+        },
+      },
+    });
+
     const email = new InputBlock({
       title: 'Почта',
       id: 'email',
@@ -71,6 +82,7 @@ export default class UserSettingsPage extends Block {
       attr: { class: 'user-settings-container' },
       defaultAvatar,
       form,
+      userProfilePage,
     });
   }
 
