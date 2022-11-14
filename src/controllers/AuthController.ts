@@ -1,10 +1,28 @@
-import { AuthAPI } from '../api/AuthAPI';
+import { AuthAPI, UserRegData } from '../api/AuthAPI';
 import { Router } from '../core/Router';
 import { store } from '../core/Store';
 
 const authAPI = new AuthAPI();
 
+const getObjectFromFormData = (data: FormData) => {
+  const res = {};
+  Array.from(data.keys()).forEach((key) => {
+    res[key] = data.get(key);
+  });
+  return res;
+};
+
 export class AuthController {
+  static signUp(formData: FormData) {
+    const userData = getObjectFromFormData(formData) as UserRegData;
+    console.log(userData);
+    return authAPI
+      .singUp(userData)
+      .then((res) => {
+        console.log(res)
+      })
+  }
+
   static singIn(formData: FormData) {
     const userAuthData = {
       login: formData.get('login') as string,
@@ -28,7 +46,13 @@ export class AuthController {
   }
 
   static getUserInfo() {
-    return authAPI.request().then((user) => JSON.parse(user));
+    const { user } = store.getState();
+    if (user) {
+      return Promise.resolve(user);
+    }
+    return authAPI.request()
+      .then((userString) => JSON.parse(userString))
+      .then((userObj) => store.set('user', userObj));
   }
 
   static logout() {

@@ -6,12 +6,44 @@ import userProfileTemplate from './userProfilePage.template';
 import Button from '../../components/Button';
 import { AuthController } from '../../controllers/AuthController';
 import { store } from '../../core/Store';
+import Link from '../../components/Link';
+import { Router } from '../../core/Router';
 
 export default class userProfilePage extends Block {
   constructor() {
     const { user } = store.getState();
 
     console.log('store from prof', user);
+
+    const messengerLink = new Link({
+      events: {
+        click: (e) => {
+          e.preventDefault();
+          console.log('link');
+          Router.getInstanse().go('/messenger');
+        },
+      },
+    });
+
+    const userSettings = new Link({
+      events: {
+        click: (e) => {
+          e.preventDefault();
+          console.log('settings');
+          Router.getInstanse().go('/user_settings');
+        },
+      },
+    });
+
+    const changePassword = new Link({
+      events: {
+        click: (e) => {
+          e.preventDefault();
+          console.log('settings');
+          Router.getInstanse().go('/change_password');
+        },
+      },
+    });
 
     const email = new InputBlock({
       title: 'Почта',
@@ -92,6 +124,9 @@ export default class userProfilePage extends Block {
       displayName,
       phone,
       exitButton,
+      messengerLink,
+      userSettings,
+      changePassword,
     });
   }
 

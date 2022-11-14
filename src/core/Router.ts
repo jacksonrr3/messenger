@@ -1,20 +1,6 @@
 import Block from './Block';
 import { Route } from './Route';
-
-// function isEqual(lhs: , rhs) {
-//   return lhs === rhs;
-// }
-
-// function render(query, block) {
-//   const root = document.querySelector(query);
-//   root.textContent = block.getContent();
-//   return root;
-// }
-
-// interface IRouter {
-//   // static __instance: any;
-
-// }
+import { AuthController } from '../controllers/AuthController';
 
 export class Router {
   static __instance: any;
@@ -55,8 +41,20 @@ export class Router {
     window.onpopstate = () => {
       this._onRoute(window.location.pathname);
     };
-
-    this._onRoute(window.location.pathname);
+    // TODO extract controle auth logic
+    AuthController.getUserInfo()
+      .then((user) => {
+        console.log(user);
+        const { pathname } = window.location;
+        const path = ['/', '/reg'].indexOf(pathname) === -1 ? pathname : '/messenger';
+        this._onRoute(path);
+      })
+      .catch((err) => {
+        console.log(err);
+        const { pathname } = window.location;
+        const path = pathname === '/reg' ? pathname : '/';
+        this._onRoute(path);
+      });
   }
 
   _onRoute(pathname: string) {

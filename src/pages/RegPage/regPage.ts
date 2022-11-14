@@ -4,6 +4,25 @@ import regTemplate from './regPage.template';
 import InputBlock from '../../components/InputBlock';
 import Form from '../../components/Form';
 import Link from '../../components/Link';
+import { AuthController } from '../../controllers/AuthController';
+import { isValidInput } from '../../utils/validation';
+
+const submitHandler = (e: Event) => {
+  e.preventDefault();
+  const { target } = e;
+  const regData = new FormData(target as HTMLFormElement);
+  const formInputs = target.querySelectorAll('input');
+
+  const isValidInputs = Array.from(formInputs)
+    .reduce((acc, input) => (acc && isValidInput(input as HTMLInputElement)), true);
+
+  const passwordConfirmed = regData.get('password') === regData.get('confirm_password');
+  if (isValidInputs && passwordConfirmed) {
+    AuthController.signUp(regData);
+  } else {
+    console.log('invalid reg data');
+  }
+};
 
 export default class RegPage extends Block {
   constructor() {
@@ -73,6 +92,7 @@ export default class RegPage extends Block {
       phone,
       password,
       confirmPassword,
+      submitHandler,
       formButtonText: 'Зарегистрироваться',
     });
 

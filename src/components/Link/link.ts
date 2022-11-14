@@ -4,7 +4,7 @@ import './link.scss';
 
 export default class Link extends Block {
   constructor(props: Props) {
-    const { className = '', href = '#' } = props;
+    const { className = '', href = '' } = props;
     super('a', {
       attr: {
         href,
