@@ -6,6 +6,7 @@ const authAPI = new AuthAPI();
 
 const getObjectFromFormData = (data: FormData) => {
   const res = {};
+  data.delete('confirm_password');
   Array.from(data.keys()).forEach((key) => {
     res[key] = data.get(key);
   });
@@ -19,8 +20,8 @@ export class AuthController {
     return authAPI
       .singUp(userData)
       .then((res) => {
-        console.log(res)
-      })
+        console.log(res);
+      });
   }
 
   static singIn(formData: FormData) {

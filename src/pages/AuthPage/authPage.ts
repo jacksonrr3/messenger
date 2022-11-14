@@ -12,15 +12,17 @@ const submitHandler = (e: Event) => {
   e.preventDefault();
   const { target } = e;
   const formData = new FormData(target as HTMLFormElement);
-  const formInputs = target.querySelectorAll('input');
+  if (target) {
+    const formInputs = target.querySelectorAll('input');
 
-  const isValid = Array.from(formInputs)
-    .reduce((acc, input) => (acc && isValidInput(input as HTMLInputElement)), true);
+    const isValid = Array.from(formInputs)
+      .reduce((acc, input) => (acc && isValidInput(input as HTMLInputElement)), true);
 
-  if (isValid) {
-    AuthController.singIn(formData);
-  } else {
-    console.log('invalud form data');
+    if (isValid) {
+      AuthController.singIn(formData);
+    } else {
+      console.log('invalud form data');
+    }
   }
 };
 

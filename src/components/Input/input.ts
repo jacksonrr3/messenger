@@ -5,7 +5,9 @@ import { validationErrorMessage, isValidInput } from '../../utils/validation';
 import Span from '../Span';
 
 const focusBlurHandler = (spanElement = new Span({})) => ({ target } : Event) => {
-  const spanText = isValidInput(target as HTMLInputElement) ? '' : validationErrorMessage[target.id];
+  const spanText = isValidInput(target as HTMLInputElement)
+    ? ''
+    : validationErrorMessage[target.id];
   spanElement.setProps({
     spanText,
   });

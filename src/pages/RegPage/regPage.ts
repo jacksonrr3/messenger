@@ -12,16 +12,18 @@ const submitHandler = (e: Event) => {
   e.preventDefault();
   const { target } = e;
   const regData = new FormData(target as HTMLFormElement);
-  const formInputs = target.querySelectorAll('input');
+  if (target) {
+    const formInputs = target.querySelectorAll('input');
 
-  const isValidInputs = Array.from(formInputs)
-    .reduce((acc, input) => (acc && isValidInput(input as HTMLInputElement)), true);
+    const isValidInputs = Array.from(formInputs)
+      .reduce((acc, input) => (acc && isValidInput(input as HTMLInputElement)), true);
 
-  const passwordConfirmed = regData.get('password') === regData.get('confirm_password');
-  if (isValidInputs && passwordConfirmed) {
-    AuthController.signUp(regData);
-  } else {
-    console.log('invalid reg data');
+    const passwordConfirmed = regData.get('password') === regData.get('confirm_password');
+    if (isValidInputs && passwordConfirmed) {
+      AuthController.signUp(regData);
+    } else {
+      console.log('invalid reg data');
+    }
   }
 };
 
