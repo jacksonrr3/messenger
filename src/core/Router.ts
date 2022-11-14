@@ -21,10 +21,11 @@ export class Router {
 
   routes: Route[];
   history: History;
+  _defaultPath: string;
   _currentRoute: null | Route;
   _rootQuery: string;
 
-  constructor(rootQuery: string) {
+  constructor(rootQuery: string, defaultPath: string) {
     if (Router.__instance) {
       // eslint-disable-next-line no-constructor-return
       return Router.__instance;
@@ -32,6 +33,7 @@ export class Router {
 
     this.routes = [];
     this.history = window.history;
+    this._defaultPath = defaultPath;
     this._currentRoute = null;
     this._rootQuery = rootQuery;
 
@@ -58,7 +60,7 @@ export class Router {
   }
 
   _onRoute(pathname: string) {
-    const route = this.getRoute(pathname);
+    const route = this.getRoute(pathname) || this.getRoute(this._defaultPath);
 
     if (this._currentRoute && this._currentRoute !== route) {
       this._currentRoute.leave();

@@ -5,9 +5,14 @@ import defaultAvatar from '../../../static/pictures/default_avatar.svg';
 import userProfileTemplate from './userProfilePage.template';
 import Button from '../../components/Button';
 import { AuthController } from '../../controllers/AuthController';
+import { store } from '../../core/Store';
 
 export default class userProfilePage extends Block {
   constructor() {
+    const { user } = store.getState();
+
+    console.log('store from prof', user);
+
     const email = new InputBlock({
       title: 'Почта',
       id: 'email',
@@ -15,6 +20,7 @@ export default class userProfilePage extends Block {
       label: true,
       middleSpan: true,
       disabled: 'disabled',
+      value: user.email,
     });
 
     const login = new InputBlock({
@@ -24,6 +30,7 @@ export default class userProfilePage extends Block {
       label: true,
       middleSpan: true,
       disabled: 'disabled',
+      value: user.login,
     });
 
     const firstName = new InputBlock({
@@ -33,6 +40,7 @@ export default class userProfilePage extends Block {
       label: true,
       middleSpan: true,
       disabled: 'disabled',
+      value: user.first_name,
     });
 
     const secondName = new InputBlock({
@@ -42,6 +50,7 @@ export default class userProfilePage extends Block {
       label: true,
       middleSpan: true,
       disabled: 'disabled',
+      value: user.second_name,
     });
 
     const displayName = new InputBlock({
@@ -51,6 +60,7 @@ export default class userProfilePage extends Block {
       label: true,
       middleSpan: true,
       disabled: 'disabled',
+      value: user.display_name,
     });
 
     const phone = new InputBlock({
@@ -60,14 +70,14 @@ export default class userProfilePage extends Block {
       label: true,
       middleSpan: true,
       disabled: 'disabled',
+      value: user.phone,
     });
 
     const exitButton = new Button({
       text: 'Выйти',
       events: {
-        click: () => {
-          console.log('logout');
-          AuthController.logout();
+        click: async () => {
+          await AuthController.logout();
         },
       },
     });

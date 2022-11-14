@@ -7,9 +7,23 @@ import rightArrow from '../../../static/pictures/right_arrow.svg';
 import chatsTemplate from './chatsPage.template';
 import ChatItem from '../../components/ChatItem';
 import InputBlock from '../../components/InputBlock';
+import { store } from '../../core/Store';
+import ButtonBlock from '../../components/ButtonBlock';
+import { Router } from '../../core/Router';
 
 export default class ChatsPage extends Block {
   constructor(/* props: Props */) {
+    console.log('store from messenger', store.getState());
+
+    const userProfileButton = new ButtonBlock({
+      text: 'Профиль',
+      events: {
+        click: () => {
+          Router.getInstanse().go('/user_profile');
+        },
+      },
+    });
+
     const chatItem = new ChatItem({
       userName: 'Андрей',
       textPreview: 'Изображение',
@@ -31,6 +45,7 @@ export default class ChatsPage extends Block {
       threePoints,
       append,
       rightArrow,
+      userProfileButton,
       chatItem,
       messageInput,
     });

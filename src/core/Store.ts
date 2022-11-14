@@ -3,7 +3,7 @@ import EventBus from './EventBus';
 
 type Indexed = Record<string, any>;
 
-const StoreEvents = {
+export const StoreEvents = {
   Updated: 'updated',
 };
 
@@ -22,4 +22,4 @@ class Store extends EventBus {
   }
 }
 
-export default new Store();
+export const store = new Store();

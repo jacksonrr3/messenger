@@ -9,9 +9,8 @@ import UserSettingsPage from './pages/UserSettingsPage';
 import ChangePasswordPage from './pages/ChangePasswordPage';
 import ChangeAvatarPage from './pages/ChangeAvatarPage';
 
-const AppRouter = new Router('#root');
+const AppRouter = new Router('#root', '/');
 AppRouter
-  // .use('/', NavPage)
   .use('/', AuthPage)
   .use('/reg', RegPage)
   .use('/messenger', ChatsPage)

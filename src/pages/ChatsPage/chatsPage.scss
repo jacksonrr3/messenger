@@ -13,15 +13,17 @@
 
         border-right: 1px solid #eaeaea;
 
-        .profile {
+        .btn {
             margin: 21px 22px 23px auto;
 
-            a {
+            button {
+                background: none;
+                border: none;
+                
                 font-size: 12px;
                 line-height: 12px;
                 
                 text-decoration: none;
-    
                 color: $gray;
             }
         }

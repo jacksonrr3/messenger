@@ -24,7 +24,7 @@ export class AuthAPI {
     return this._http.post('/auth/logout');
   }
 
-  update() { }
-
-  delete() { }
+  request() {
+    return this._http.get('/auth/user');
+  }
 }

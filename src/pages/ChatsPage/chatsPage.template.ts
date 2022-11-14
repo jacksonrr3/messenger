@@ -1,8 +1,6 @@
 export default `
   <div class="menu">
-    <div class="profile">
-      <a href="/user_profile">Профиль</a>
-    </div>
+    {{{userProfileButton}}}
     <div class="search">
       <input type="text" id="search-input" placeholder="Поиск">
     </div>
