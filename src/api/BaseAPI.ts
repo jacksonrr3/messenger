@@ -1,12 +1,19 @@
-export type APIMethod = (options?: object) => Promise<any> | void;
+import { HTTPTransport } from '../utils/HTTPTransport';
 
-// export class BaseAPI {
-//   // На случай, если забудете переопределить метод и используете его, — выстрелит ошибка
-//   create: APIMethod = () => { throw new Error('Not implemented'); };
+// export type APIMethod = (data: any) => Promise<any> | void;
 
-//   request() { throw new Error('Not implemented'); }
+export abstract class BaseAPI {
+  _http: HTTPTransport;
 
-//   // update() { throw new Error('Not implemented'); }
+  constructor(http: HTTPTransport) {
+    this._http = http;
+  }
 
-//   // delete() { throw new Error('Not implemented'); }
-// }
+  create(data?: any):Promise<any> | void { throw new Error(`Not implemented. ${data}`); }
+
+  request():Promise<any> | void { throw new Error('Not implemented'); }
+
+  update(data?: any):Promise<any> | void { throw new Error(`Not implemented. ${data}`); }
+
+  delete():Promise<any> | void { throw new Error('Not implemented'); }
+}

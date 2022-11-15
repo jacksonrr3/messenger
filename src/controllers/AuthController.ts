@@ -18,7 +18,7 @@ export class AuthController {
     const userData = getObjectFromFormData(formData) as UserRegData;
     console.log(userData);
     return authAPI
-      .singUp(userData)
+      .signUp(userData)
       .then((res) => {
         console.log(res);
       });
@@ -30,10 +30,10 @@ export class AuthController {
       password: formData.get('password') as string,
     };
 
-    return authAPI.singIn(userAuthData)
+    return authAPI.signIn(userAuthData)
       .then((res) => {
         console.log(res);
-        return authAPI.request();
+        return authAPI.getInfo();
       })
       .then((user) => JSON.parse(user))
       .then((user) => {
@@ -51,13 +51,13 @@ export class AuthController {
     if (user) {
       return Promise.resolve(user);
     }
-    return authAPI.request()
+    return authAPI.getInfo()
       .then((userString) => JSON.parse(userString))
       .then((userObj) => store.set('user', userObj));
   }
 
   static logout() {
-    return authAPI.logOut()
+    return authAPI.loguot()
       .then(() => {
         Router.getInstanse().go('/');
       })
