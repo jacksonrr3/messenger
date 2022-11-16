@@ -7,27 +7,8 @@ import Form from '../../components/Form';
 import Link from '../../components/Link';
 import { Router } from '../../core/Router';
 import { store } from '../../core/Store';
-import { isValidInput } from '../../utils/validation';
 import { UserController } from '../../controllers/UserController';
 import { makeSubmitHandler } from '../../utils/formHandler';
-
-// const submitHandler = (e: Event) => {
-//   e.preventDefault();
-//   const { target } = e;
-//   const formData = new FormData(target as HTMLFormElement);
-//   if (target) {
-//     const formInputs = target.querySelectorAll('input');
-
-//     const isValid = Array.from(formInputs)
-//       .reduce((acc, input) => (acc && isValidInput(input as HTMLInputElement)), true);
-
-//     if (isValid) {
-//       UserController.changeUserProfile(formData);
-//     } else {
-//       console.log('invalud form data');
-//     }
-//   }
-// };
 
 const submitHandler = makeSubmitHandler(UserController.changeUserProfile);
 

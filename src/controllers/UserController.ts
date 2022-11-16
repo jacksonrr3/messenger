@@ -1,4 +1,4 @@
-import { UserAPI, UserProfileData } from '../api/UserAPI';
+import { UserAPI, UserProfileData, UserPasswordData } from '../api/UserAPI';
 import { Router } from '../core/Router';
 import { store } from '../core/Store';
 import getObjectFromFormData from '../utils/getObjectFromFormData';
@@ -18,11 +18,11 @@ export class UserController {
   }
 
   static changeUserPassword(formData: FormData) {
-    const userData = getObjectFromFormData(formData) as UserProfileData;
+    const passwordData = getObjectFromFormData(formData) as UserPasswordData;
     return userAPI.changePassword(passwordData)
       .then((res) => {
-        const passwordChanget = JSON.parse(res);
-        console.log(passwordChanget);
+        // const passwordChanged = JSON.parse(res);
+        console.log(res);
 
         Router.getInstanse().go('/user_profile');
       });

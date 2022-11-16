@@ -6,6 +6,10 @@ import InputBlock from '../../components/InputBlock/index';
 import Form from '../../components/Form';
 import Link from '../../components/Link';
 import { Router } from '../../core/Router';
+import { makeSubmitHandler } from '../../utils/formHandler';
+import { UserController } from '../../controllers/UserController';
+
+const submitHandler = makeSubmitHandler(UserController.changeUserPassword);
 
 export default class ChangePasswordPage extends Block {
   constructor() {
@@ -49,7 +53,7 @@ export default class ChangePasswordPage extends Block {
       newPassword,
       repeatNewPassword,
       formButtonText: 'Сохранить',
-      
+      submitHandler,
     });
 
     super('div', {
