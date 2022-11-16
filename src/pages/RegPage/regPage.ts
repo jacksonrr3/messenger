@@ -5,27 +5,32 @@ import InputBlock from '../../components/InputBlock';
 import Form from '../../components/Form';
 import Link from '../../components/Link';
 import { AuthController } from '../../controllers/AuthController';
-import { isValidInput } from '../../utils/validation';
+// import { isValidInput } from '../../utils/validation';
 import { Router } from '../../core/Router';
+import { makeSubmitHandler } from '../../utils/formHandler';
 
-const submitHandler = (e: Event) => {
-  e.preventDefault();
-  const { target } = e;
-  const regData = new FormData(target as HTMLFormElement);
-  if (target) {
-    const formInputs = target.querySelectorAll('input');
+// const submitHandler = (e: Event) => {
+//   e.preventDefault();
+//   const { target } = e;
+//   const regData = new FormData(target as HTMLFormElement);
+//   if (target) {
+//     const formInputs = target.querySelectorAll('input');
 
-    const isValidInputs = Array.from(formInputs)
-      .reduce((acc, input) => (acc && isValidInput(input as HTMLInputElement)), true);
+//     const isValidInputs = Array.from(formInputs)
+//       .reduce((acc, input) => (acc && isValidInput(input as HTMLInputElement)), true);
 
-    const passwordConfirmed = regData.get('password') === regData.get('confirm_password');
-    if (isValidInputs && passwordConfirmed) {
-      AuthController.signUp(regData);
-    } else {
-      console.log('invalid reg data');
-    }
-  }
-};
+//     const passwordConfirmed = regData.get('password') === regData.get('confirm_password');
+//     if (isValidInputs && passwordConfirmed) {
+//       AuthController.signUp(regData);
+//     } else {
+//       console.log('invalid reg data');
+//     }
+//   }
+// };
+
+const checkPassword = (formData: FormData) => formData.get('password') === formData.get('confirm_password');
+
+const submitHandler = makeSubmitHandler(AuthController.signUp, checkPassword);
 
 export default class RegPage extends Block {
   constructor() {

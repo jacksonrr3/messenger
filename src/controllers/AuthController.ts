@@ -1,26 +1,21 @@
 import { AuthAPI, UserRegData } from '../api/AuthAPI';
 import { Router } from '../core/Router';
 import { store } from '../core/Store';
+import getObjectFromFormData from '../utils/getObjectFromFormData';
 
 const authAPI = new AuthAPI();
-
-const getObjectFromFormData = (data: FormData) => {
-  const res = {};
-  data.delete('confirm_password');
-  Array.from(data.keys()).forEach((key) => {
-    res[key] = data.get(key);
-  });
-  return res;
-};
 
 export class AuthController {
   static signUp(formData: FormData) {
     const userData = getObjectFromFormData(formData) as UserRegData;
-    console.log(userData);
     return authAPI
       .signUp(userData)
       .then((res) => {
         console.log(res);
+        Router.getInstanse().go('/messenger');
+      })
+      .catch((err) => {
+        console.log('signup err', err);
       });
   }
 
@@ -33,12 +28,12 @@ export class AuthController {
     return authAPI.signIn(userAuthData)
       .then((res) => {
         console.log(res);
-        return authAPI.getInfo();
+        return authAPI.getUserInfo();
       })
       .then((user) => JSON.parse(user))
       .then((user) => {
         store.set('user', user);
-        console.log(store.getState());
+        console.log('store', store.getState());
         Router.getInstanse().go('/messenger');
       })
       .catch((err) => {
@@ -49,15 +44,16 @@ export class AuthController {
   static getUserInfo() {
     const { user } = store.getState();
     if (user) {
+      console.log('user from store', user);
       return Promise.resolve(user);
     }
-    return authAPI.getInfo()
+    return authAPI.getUserInfo()
       .then((userString) => JSON.parse(userString))
       .then((userObj) => store.set('user', userObj));
   }
 
   static logout() {
-    return authAPI.loguot()
+    return authAPI.logOut()
       .then(() => {
         Router.getInstanse().go('/');
       })

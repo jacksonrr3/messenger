@@ -18,11 +18,11 @@ export type UserLogin = {
   login: string,
 }
 
-export class AuthAPI {
+export class UserAPI {
   _http: HTTPTransport;
 
-  constructor(http: HTTPTransport) {
-    this._http = http;
+  constructor() {
+    this._http = new HTTPTransport();
   }
 
   changeProfile(data: UserProfileData) {

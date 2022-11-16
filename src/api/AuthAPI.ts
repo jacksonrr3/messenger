@@ -14,8 +14,8 @@ export type UserRegData = {
 export class AuthAPI {
   _http: HTTPTransport;
 
-  constructor(http: HTTPTransport) {
-    this._http = http;
+  constructor() {
+    this._http = new HTTPTransport();
   }
 
   signUp(data: UserRegData) {
@@ -36,11 +36,11 @@ export class AuthAPI {
     });
   }
 
-  loguot() {
+  logOut() {
     return this._http.post('/auth/logout');
   }
 
-  getInfo() {
+  getUserInfo() {
     return this._http.get('/auth/user');
   }
 }

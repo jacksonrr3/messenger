@@ -58,7 +58,7 @@ export class Router {
   }
 
   _onRoute(pathname: string) {
-    const route = this.getRoute(pathname) || this.getRoute(this._defaultPath);
+    const route = this.getRoute(pathname);
 
     if (this._currentRoute && this._currentRoute !== route) {
       this._currentRoute.leave();

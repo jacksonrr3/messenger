@@ -49,6 +49,7 @@ export default class ChangePasswordPage extends Block {
       newPassword,
       repeatNewPassword,
       formButtonText: 'Сохранить',
+      
     });
 
     super('div', {

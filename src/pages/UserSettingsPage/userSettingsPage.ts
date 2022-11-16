@@ -6,9 +6,35 @@ import userSettingsTemplate from './userSettingsPage.template';
 import Form from '../../components/Form';
 import Link from '../../components/Link';
 import { Router } from '../../core/Router';
+import { store } from '../../core/Store';
+import { isValidInput } from '../../utils/validation';
+import { UserController } from '../../controllers/UserController';
+import { makeSubmitHandler } from '../../utils/formHandler';
+
+// const submitHandler = (e: Event) => {
+//   e.preventDefault();
+//   const { target } = e;
+//   const formData = new FormData(target as HTMLFormElement);
+//   if (target) {
+//     const formInputs = target.querySelectorAll('input');
+
+//     const isValid = Array.from(formInputs)
+//       .reduce((acc, input) => (acc && isValidInput(input as HTMLInputElement)), true);
+
+//     if (isValid) {
+//       UserController.changeUserProfile(formData);
+//     } else {
+//       console.log('invalud form data');
+//     }
+//   }
+// };
+
+const submitHandler = makeSubmitHandler(UserController.changeUserProfile);
 
 export default class UserSettingsPage extends Block {
   constructor() {
+    const { user } = store.getState();
+
     const userProfilePage = new Link({
       events: {
         click: (e) => {
@@ -24,6 +50,7 @@ export default class UserSettingsPage extends Block {
       type: 'email',
       label: true,
       middleSpan: true,
+      value: user.email,
     });
 
     const login = new InputBlock({
@@ -32,6 +59,7 @@ export default class UserSettingsPage extends Block {
       type: 'text',
       label: true,
       middleSpan: true,
+      value: user.login,
     });
 
     const firstName = new InputBlock({
@@ -40,6 +68,7 @@ export default class UserSettingsPage extends Block {
       type: 'text',
       label: true,
       middleSpan: true,
+      value: user.first_name,
     });
 
     const secondName = new InputBlock({
@@ -48,6 +77,7 @@ export default class UserSettingsPage extends Block {
       type: 'text',
       label: true,
       middleSpan: true,
+      value: user.second_name,
     });
 
     const displayName = new InputBlock({
@@ -56,6 +86,7 @@ export default class UserSettingsPage extends Block {
       type: 'text',
       label: true,
       middleSpan: true,
+      value: user.display_name,
     });
 
     const phone = new InputBlock({
@@ -64,6 +95,7 @@ export default class UserSettingsPage extends Block {
       type: 'tel',
       label: true,
       middleSpan: true,
+      value: user.phone,
     });
 
     const form = new Form({
@@ -76,6 +108,7 @@ export default class UserSettingsPage extends Block {
       displayName,
       phone,
       formButtonText: 'Сохранить',
+      submitHandler,
     });
 
     super('div', {

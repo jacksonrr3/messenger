@@ -7,24 +7,27 @@ import Link from '../../components/Link';
 import { AuthController } from '../../controllers/AuthController';
 import { isValidInput } from '../../utils/validation';
 import { Router } from '../../core/Router';
+import { makeSubmitHandler } from '../../utils/formHandler';
 
-const submitHandler = (e: Event) => {
-  e.preventDefault();
-  const { target } = e;
-  const formData = new FormData(target as HTMLFormElement);
-  if (target) {
-    const formInputs = target.querySelectorAll('input');
+// const submitHandler = (e: Event) => {
+//   e.preventDefault();
+//   const { target } = e;
+//   const formData = new FormData(target as HTMLFormElement);
+//   if (target) {
+//     const formInputs = target.querySelectorAll('input');
 
-    const isValid = Array.from(formInputs)
-      .reduce((acc, input) => (acc && isValidInput(input as HTMLInputElement)), true);
+//     const isValid = Array.from(formInputs)
+//       .reduce((acc, input) => (acc && isValidInput(input as HTMLInputElement)), true);
 
-    if (isValid) {
-      AuthController.singIn(formData);
-    } else {
-      console.log('invalud form data');
-    }
-  }
-};
+//     if (isValid) {
+//       AuthController.singIn(formData);
+//     } else {
+//       console.log('invalud form data');
+//     }
+//   }
+// };
+
+const submitHandler = makeSubmitHandler(AuthController.singIn);
 
 export default class AuthPage extends Block {
   constructor() {
