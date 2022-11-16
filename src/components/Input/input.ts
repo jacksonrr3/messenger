@@ -3,6 +3,7 @@ import './input.scss';
 import inputTemplate from './input.template';
 import { validationErrorMessage, isValidInput } from '../../utils/validation';
 import Span from '../Span';
+import { store, StoreEvents } from '../../core/Store';
 
 const focusBlurHandler = (spanElement = new Span({})) => ({ target } : Event) => {
   const spanText = isValidInput(target as HTMLInputElement)
@@ -16,15 +17,30 @@ const focusBlurHandler = (spanElement = new Span({})) => ({ target } : Event) =>
 export default class Input extends Block {
   constructor(props: Props) {
     const {
-      type, id, title, disabled, spanElement, value = '',
+      type, id, title, disabled, spanElement,
     } = props;
+
+    const { user } = store.getState();
+
+    store.on(StoreEvents.Updated, () => {
+      const { user: newUserData } = store.getState();
+      this.setProps({
+        attr: {
+          type,
+          id,
+          name: id,
+          placeholder: title,
+          value: props.valueProp ? newUserData[props.valueProp] : '',
+        },
+      });
+    });
 
     const inputAttr = {
       type,
       id,
       name: id,
       placeholder: title,
-      value,
+      value: props.valueProp ? user[props.valueProp] : '',
     };
 
     super('input', {

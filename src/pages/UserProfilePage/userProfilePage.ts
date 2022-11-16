@@ -5,15 +5,15 @@ import defaultAvatar from '../../../static/pictures/default_avatar.svg';
 import userProfileTemplate from './userProfilePage.template';
 import Button from '../../components/Button';
 import { AuthController } from '../../controllers/AuthController';
-import { store } from '../../core/Store';
+// import { store } from '../../core/Store';
 import Link from '../../components/Link';
 import { Router } from '../../core/Router';
 
 export default class userProfilePage extends Block {
   constructor() {
-    const { user } = store.getState();
+    // const { user } = store.getState();
 
-    console.log('store from prof', user);
+    // console.log('store from prof', user);
 
     const messengerLink = new Link({
       events: {
@@ -71,7 +71,7 @@ export default class userProfilePage extends Block {
       label: true,
       middleSpan: true,
       disabled: 'disabled',
-      value: user.email,
+      valueProp: 'email',
     });
 
     const login = new InputBlock({
@@ -81,7 +81,7 @@ export default class userProfilePage extends Block {
       label: true,
       middleSpan: true,
       disabled: 'disabled',
-      value: user.login,
+      valueProp: 'login',
     });
 
     const firstName = new InputBlock({
@@ -91,7 +91,7 @@ export default class userProfilePage extends Block {
       label: true,
       middleSpan: true,
       disabled: 'disabled',
-      value: user.first_name,
+      valueProp: 'first_name',
     });
 
     const secondName = new InputBlock({
@@ -101,7 +101,7 @@ export default class userProfilePage extends Block {
       label: true,
       middleSpan: true,
       disabled: 'disabled',
-      value: user.second_name,
+      valueProp: 'second_name',
     });
 
     const displayName = new InputBlock({
@@ -111,7 +111,7 @@ export default class userProfilePage extends Block {
       label: true,
       middleSpan: true,
       disabled: 'disabled',
-      value: user.display_name,
+      valueProp: 'display_name',
     });
 
     const phone = new InputBlock({
@@ -121,7 +121,7 @@ export default class userProfilePage extends Block {
       label: true,
       middleSpan: true,
       disabled: 'disabled',
-      value: user.phone,
+      valueProp: 'phone',
     });
 
     const exitButton = new Button({

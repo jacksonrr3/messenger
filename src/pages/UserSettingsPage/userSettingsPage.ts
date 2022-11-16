@@ -6,7 +6,7 @@ import userSettingsTemplate from './userSettingsPage.template';
 import Form from '../../components/Form';
 import Link from '../../components/Link';
 import { Router } from '../../core/Router';
-import { store } from '../../core/Store';
+// import { store } from '../../core/Store';
 import { UserController } from '../../controllers/UserController';
 import { makeSubmitHandler } from '../../utils/formHandler';
 
@@ -14,7 +14,7 @@ const submitHandler = makeSubmitHandler(UserController.changeUserProfile);
 
 export default class UserSettingsPage extends Block {
   constructor() {
-    const { user } = store.getState();
+    // const { user } = store.getState();
 
     const userProfilePage = new Link({
       events: {
@@ -31,7 +31,7 @@ export default class UserSettingsPage extends Block {
       type: 'email',
       label: true,
       middleSpan: true,
-      value: user.email,
+      valueProp: 'email',
     });
 
     const login = new InputBlock({
@@ -40,7 +40,7 @@ export default class UserSettingsPage extends Block {
       type: 'text',
       label: true,
       middleSpan: true,
-      value: user.login,
+      valueProp: 'login',
     });
 
     const firstName = new InputBlock({
@@ -49,7 +49,7 @@ export default class UserSettingsPage extends Block {
       type: 'text',
       label: true,
       middleSpan: true,
-      value: user.first_name,
+      valueProp: 'first_name',
     });
 
     const secondName = new InputBlock({
@@ -58,7 +58,7 @@ export default class UserSettingsPage extends Block {
       type: 'text',
       label: true,
       middleSpan: true,
-      value: user.second_name,
+      valueProp: 'second_name',
     });
 
     const displayName = new InputBlock({
@@ -67,7 +67,7 @@ export default class UserSettingsPage extends Block {
       type: 'text',
       label: true,
       middleSpan: true,
-      value: user.display_name,
+      valueProp: 'display_name',
     });
 
     const phone = new InputBlock({
@@ -76,7 +76,7 @@ export default class UserSettingsPage extends Block {
       type: 'tel',
       label: true,
       middleSpan: true,
-      value: user.phone,
+      valueProp: 'phone',
     });
 
     const form = new Form({
