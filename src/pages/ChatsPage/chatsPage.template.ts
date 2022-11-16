@@ -4,9 +4,7 @@ export default `
     <div class="search">
       <input type="text" id="search-input" placeholder="Поиск">
     </div>
-    <div class="chat-list">
-      {{{chatItem}}}
-    </div>
+    {{{chatList}}}
   </div>
   <div class="chat">
     <div class="user">

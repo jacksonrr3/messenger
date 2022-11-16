@@ -5,7 +5,7 @@ import threePoints from '../../../static/pictures/three_points.svg';
 import append from '../../../static/pictures/append.svg';
 import rightArrow from '../../../static/pictures/right_arrow.svg';
 import chatsTemplate from './chatsPage.template';
-import ChatItem from '../../components/ChatItem';
+import ChatList from '../../components/ChatList';
 import InputBlock from '../../components/InputBlock';
 import { store } from '../../core/Store';
 import ButtonBlock from '../../components/ButtonBlock';
@@ -24,12 +24,7 @@ export default class ChatsPage extends Block {
       },
     });
 
-    const chatItem = new ChatItem({
-      userName: 'Андрей',
-      textPreview: 'Изображение',
-      time: '10:49',
-      unreadMessageCont: 2,
-    });
+    const chatList = new ChatList({});
 
     const messageInput = new InputBlock({
       type: 'text',
@@ -46,7 +41,7 @@ export default class ChatsPage extends Block {
       append,
       rightArrow,
       userProfileButton,
-      chatItem,
+      chatList,
       messageInput,
     });
   }
