@@ -2,7 +2,7 @@ export default `
   <div class="menu">
     {{{userProfileButton}}}
     <div class="search">
-      <input type="text" id="search-input" placeholder="Поиск">
+      {{{chatSearchInput}}}
     </div>
     {{{chatList}}}
   </div>
@@ -10,17 +10,13 @@ export default `
     <div class="user">
       <img src="{{round3434}}" alt="user_avatar">
       <p>Имя</p>
-      <button>
-        <img src="{{threePoints}}" alt="three_points_button">
-      </button>
+      {{{treePointsButton}}}
     </div>
     <div class="conversation"></div>
     <div class="message-block">
       <img src="{{append}}" alt="append_file">
       {{{messageInput}}}
-      <button>
-        <img src="{{rightArrow}}" alt="send_button">
-      </button>
+      {{{sendMessageButton}}}
     </div>
   </div>
 `;

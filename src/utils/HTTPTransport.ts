@@ -29,7 +29,7 @@ export class HTTPTransport {
   get: HTTPMethod = (url, options = {}) => {
     const { data = {} } = options;
     return this.request(
-      `${url}${queryStringify(data)}`,
+      `${url}?${queryStringify(data)}`,
       { ...options, method: METHODS.GET },
       options.timeout,
     );

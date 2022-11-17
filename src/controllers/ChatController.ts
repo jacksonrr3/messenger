@@ -1,7 +1,7 @@
-import { ChatAPI } from '../api/ChatAPI';
+import { ChatAPI, ChatsQueryParams } from '../api/ChatAPI';
 import { store } from '../core/Store';
 
-const userAPI = new ChatAPI();
+const chatAPI = new ChatAPI();
 
 export type LastMessage = {
   user: any,
@@ -19,12 +19,19 @@ export type ChatItem = {
 };
 
 export class ChatController {
-  static getChats() {
-    return userAPI.getUserChats()
+  static getChats(params?: ChatsQueryParams) {
+    return chatAPI.getChats(params)
       .then((res) => {
         const chats = JSON.parse(res);
         console.log(chats);
         store.set('chats', chats);
       });
   }
+
+  // static searchChat(title: string) {
+  //   return chatAPI.getChats({ title })
+  //     .then((res) => { 
+  //       const chats = JSON.parse(res);
+  //     });
+  // }
 }

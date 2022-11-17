@@ -17,7 +17,7 @@ const focusBlurHandler = (spanElement = new Span({})) => ({ target } : Event) =>
 export default class Input extends Block {
   constructor(props: Props) {
     const {
-      type, id, title, disabled, spanElement,
+      type, id, title, disabled, spanElement, events = {},
     } = props;
 
     const { user } = store.getState();
@@ -48,6 +48,7 @@ export default class Input extends Block {
       events: {
         focus: focusBlurHandler(spanElement),
         blur: focusBlurHandler(spanElement),
+        ...events,
       },
       disabled,
     });

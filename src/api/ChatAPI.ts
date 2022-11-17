@@ -1,9 +1,9 @@
 import { HTTPTransport } from '../utils/HTTPTransport';
 
-type ChatsQueryParams = {
-  offset: number,
-  limit: number,
-  title: string,
+export type ChatsQueryParams = {
+  offset?: number,
+  limit?: number,
+  title?: string,
 }
 
 export class ChatAPI {
@@ -13,7 +13,7 @@ export class ChatAPI {
     this._http = new HTTPTransport();
   }
 
-  getUserChats(data?: ChatsQueryParams) {
+  getChats(data?: ChatsQueryParams) {
     return this._http.get('/chats', {
       data,
     });
