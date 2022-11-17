@@ -33,7 +33,8 @@ export default class ChatList extends Block {
           const { target } = event;
           const div = target.closest('div.chat-item');
           console.log('choose chat with id:', div.dataset.id);
-          store.set('currentChatId', div.dataset.id);
+          store.set('chatId', div.dataset.id);
+          console.log(store.getState());
         },
       },
     });

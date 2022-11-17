@@ -6,13 +6,12 @@ import append from '../../../static/pictures/append.svg';
 import rightArrow from '../../../static/pictures/right_arrow.svg';
 import chatsTemplate from './chatsPage.template';
 import ChatList from '../../components/ChatList';
-import InputBlock from '../../components/InputBlock';
 import Input from '../../components/Input';
-import Button from '../../components/Button';
 import { store } from '../../core/Store';
 import ButtonBlock from '../../components/ButtonBlock';
 import { Router } from '../../core/Router';
 import { ChatController } from '../../controllers/ChatController';
+import Chat from '../../components/Chat';
 
 export default class ChatsPage extends Block {
   constructor(/* props: Props */) {
@@ -57,28 +56,7 @@ export default class ChatsPage extends Block {
       },
     });
 
-    const treePointsButton = new Button({
-      text: `<img src="${threePoints}" alt="three_points_button">`,
-    });
-
-    const messageInput = new InputBlock({
-      type: 'text',
-      id: 'message',
-      title: 'Сообщение',
-      middleSpan: true,
-    });
-
-    const sendMessageButton = new Button({
-      text: `<img src="${rightArrow}" alt="send_button">`,
-      events: {
-        click: (e) => {
-          const { inputElement } = messageInput.children;
-          const { value } = inputElement.element;
-          console.log('message click', value);
-          inputElement.element.value = '';
-        },
-      },
-    });
+    const chat = new Chat({});
 
     const chatList = new ChatList({});
 
@@ -92,9 +70,7 @@ export default class ChatsPage extends Block {
       newChatButton,
       chatSearchInput,
       chatList,
-      treePointsButton,
-      messageInput,
-      sendMessageButton,
+      chat,
     });
   }
 
