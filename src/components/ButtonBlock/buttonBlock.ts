@@ -11,7 +11,7 @@ export default class ButtonBlock extends Block {
     });
 
     super('div', {
-      ...props,
+      // ...props,
       attr: { class: 'btn' },
       button,
     });

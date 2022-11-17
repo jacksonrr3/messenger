@@ -26,16 +26,32 @@ export default class ChatsPage extends Block {
         },
       },
     });
-    // <input type="text" id="search-input" placeholder="Поиск">
+
+    const newChatButton = new ButtonBlock({
+      text: 'Новый чат',
+      events: {
+        click: () => {
+          const { newChatname: title } = store.getState();
+          store.set('newChatname', '');
+          ChatController.addChat(title).then(() => {
+            ChatController.getChats();
+          });
+        },
+      },
+    });
+
     const chatSearchInput = new Input({
       type: 'text',
       id: 'search-input',
       title: 'Поиск',
       events: {
         focus: () => { },
-        blur: () => { },
+        blur: (e) => {
+          e.target.value = '';
+        },
         input: (e) => {
           const { target } = e;
+          store.set('newChatname', target.value);
           ChatController.getChats({ title: target.value });
         },
       },
@@ -73,6 +89,7 @@ export default class ChatsPage extends Block {
       append,
       rightArrow,
       userProfileButton,
+      newChatButton,
       chatSearchInput,
       chatList,
       treePointsButton,

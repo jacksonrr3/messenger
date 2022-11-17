@@ -13,18 +13,23 @@
 
         border-right: 1px solid #eaeaea;
 
-        .btn {
-            margin: 21px 22px 23px auto;
+        .button-block {
+            display: flex;
+            justify-content: space-between;
 
-            button {
-                background: none;
-                border: none;
-                
-                font-size: 12px;
-                line-height: 12px;
-                
-                text-decoration: none;
-                color: $gray;
+            padding: 21px;
+
+            .btn {
+                button {
+                    background: none;
+                    border: none;
+                    
+                    font-size: 12px;
+                    line-height: 12px;
+                    
+                    text-decoration: none;
+                    color: $gray;
+                }
             }
         }
 

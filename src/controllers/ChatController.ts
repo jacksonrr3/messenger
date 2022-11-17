@@ -23,15 +23,16 @@ export class ChatController {
     return chatAPI.getChats(params)
       .then((res) => {
         const chats = JSON.parse(res);
-        console.log(chats);
+        // console.log(chats);
         store.set('chats', chats);
       });
   }
 
-  // static searchChat(title: string) {
-  //   return chatAPI.getChats({ title })
-  //     .then((res) => { 
-  //       const chats = JSON.parse(res);
-  //     });
-  // }
+  static addChat(title: string) {
+    return chatAPI.createNewChat(title)
+      .then((res) => {
+        const chats = JSON.parse(res);
+        console.log('new chats', chats);
+      });
+  }
 }
