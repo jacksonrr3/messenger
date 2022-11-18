@@ -27,4 +27,37 @@ export class ChatAPI {
       },
     });
   }
+
+  addUsersToChat(users: string[], chatId: number) {
+    console.log('adduser', JSON.stringify({
+      users,
+      chatId,
+    }));
+
+    return this._http.put('/chats/users', {
+      body: JSON.stringify({
+        users,
+        chatId,
+      }),
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+    });
+  }
+
+  deleteUsersFromChat(users: string[], chatId: number) {
+    console.log('deleteuser', JSON.stringify({
+      users,
+      chatId,
+    }));
+    return this._http.delete('/chats/users', {
+      body: JSON.stringify({
+        users,
+        chatId,
+      }),
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+    });
+  }
 }

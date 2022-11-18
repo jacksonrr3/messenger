@@ -56,7 +56,7 @@ export default class ChatsPage extends Block {
       },
     });
 
-    const chat = new Chat({});
+    const chat = new Chat();
 
     const chatList = new ChatList({});
 

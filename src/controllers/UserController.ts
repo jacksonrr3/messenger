@@ -28,6 +28,17 @@ export class UserController {
       });
   }
 
+  static getUserIdByLogin(login: string) {
+    return userAPI.getUser(login)
+      .then((res) => {
+        console.log('userId', res);
+        return res;
+      })
+      .catch((err) => {
+        console.log(`userId, error: ${err.response}`);
+      });
+  }
+
   // static singIn(formData: FormData) {
   //   const userAuthData = {
   //     login: formData.get('login') as string,

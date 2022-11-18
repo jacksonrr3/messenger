@@ -1,12 +1,14 @@
 export default `
   {{#if chat}}
+    {{{addUserModal}}}
+    {{{deleteUserModal}}}
     <div class="user">
       <img src="{{round3434}}" alt="user_avatar">
       <p>{{chat.title}}</p>
       {{{treePointsButton}}}
-      <div class="modal">
-        <button>Добавить юзера</button>
-        <button>Удалить юзера</button>
+      <div class="modal" id="modal">
+        {{{addUserButton}}}
+        {{{deleteUserButton}}}
       </div>
     </div>
     <div class="conversation"></div>

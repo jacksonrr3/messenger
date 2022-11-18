@@ -1,4 +1,5 @@
 import { ChatAPI, ChatsQueryParams } from '../api/ChatAPI';
+import { UserController } from './UserController';
 import { store } from '../core/Store';
 
 const chatAPI = new ChatAPI();
@@ -33,6 +34,22 @@ export class ChatController {
       .then((res) => {
         const chats = JSON.parse(res);
         console.log('new chats', chats);
+      });
+  }
+
+  static async addUserToChat(userLogin: string, chatId: number) {
+    return UserController.getUserIdByLogin(userLogin)
+      .then((userId) => chatAPI.addUsersToChat([userId], chatId))
+      .then(() => {
+        console.log(`add new users to chat: ${chatId}`);
+      });
+  }
+
+  static deleteUserfromChat(userLogin: string, chatId: number) {
+    return UserController.getUserIdByLogin(userLogin)
+      .then((userId) => chatAPI.addUsersToChat([userId], chatId))
+      .then(() => {
+        console.log(`add new users to chat: ${chatId}`);
       });
   }
 }

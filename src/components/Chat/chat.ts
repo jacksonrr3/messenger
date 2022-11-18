@@ -6,17 +6,19 @@ import append from '../../../static/pictures/append.svg';
 import rightArrow from '../../../static/pictures/right_arrow.svg';
 import chatsTemplate from './chat.template';
 import InputBlock from '../InputBlock';
-import Input from '../Input';
 import Button from '../Button';
 import { store, StoreEvents } from '../../core/Store';
+import Modal from '../Modal';
+import Input from '../Input';
 import ButtonBlock from '../ButtonBlock';
 import { Router } from '../core/Router';
 import { ChatController } from '../../controllers/ChatController';
+import { UserController } from '../../controllers/UserController';
 
 const getChatFromStateById = (): any => {
   const { chatId } = store.getState();
   const { chats } = store.getState();
-  return chats?.find((el) => el.id === Number(chatId));
+  return chats?.find((el) => el.id === chatId);
 };
 
 export default class ChatsPage extends Block {
@@ -31,6 +33,17 @@ export default class ChatsPage extends Block {
 
     const treePointsButton = new Button({
       text: `<img src="${threePoints}" alt="three_points_button">`,
+      events: {
+        click: () => {
+          const modal = document.getElementById('modal');
+          if (modal?.style.display === 'flex') {
+            modal.style.display = 'none';
+          } else {
+            modal.style.display = 'flex';
+          }
+          console.log(modal.style.display)
+        },
+      },
     });
 
     const messageInput = new InputBlock({
@@ -52,6 +65,51 @@ export default class ChatsPage extends Block {
       },
     });
 
+    const addUserModal = new Modal({
+      title: 'Добавить пользователя',
+      inputTitle: 'введите имя',
+      clickHandler: (userName: string) => {
+        const { chatId } = store.getState();
+        if (chatId) {
+          // ChatController.addUsersToChat([userName], chatId);
+          UserController.getUserIdByLogin(userName);
+        }
+        addUserModal.hide();
+      },
+    });
+
+    const deleteUserModal = new Modal({
+      title: 'Удалить пользователя',
+      inputTitle: 'введите имя',
+      clickHandler: (userName: string) => {
+        const { chatId } = store.getState();
+        if (chatId) {
+          UserController.getUserIdByLogin(userName);
+
+          // ChatController.deleteUsersfromChat([userName], chatId);
+        }
+        deleteUserModal.hide();
+      },
+    });
+
+    const addUserButton = new Button({
+      text: 'Добавить пользователя',
+      events: {
+        click: () => {
+          addUserModal.show();
+        },
+      },
+    });
+
+    const deleteUserButton = new Button({
+      text: 'Удалить пользователя',
+      events: {
+        click: () => {
+          deleteUserModal.show();
+        },
+      },
+    });
+
     super('div', {
       attr: { class: 'chat' },
       round3434,
@@ -61,6 +119,10 @@ export default class ChatsPage extends Block {
       chat,
       messageInput,
       sendMessageButton,
+      addUserModal,
+      deleteUserModal,
+      addUserButton,
+      deleteUserButton,
     });
   }
 
