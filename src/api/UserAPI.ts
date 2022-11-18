@@ -49,13 +49,16 @@ export class UserAPI {
     });
   }
 
-  getUser(id: string) {
+  getUserById(id: string) {
     return this._http.get(`/user/${id}`);
   }
 
-  searchUser(data: UserLogin) {
+  searchUserByLogin(data: UserLogin) {
     return this._http.post('/user/search', {
-      body: data,
+      body: JSON.stringify(data),
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      },
     });
   }
 }

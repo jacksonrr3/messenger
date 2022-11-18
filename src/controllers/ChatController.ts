@@ -38,16 +38,16 @@ export class ChatController {
   }
 
   static async addUserToChat(userLogin: string, chatId: number) {
-    return UserController.getUserIdByLogin(userLogin)
-      .then((userId) => chatAPI.addUsersToChat([userId], chatId))
+    return UserController.getUserByLogin(userLogin)
+      .then(({ id: userId }) => chatAPI.addUsersToChat([userId], chatId))
       .then(() => {
         console.log(`add new users to chat: ${chatId}`);
       });
   }
 
   static deleteUserfromChat(userLogin: string, chatId: number) {
-    return UserController.getUserIdByLogin(userLogin)
-      .then((userId) => chatAPI.addUsersToChat([userId], chatId))
+    return UserController.getUserByLogin(userLogin)
+      .then(({ id: userId }) => chatAPI.deleteUsersFromChat([userId], chatId))
       .then(() => {
         console.log(`add new users to chat: ${chatId}`);
       });

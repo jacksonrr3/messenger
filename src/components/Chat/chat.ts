@@ -71,8 +71,7 @@ export default class ChatsPage extends Block {
       clickHandler: (userName: string) => {
         const { chatId } = store.getState();
         if (chatId) {
-          // ChatController.addUsersToChat([userName], chatId);
-          UserController.getUserIdByLogin(userName);
+          ChatController.addUserToChat(userName, chatId);
         }
         addUserModal.hide();
       },
@@ -84,9 +83,7 @@ export default class ChatsPage extends Block {
       clickHandler: (userName: string) => {
         const { chatId } = store.getState();
         if (chatId) {
-          UserController.getUserIdByLogin(userName);
-
-          // ChatController.deleteUsersfromChat([userName], chatId);
+          ChatController.deleteUserfromChat(userName, chatId);
         }
         deleteUserModal.hide();
       },

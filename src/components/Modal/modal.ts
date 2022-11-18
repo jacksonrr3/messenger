@@ -25,9 +25,10 @@ export default class Modal extends Block {
       text: 'Сохранить',
       events: {
         click: () => {
-          const { value } = input.element;
+          const { value } = input.element as HTMLInputElement;
           const { chatId } = store.getState();
           clickHandler(value, chatId);
+          input.element.value = '';
         },
       },
     });

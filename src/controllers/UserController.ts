@@ -28,8 +28,8 @@ export class UserController {
       });
   }
 
-  static getUserIdByLogin(login: string) {
-    return userAPI.getUser(login)
+  static getUserByLogin(login: string) {
+    return userAPI.searchUserByLogin({ login })
       .then((res) => {
         console.log('userId', res);
         return res;
