@@ -20,7 +20,7 @@ export type ChatItem = {
 };
 
 export class ChatController {
-  static getChats(params?: ChatsQueryParams) {
+  static async getChats(params?: ChatsQueryParams) {
     return chatAPI.getChats(params)
       .then((res) => {
         const chats = JSON.parse(res);
@@ -51,5 +51,9 @@ export class ChatController {
       .then(() => {
         console.log(`add new users to chat: ${chatId}`);
       });
+  }
+
+  static getToken(chatId: number) {
+    return chatAPI.getChatTocken(chatId);
   }
 }

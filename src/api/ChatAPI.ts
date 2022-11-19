@@ -60,4 +60,11 @@ export class ChatAPI {
       },
     });
   }
+
+  getChatTocken(id: number) {
+    console.log('get tocken ', id)
+    return this._http.post(`/chats/token/${id}`)
+      .then((data) => JSON.parse(data))
+      .then(({ token }) => token);
+  }
 }

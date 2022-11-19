@@ -9,11 +9,9 @@ import InputBlock from '../InputBlock';
 import Button from '../Button';
 import { store, StoreEvents } from '../../core/Store';
 import Modal from '../Modal';
-import Input from '../Input';
-import ButtonBlock from '../ButtonBlock';
-import { Router } from '../core/Router';
+import Conversation from '../conversation';
 import { ChatController } from '../../controllers/ChatController';
-import { UserController } from '../../controllers/UserController';
+import { WSWrapper } from '../../utils/wsWrapper';
 
 const getChatFromStateById = (): any => {
   const { chatId } = store.getState();
@@ -21,14 +19,55 @@ const getChatFromStateById = (): any => {
   return chats?.find((el) => el.id === chatId);
 };
 
+type State = {
+  chat?: Record<string, any>,
+  token?: string,
+  messages: string[],
+  ws?: WSWrapper,
+};
+
 export default class ChatsPage extends Block {
   constructor() {
-    const chat = getChatFromStateById();
+    const state: State = {
+      messages: [],
+    };
+
+    const conversation = new Conversation({
+      messages: state.messages,
+    });
 
     store.on(StoreEvents.Updated, () => {
-      this.setProps({
-        chat: getChatFromStateById(),
-      });
+      const { chatId: newChatID, user } = store.getState();
+      console.log(newChatID, state.chat?.id);
+      if (newChatID !== state.chat?.id) {
+        ChatController.getToken(newChatID)
+          .then((token) => {
+            console.log('store', store.getState());
+
+            state.chat = getChatFromStateById();
+            state.token = token;
+            state?.ws?.close();
+            state.ws = new WSWrapper(user.id, newChatID, token, {
+              content: '0',
+              type: 'get old',
+            });
+
+            this.setProps({ ...state });
+
+            state.ws.setMessageHandler((event) => {
+              const data = JSON.parse(event.data);
+              console.log('new message', event);
+              if (Array.isArray(data)) {
+                state.messages = data;
+              } else {
+                state.messages = [...state.messages, data];
+              }
+              console.log('stateMessages', state.messages[0]);
+
+              conversation.setProps({ messages: state.messages });
+            });
+          });
+      }
     });
 
     const treePointsButton = new Button({
@@ -41,7 +80,7 @@ export default class ChatsPage extends Block {
           } else {
             modal.style.display = 'flex';
           }
-          console.log(modal.style.display)
+          console.log(modal.style.display);
         },
       },
     });
@@ -60,6 +99,13 @@ export default class ChatsPage extends Block {
           const { inputElement } = messageInput.children;
           const { value } = inputElement.element;
           console.log('message click', value);
+          const { ws } = state;
+          if (ws) {
+            ws.send({
+              content: value,
+              type: 'message',
+            });
+          }
           inputElement.element.value = '';
         },
       },
@@ -109,17 +155,18 @@ export default class ChatsPage extends Block {
 
     super('div', {
       attr: { class: 'chat' },
+      ...state,
       round3434,
       append,
       rightArrow,
       treePointsButton,
-      chat,
       messageInput,
       sendMessageButton,
       addUserModal,
       deleteUserModal,
       addUserButton,
       deleteUserButton,
+      conversation,
     });
   }
 

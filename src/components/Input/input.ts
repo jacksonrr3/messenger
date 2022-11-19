@@ -24,15 +24,17 @@ export default class Input extends Block {
 
     store.on(StoreEvents.Updated, () => {
       const { user: newUserData } = store.getState();
-      this.setProps({
-        attr: {
-          type,
-          id,
-          name: id,
-          placeholder: title,
-          value: props.valueProp ? newUserData[props.valueProp] : '',
-        },
-      });
+      if (this._props?.attr?.value !== newUserData[props.valueProp]) {
+        this.setProps({
+          attr: {
+            type,
+            id,
+            name: id,
+            placeholder: title,
+            value: props.valueProp ? newUserData[props.valueProp] : '',
+          },
+        });
+      }
     });
 
     const inputAttr = {

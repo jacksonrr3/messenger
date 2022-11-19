@@ -11,7 +11,7 @@ export default `
         {{{deleteUserButton}}}
       </div>
     </div>
-    <div class="conversation"></div>
+    {{{conversation}}}
     <div class="message-block">
       <img src="{{append}}" alt="append_file">
       {{{messageInput}}}
