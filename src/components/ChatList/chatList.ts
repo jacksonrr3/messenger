@@ -7,6 +7,10 @@ import round4747 from '../../../static/pictures/round_47_47.svg';
 const mapChats = (chats: ChatItem[]) => chats.map((chat: ChatItem) => {
   const newChat = chat;
   newChat.avatar = chat.avatar ?? round4747;
+  if (chat.last_message) {
+    const time = new Date(chat.last_message.time);
+    newChat.last_message.time = `${time.getHours()}:${time.getMinutes()}`;
+  }
   return newChat;
 });
 
@@ -17,9 +21,11 @@ export default class ChatList extends Block {
 
     store.on(StoreEvents.Updated, () => {
       const { chats: newChats } = store.getState();
-      this.setProps({
-        chats: mapChats(newChats),
-      });
+      if (this._props.chats?.length !== newChats?.length) { 
+        this.setProps({
+          chats: mapChats(newChats),
+        });
+      }
     });
 
     super('div', {
@@ -30,11 +36,10 @@ export default class ChatList extends Block {
       chats: mapChats(chats ?? []),
       events: {
         click: (event) => {
-          const { target } = event;
-          const { dataset } = target.closest('div.chat-item');
-          console.log('choose chat with id:', dataset.id);
+          const { dataset } = event.target.closest('div.chat-item');
+          // console.log('choose chat with id:', dataset.id);
           store.set('chatId', Number(dataset.id));
-          console.log(store.getState());
+          // console.log(store.getState());
         },
       },
     });

@@ -9,7 +9,7 @@ import InputBlock from '../InputBlock';
 import Button from '../Button';
 import { store, StoreEvents } from '../../core/Store';
 import Modal from '../Modal';
-import Conversation from '../conversation';
+import Conversation from '../Conversation';
 import { ChatController } from '../../controllers/ChatController';
 import { WSWrapper } from '../../utils/wsWrapper';
 
