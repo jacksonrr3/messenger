@@ -11,7 +11,7 @@ export class Router {
   _currentRoute: null | Route;
   _rootQuery: string;
 
-  constructor(rootQuery: string, defaultPath: string) {
+  constructor(rootQuery: string, defaultPath = '/') {
     if (Router.__instance) {
       // eslint-disable-next-line no-constructor-return
       return Router.__instance;
