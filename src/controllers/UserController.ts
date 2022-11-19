@@ -28,36 +28,14 @@ export class UserController {
       });
   }
 
-  static getUserByLogin(login: string) {
+  static getUsersByLogin(login: string) {
     return userAPI.searchUserByLogin({ login })
       .then((res) => {
         console.log('userId', res);
-        return res;
+        return JSON.parse(res);
       })
       .catch((err) => {
         console.log(`userId, error: ${err.response}`);
       });
   }
-
-  // static singIn(formData: FormData) {
-  //   const userAuthData = {
-  //     login: formData.get('login') as string,
-  //     password: formData.get('password') as string,
-  //   };
-
-  //   return userAPI.signIn(userAuthData)
-  //     .then((res) => {
-  //       console.log(res);
-  //       return userAPI.getInfo();
-  //     })
-  //     .then((user) => JSON.parse(user))
-  //     .then((user) => {
-  //       store.set('user', user);
-  //       console.log(store.getState());
-  //       Router.getInstanse().go('/messenger');
-  //     })
-  //     .catch((err) => {
-  //       console.log('login err', err);
-  //     });
-  // }
 }

@@ -4,7 +4,6 @@ export class WSWrapper {
   _socket: WebSocket;
 
   constructor(userId: number, chatId: number, token: string, openSendData: Record<string, any>) {
-    console.log(`${baseUrl}/${userId}/${chatId}/${token}`)
     this._socket = new WebSocket(`${baseUrl}/${userId}/${chatId}/${token}`);
 
     this._socket.addEventListener('open', () => {
@@ -24,7 +23,7 @@ export class WSWrapper {
     });
 
     this._socket.addEventListener('error', (event) => {
-      console.log('Ошибка', event.message);
+      console.log('Ошибка', event);
     });
   }
 

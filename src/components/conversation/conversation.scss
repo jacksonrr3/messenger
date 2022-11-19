@@ -1,7 +1,22 @@
+@import '../../styles/variables.scss';
+
 .conversation {
     height: 100%;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
 
     .message {
         margin: 10px;
+
+        background: $light;
+        border-radius: 12px;
+
+        width: fit-content;
+        padding: 10px;
+    }
+
+    .right {
+        margin-left: auto;
     }
 }

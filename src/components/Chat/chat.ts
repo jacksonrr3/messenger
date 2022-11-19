@@ -13,22 +13,65 @@ import Conversation from '../conversation';
 import { ChatController } from '../../controllers/ChatController';
 import { WSWrapper } from '../../utils/wsWrapper';
 
+type Message = {
+  chat_id: number,
+  time: string,
+  type: string,
+  user_id: string,
+  content: string,
+  user?: boolean
+  file?: {
+      id: number,
+      user_id: number,
+      path: string,
+      filename: string,
+      content_type: string,
+      content_size: number,
+      upload_date: string,
+  }
+}
+
+type State = {
+  userId: number,
+  chat?: Record<string, any>,
+  token?: string,
+  messages: Message[],
+  ws?: WSWrapper,
+};
+
 const getChatFromStateById = (): any => {
   const { chatId } = store.getState();
   const { chats } = store.getState();
   return chats?.find((el) => el.id === chatId);
 };
 
-type State = {
-  chat?: Record<string, any>,
-  token?: string,
-  messages: string[],
-  ws?: WSWrapper,
+const makeMessageFormatter = (state: State) => (message: Message) => {
+  const { user_id: messUserId, time } = message;
+  const user = Number(messUserId) !== state.userId;
+
+  const data = new Date(time);
+  console.log({ ...message, user, time: `${data.getHours()}:${data.getMinutes()}` });
+  return { ...message, user, time: `${data.getHours()}:${data.getMinutes()}` };
+};
+
+const makeMessageHandler = (conversation: Block, state: State) => (event) => {
+  const formatter = makeMessageFormatter(state);
+  const data = JSON.parse(event.data);
+  if (Array.isArray(data)) {
+    state.messages = data.map((message) => formatter(message));
+  } else {
+    state.messages = [...state.messages, formatter(data)];
+  }
+
+  conversation.setProps({ messages: state.messages });
 };
 
 export default class ChatsPage extends Block {
   constructor() {
+    const { user } = store.getState();
+
     const state: State = {
+      userId: user.id,
       messages: [],
     };
 
@@ -42,8 +85,6 @@ export default class ChatsPage extends Block {
       if (newChatID !== state.chat?.id) {
         ChatController.getToken(newChatID)
           .then((token) => {
-            console.log('store', store.getState());
-
             state.chat = getChatFromStateById();
             state.token = token;
             state?.ws?.close();
@@ -54,18 +95,7 @@ export default class ChatsPage extends Block {
 
             this.setProps({ ...state });
 
-            state.ws.setMessageHandler((event) => {
-              const data = JSON.parse(event.data);
-              console.log('new message', event);
-              if (Array.isArray(data)) {
-                state.messages = data;
-              } else {
-                state.messages = [...state.messages, data];
-              }
-              console.log('stateMessages', state.messages[0]);
-
-              conversation.setProps({ messages: state.messages });
-            });
+            state.ws.setMessageHandler(makeMessageHandler(conversation, state));
           });
       }
     });
@@ -80,7 +110,6 @@ export default class ChatsPage extends Block {
           } else {
             modal.style.display = 'flex';
           }
-          console.log(modal.style.display);
         },
       },
     });

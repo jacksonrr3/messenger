@@ -24,7 +24,6 @@ export class ChatController {
     return chatAPI.getChats(params)
       .then((res) => {
         const chats = JSON.parse(res);
-        // console.log(chats);
         store.set('chats', chats);
       });
   }
@@ -33,20 +32,22 @@ export class ChatController {
     return chatAPI.createNewChat(title)
       .then((res) => {
         const chats = JSON.parse(res);
-        console.log('new chats', chats);
       });
   }
 
   static async addUserToChat(userLogin: string, chatId: number) {
-    return UserController.getUserByLogin(userLogin)
-      .then(({ id: userId }) => chatAPI.addUsersToChat([userId], chatId))
+    return UserController.getUsersByLogin(userLogin)
+      .then((users) => {
+        const userIds = users.map((user: any) => user.id);
+        return chatAPI.addUsersToChat(userIds, chatId);
+      })
       .then(() => {
         console.log(`add new users to chat: ${chatId}`);
       });
   }
 
   static deleteUserfromChat(userLogin: string, chatId: number) {
-    return UserController.getUserByLogin(userLogin)
+    return UserController.getUsersByLogin(userLogin)
       .then(({ id: userId }) => chatAPI.deleteUsersFromChat([userId], chatId))
       .then(() => {
         console.log(`add new users to chat: ${chatId}`);

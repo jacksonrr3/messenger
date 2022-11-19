@@ -1,5 +1,8 @@
 export default `
   {{#each messages}}
-    <p class="message">{{content}}</p>
+    <div class="message {{#if user}}right{{/if}}">
+      <p class="text">{{content}}</p>
+      <p class="time">{{time}}</p>
+    </div>
   {{/each}}
 `;

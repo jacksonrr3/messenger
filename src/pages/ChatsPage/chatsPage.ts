@@ -42,7 +42,7 @@ export default class ChatsPage extends Block {
     const chatSearchInput = new Input({
       type: 'text',
       id: 'search-input',
-      title: 'Поиск',
+      title: 'Поиск чата / Имя нового чата',
       events: {
         focus: () => { },
         blur: (e) => {
