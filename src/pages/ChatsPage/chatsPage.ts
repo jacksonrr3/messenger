@@ -15,7 +15,7 @@ import { Chat } from '../../components/Chat';
 import { Modal } from '../../components/Modal';
 
 export default class ChatsPage extends Block {
-  constructor(/* props: Props */) {
+  constructor() {
     console.log('store from messenger', store.getState());
 
     const userProfileButton = new ButtonBlock({
@@ -27,15 +27,22 @@ export default class ChatsPage extends Block {
       },
     });
 
+    const newChatModal = new Modal({
+      title: 'Добавить новый чат',
+      inputTitle: 'Введите название чата',
+      clickHandler: (title: string) => {
+        ChatController.addChat(title).then(() => {
+          ChatController.getChats();
+        });
+        newChatModal.hide();
+      },
+    });
+
     const newChatButton = new ButtonBlock({
       text: 'Новый чат',
       events: {
         click: () => {
-          const { newChatname: title } = store.getState();
-          store.set('newChatname', '');
-          ChatController.addChat(title).then(() => {
-            ChatController.getChats();
-          });
+          newChatModal.show();
         },
       },
     });
@@ -43,7 +50,7 @@ export default class ChatsPage extends Block {
     const chatSearchInput = new Input({
       type: 'text',
       id: 'search-input',
-      title: 'Поиск чата / Имя нового чата',
+      title: 'Поиск чата',
       events: {
         focus: () => { },
         blur: (e) => {
@@ -69,6 +76,7 @@ export default class ChatsPage extends Block {
       rightArrow,
       userProfileButton,
       newChatButton,
+      newChatModal,
       chatSearchInput,
       chatList,
       chat,

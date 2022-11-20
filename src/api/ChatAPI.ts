@@ -28,6 +28,8 @@ export class ChatAPI {
     });
   }
 
+  // deleteChat()
+
   addUsersToChat(users: string[], chatId: number) {
     console.log('adduser', JSON.stringify({
       users,

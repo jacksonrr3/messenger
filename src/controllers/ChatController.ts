@@ -31,7 +31,7 @@ export class ChatController {
   static addChat(title: string) {
     return chatAPI.createNewChat(title)
       .then((res) => {
-        const chats = JSON.parse(res);
+        console.log(JSON.parse(res));
       });
   }
 
