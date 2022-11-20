@@ -1,25 +1,39 @@
 import Block from '../../core/Block';
 import { InputBlock } from '../../components/InputBlock/index';
 import './userProfilePage.scss';
-import defaultAvatar from '../../../static/pictures/default_avatar.svg';
 import userProfileTemplate from './userProfilePage.template';
 import { Button } from '../../components/Button';
 import { AuthController } from '../../controllers/AuthController';
-// import { store } from '../../core/Store';
 import { Link } from '../../components/Link';
+import { Router } from '../../core/Router';
+import { Avatar } from '../../components/Avatar';
+import { store, StoreEvents } from '../../core/Store';
 import { Router } from '../../core/Router';
 
 export default class userProfilePage extends Block {
   constructor() {
-    // const { user } = store.getState();
+    const { user } = store.getState();
 
-    // console.log('store from prof', user);
+    store.on(StoreEvents.Updated, () => {
+      // const { user } = store.getState();
+      // console.log('user avatar', user);
+    });
 
     const messengerLink = new Link({
       events: {
         click: (e) => {
           e.preventDefault();
           Router.getInstanse().go('/messenger');
+        },
+      },
+    });
+
+    const userAvatar = new Avatar({
+      src: user.avatar,
+      events: {
+        click: () => {
+          console.log('go to avatar');
+          Router.getInstanse().go('/change_avatar');
         },
       },
     });
@@ -135,7 +149,7 @@ export default class userProfilePage extends Block {
 
     super('div', {
       attr: { class: 'user-profile-container' },
-      defaultAvatar,
+      userAvatar,
       email,
       login,
       firstName,

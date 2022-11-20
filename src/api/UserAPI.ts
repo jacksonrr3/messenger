@@ -37,6 +37,9 @@ export class UserAPI {
   changeAvatar(data: FormData) {
     return this._http.put('/user/profile/avatar', {
       body: data,
+      headers: {
+        // 'Content-Type': 'multipart/form-data',
+      },
     });
   }
 

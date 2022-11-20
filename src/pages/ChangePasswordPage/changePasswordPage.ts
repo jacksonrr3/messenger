@@ -9,7 +9,10 @@ import { Router } from '../../core/Router';
 import { makeSubmitHandler } from '../../utils/formHandler';
 import { UserController } from '../../controllers/UserController';
 
-const submitHandler = makeSubmitHandler(UserController.changeUserPassword);
+const submitHandler = makeSubmitHandler((formData) => UserController.changeUserPassword(formData)
+  .then(() => {
+    Router.getInstanse().go('/user_profile');
+  }));
 
 export default class ChangePasswordPage extends Block {
   constructor() {

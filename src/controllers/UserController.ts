@@ -28,6 +28,14 @@ export class UserController {
       });
   }
 
+  static changeUserAvatar(formData: FormData) {
+    return userAPI.changeAvatar(formData)
+      .then((res) => {
+        // const passwordChanged = JSON.parse(res);
+        console.log(res);
+      });
+  }
+
   static getUsersByLogin(login: string) {
     return userAPI.searchUserByLogin({ login })
       .then((res) => {

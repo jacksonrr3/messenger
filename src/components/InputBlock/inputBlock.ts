@@ -12,6 +12,9 @@ export class InputBlock extends Block {
 
     const inputElement = new Input({
       ...props,
+      attr: {
+        ...props.inputAttr,
+      },
       spanElement: messageSpan,
     });
 

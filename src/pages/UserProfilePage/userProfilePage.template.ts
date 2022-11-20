@@ -3,9 +3,7 @@ export default `
       {{{messengerLink}}}
   </div>
   <div class="user">
-      <div class="avatar">
-        <img src="{{defaultAvatar}}" alt="user_avatar">
-      </div>
+      {{{userAvatar}}}
       <div class="info">
           {{{email}}}
           {{{login}}}

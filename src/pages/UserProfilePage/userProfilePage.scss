@@ -28,21 +28,6 @@
         margin: auto;
         width: 510px;
 
-        .avatar {
-            display: flex;
-
-            width: 130px;
-            height: 130px;
-
-            margin: 0 auto 95px;
-            border-radius: 50%;
-            background: #efefef;
-
-            img {
-                margin: auto;
-            }
-        }
-
         .info {
             display: flex;
             flex-direction: column;
