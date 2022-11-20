@@ -2,7 +2,7 @@ import Block, { Props } from '../../core/Block';
 import conversationTemplate from './conversation.template';
 import './conversation.scss';
 
-export default class Conversation extends Block {
+export class Conversation extends Block {
   constructor(props: Props) {
     super('div', {
       ...props,

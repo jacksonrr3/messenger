@@ -1,11 +1,11 @@
 import Block, { Props } from '../../core/Block';
 import modalTemplate from './modal.template';
 import './modal.scss';
-import ButtonBlock from '../Button';
-import Input from '../Input';
+import { Button } from '../Button';
+import { Input } from '../Input';
 import { store } from '../../core/Store';
 
-export default class Modal extends Block {
+export class Modal extends Block {
   constructor(props: Props) {
     const {
       title, clickHandler, inputTitle, inputName,
@@ -21,7 +21,7 @@ export default class Modal extends Block {
       },
     });
 
-    const button = new ButtonBlock({
+    const button = new Button({
       text: 'Сохранить',
       events: {
         click: () => {

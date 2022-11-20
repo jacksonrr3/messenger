@@ -3,7 +3,7 @@ import './chatItem.scss';
 import round4747 from '../../../static/pictures/round_47_47.svg';
 import chatItemTemplate from './chatItem.template';
 
-export default class ChatItem extends Block {
+export class ChatItem extends Block {
   constructor(props: Props) {
     super('div', {
       ...props,

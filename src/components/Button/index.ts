@@ -1,3 +1,3 @@
-import ButtonBlock from './button';
+import { Button } from './button';
 
-export default ButtonBlock;
+export { Button };

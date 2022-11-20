@@ -14,14 +14,14 @@ const mapChats = (chats: ChatItem[]) => chats.map((chat: ChatItem) => {
   return newChat;
 });
 
-export default class ChatList extends Block {
+export class ChatList extends Block {
   constructor(props: Props) {
     ChatController.getChats();
     const { chats } = store.getState();
 
     store.on(StoreEvents.Updated, () => {
       const { chats: newChats } = store.getState();
-      if (this._props.chats?.length !== newChats?.length) { 
+      if (this._props.chats?.length !== newChats?.length) {
         this.setProps({
           chats: mapChats(newChats),
         });

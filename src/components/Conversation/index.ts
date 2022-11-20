@@ -1,3 +1,3 @@
-import Conversation from './conversation';
+import { Conversation } from './conversation';
 
-export default Conversation;
+export { Conversation };

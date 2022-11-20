@@ -3,7 +3,7 @@ import Block, { Props } from '../../core/Block';
 import errorPageTemplate from './errorPage.template';
 import './errorPage.scss';
 
-export default class ErrorPage extends Block {
+export class ErrorPage extends Block {
   constructor(props: Props) {
     super('div', {
       ...props,

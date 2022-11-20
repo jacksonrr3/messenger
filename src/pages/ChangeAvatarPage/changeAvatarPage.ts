@@ -1,8 +1,8 @@
 import Block from '../../core/Block';
 import './changeAvatarPage.scss';
 import changeAvatarTemplate from './changeAvatarPage.template';
-import InputBlock from '../../components/InputBlock/index';
-import Button from '../../components/ButtonBlock';
+import { InputBlock } from '../../components/InputBlock/index';
+import { ButtonBlock } from '../../components/ButtonBlock';
 
 export default class ChangeAvatarPage extends Block {
   constructor() {
@@ -13,7 +13,7 @@ export default class ChangeAvatarPage extends Block {
       type: 'file',
     });
 
-    const saveButton = new Button({
+    const saveButton = new ButtonBlock({
       text: 'Сохранить',
     });
 

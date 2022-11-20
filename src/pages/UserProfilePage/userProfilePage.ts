@@ -1,12 +1,12 @@
 import Block from '../../core/Block';
-import InputBlock from '../../components/InputBlock/index';
+import { InputBlock } from '../../components/InputBlock/index';
 import './userProfilePage.scss';
 import defaultAvatar from '../../../static/pictures/default_avatar.svg';
 import userProfileTemplate from './userProfilePage.template';
-import Button from '../../components/Button';
+import { Button } from '../../components/Button';
 import { AuthController } from '../../controllers/AuthController';
 // import { store } from '../../core/Store';
-import Link from '../../components/Link';
+import { Link } from '../../components/Link';
 import { Router } from '../../core/Router';
 
 export default class userProfilePage extends Block {

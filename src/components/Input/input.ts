@@ -2,7 +2,7 @@ import Block, { Props } from '../../core/Block';
 import './input.scss';
 import inputTemplate from './input.template';
 import { validationErrorMessage, isValidInput } from '../../utils/validation';
-import Span from '../Span';
+import { Span } from '../Span';
 import { store, StoreEvents } from '../../core/Store';
 
 const focusBlurHandler = (spanElement = new Span({})) => ({ target } : Event) => {
@@ -14,7 +14,7 @@ const focusBlurHandler = (spanElement = new Span({})) => ({ target } : Event) =>
   });
 };
 
-export default class Input extends Block {
+export class Input extends Block {
   constructor(props: Props) {
     const {
       type, id, title, disabled, spanElement, events = {},

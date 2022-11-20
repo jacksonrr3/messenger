@@ -1,6 +1,6 @@
 import Block, { Props } from '../../core/Block';
 import formTemplate from './form.template';
-import ButtonBlock from '../ButtonBlock';
+import { ButtonBlock } from '../ButtonBlock';
 import { isValidInput } from '../../utils/validation';
 
 const defaultSubmitHandler = (e: Event) => {
@@ -17,7 +17,7 @@ const defaultSubmitHandler = (e: Event) => {
   }
 };
 
-export default class Form extends Block {
+export class Form extends Block {
   constructor(props: Props) {
     const formButton = new ButtonBlock({
       text: props.formButtonText,

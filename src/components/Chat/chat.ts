@@ -5,11 +5,11 @@ import threePoints from '../../../static/pictures/three_points.svg';
 import append from '../../../static/pictures/append.svg';
 import rightArrow from '../../../static/pictures/right_arrow.svg';
 import chatsTemplate from './chat.template';
-import InputBlock from '../InputBlock';
-import Button from '../Button';
+import { InputBlock } from '../InputBlock';
+import { Button } from '../Button';
 import { store, StoreEvents } from '../../core/Store';
-import Modal from '../Modal';
-import Conversation from '../Conversation';
+import { Modal } from '../Modal';
+import { Conversation } from '../Conversation';
 import { ChatController } from '../../controllers/ChatController';
 import { WSWrapper } from '../../utils/wsWrapper';
 
@@ -66,7 +66,7 @@ const makeMessageHandler = (conversation: Block, state: State) => (event) => {
   conversation.setProps({ messages: state.messages });
 };
 
-export default class ChatsPage extends Block {
+export class Chat extends Block {
   constructor() {
     const { user } = store.getState();
 

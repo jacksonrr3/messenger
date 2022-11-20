@@ -1,5 +1,5 @@
 import Block from '../../core/Block';
-import Link from '../../components/Link';
+import { Link } from '../../components/Link';
 import './navPage.scss';
 import regTemplate from './navPage.template';
 

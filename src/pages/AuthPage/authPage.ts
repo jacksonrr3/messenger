@@ -1,9 +1,9 @@
 import Block from '../../core/Block';
 import './auth.scss';
 import authTemplate from './authPage.template';
-import InputBlock from '../../components/InputBlock';
-import Form from '../../components/Form';
-import Link from '../../components/Link';
+import { InputBlock } from '../../components/InputBlock';
+import { Form } from '../../components/Form';
+import { Link } from '../../components/Link';
 import { AuthController } from '../../controllers/AuthController';
 import { Router } from '../../core/Router';
 import { makeSubmitHandler } from '../../utils/formHandler';

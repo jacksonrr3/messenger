@@ -5,13 +5,14 @@ import threePoints from '../../../static/pictures/three_points.svg';
 import append from '../../../static/pictures/append.svg';
 import rightArrow from '../../../static/pictures/right_arrow.svg';
 import chatsTemplate from './chatsPage.template';
-import ChatList from '../../components/ChatList';
-import Input from '../../components/Input';
+import { ChatList } from '../../components/ChatList';
+import { Input } from '../../components/Input';
 import { store } from '../../core/Store';
-import ButtonBlock from '../../components/ButtonBlock';
+import { ButtonBlock } from '../../components/ButtonBlock';
 import { Router } from '../../core/Router';
 import { ChatController } from '../../controllers/ChatController';
-import Chat from '../../components/Chat';
+import { Chat } from '../../components/Chat';
+import { Modal } from '../../components/Modal';
 
 export default class ChatsPage extends Block {
   constructor(/* props: Props */) {

@@ -1,12 +1,11 @@
 import Block from '../../core/Block';
-import InputBlock from '../../components/InputBlock';
+import { InputBlock } from '../../components/InputBlock';
 import './userSettingsPage.scss';
 import defaultAvatar from '../../../static/pictures/default_avatar.svg';
 import userSettingsTemplate from './userSettingsPage.template';
-import Form from '../../components/Form';
-import Link from '../../components/Link';
+import { Form } from '../../components/Form';
+import { Link } from '../../components/Link';
 import { Router } from '../../core/Router';
-// import { store } from '../../core/Store';
 import { UserController } from '../../controllers/UserController';
 import { makeSubmitHandler } from '../../utils/formHandler';
 
