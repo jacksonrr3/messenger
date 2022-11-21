@@ -3,7 +3,6 @@ import modalTemplate from './modal.template';
 import './modal.scss';
 import { Button } from '../Button';
 import { Input } from '../Input';
-import { store } from '../../core/Store';
 
 export class Modal extends Block {
   constructor(props: Props) {

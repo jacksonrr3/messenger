@@ -10,7 +10,7 @@ import { Button } from '../Button';
 import { store, StoreEvents } from '../../core/Store';
 import { Modal } from '../Modal';
 import { Conversation } from '../Conversation';
-import { ChatController } from '../../controllers/ChatController';
+import { ChatController, ChatItem } from '../../controllers/ChatController';
 import { WSWrapper } from '../../utils/wsWrapper';
 import { baseFilesUrl } from '../../constants/urls';
 
@@ -43,7 +43,7 @@ type State = {
 const getChatFromStateById = (): any => {
   const { chatId } = store.getState();
   const { chats } = store.getState();
-  return chats?.find((el) => el.id === chatId);
+  return chats?.find((el: ChatItem) => el.id === chatId);
 };
 
 const makeMessageFormatter = (state: State) => (message: Message) => {
@@ -55,7 +55,7 @@ const makeMessageFormatter = (state: State) => (message: Message) => {
   return { ...message, user, time: `${data.getHours()}:${data.getMinutes()}` };
 };
 
-const makeMessageHandler = (conversation: Block, state: State) => (event: Event) => {
+const makeMessageHandler = (conversation: Block, state: State) => (event: MessageEvent<any>) => {
   const formatter = makeMessageFormatter(state);
   const data = JSON.parse(event.data);
   if (Array.isArray(data)) {
@@ -116,11 +116,14 @@ export class Chat extends Block {
       events: {
         click: () => {
           const modal = document.getElementById('modal');
-          if (modal?.style.display === 'flex') {
-            modal.style.display = 'none';
-          } else {
-            modal.style.display = 'flex';
+          if (modal) {
+            modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
           }
+          // if (modal?.style.display === 'flex') {
+          //   modal.style.display = 'none';
+          // } else {
+          //   modal.style.display = 'flex';
+          // }
         },
       },
     });
