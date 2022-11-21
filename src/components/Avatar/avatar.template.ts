@@ -1,3 +1,3 @@
 export default `
-  <img src="{{src}}" alt="user_avatar">
+  <img src="{{src}}" alt="devault_avatar">
 `;

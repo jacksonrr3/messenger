@@ -8,7 +8,6 @@ import { Link } from '../../components/Link';
 import { Router } from '../../core/Router';
 import { Avatar } from '../../components/Avatar';
 import { store, StoreEvents } from '../../core/Store';
-import { Router } from '../../core/Router';
 
 export default class userProfilePage extends Block {
   constructor() {
@@ -64,16 +63,6 @@ export default class userProfilePage extends Block {
           e.preventDefault();
           console.log('settings');
           Router.getInstanse().go('/user_settings');
-        },
-      },
-    });
-
-    const changePassword = new Link({
-      events: {
-        click: (e) => {
-          e.preventDefault();
-          console.log('settings');
-          Router.getInstanse().go('/change_password');
         },
       },
     });
@@ -158,7 +147,6 @@ export default class userProfilePage extends Block {
       phone,
       messengerLink,
       userSettings,
-      changePassword,
       userSettingsLink,
       changePasswordLink,
       exitButton,

@@ -23,8 +23,7 @@ export class ChatController {
   static async getChats(params?: ChatsQueryParams) {
     return chatAPI.getChats(params)
       .then((res) => {
-        const chats = JSON.parse(res);
-        store.set('chats', chats);
+        store.set('chats', JSON.parse(res));
       });
   }
 
@@ -48,7 +47,10 @@ export class ChatController {
 
   static deleteUserfromChat(userLogin: string, chatId: number) {
     return UserController.getUsersByLogin(userLogin)
-      .then(({ id: userId }) => chatAPI.deleteUsersFromChat([userId], chatId))
+      .then((users) => {
+        const userIds = users.map((user: any) => user.id);
+        return chatAPI.deleteUsersFromChat(userIds, chatId)
+      })
       .then(() => {
         console.log(`add new users to chat: ${chatId}`);
       });

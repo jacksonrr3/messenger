@@ -1,6 +1,5 @@
 import Block from '../../core/Block';
 import './changePasswordPage.scss';
-import defaultAvatar from '../../../static/pictures/default_avatar.svg';
 import changePasswordTemplate from './changePasswordPage.template';
 import { InputBlock } from '../../components/InputBlock/index';
 import { Form } from '../../components/Form';
@@ -8,6 +7,8 @@ import { Link } from '../../components/Link';
 import { Router } from '../../core/Router';
 import { makeSubmitHandler } from '../../utils/formHandler';
 import { UserController } from '../../controllers/UserController';
+import { Avatar } from '../../components/Avatar';
+import { store } from '../../core/Store';
 
 const submitHandler = makeSubmitHandler((formData) => UserController.changeUserPassword(formData)
   .then(() => {
@@ -16,11 +17,23 @@ const submitHandler = makeSubmitHandler((formData) => UserController.changeUserP
 
 export default class ChangePasswordPage extends Block {
   constructor() {
+    const { user } = store.getState();
+
     const userProfileLink = new Link({
       events: {
         click: (e) => {
           e.preventDefault();
           Router.getInstanse().go('/user_profile');
+        },
+      },
+    });
+
+    const userAvatar = new Avatar({
+      src: user.avatar,
+      events: {
+        click: () => {
+          console.log('go to avatar');
+          Router.getInstanse().go('/change_avatar');
         },
       },
     });
@@ -61,7 +74,7 @@ export default class ChangePasswordPage extends Block {
 
     super('div', {
       attr: { class: 'change-password-container' },
-      defaultAvatar,
+      userAvatar,
       form,
       userProfileLink,
     });

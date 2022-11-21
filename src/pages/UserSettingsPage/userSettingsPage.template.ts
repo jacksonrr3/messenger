@@ -3,9 +3,7 @@ export default `
       {{{userProfilePage}}}
   </div>
   <div class="user">
-      <div class="avatar">
-        <img src="{{defaultAvatar}}" alt="user_avatar">
-      </div>
+      {{{userAvatar}}}
       {{{form}}}
   </div>
 `;

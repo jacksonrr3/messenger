@@ -22,7 +22,7 @@ export class UserController {
     return userAPI.changePassword(passwordData)
       .then((res) => {
         // const passwordChanged = JSON.parse(res);
-        console.log(res);
+        console.log('passwordChanged', JSON.parse(res));
 
         Router.getInstanse().go('/user_profile');
       });

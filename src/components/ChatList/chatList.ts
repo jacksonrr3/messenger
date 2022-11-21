@@ -1,12 +1,14 @@
 import Block, { Props } from '../../core/Block';
 import chatListTemplate from './chatList.template';
+import './chatList.scss';
 import { store, StoreEvents } from '../../core/Store';
 import { ChatController, ChatItem } from '../../controllers/ChatController';
 import round4747 from '../../../static/pictures/round_47_47.svg';
+import { baseFilesUrl } from '../../constants/urls';
 
 const mapChats = (chats: ChatItem[]) => chats.map((chat: ChatItem) => {
   const newChat = chat;
-  newChat.avatar = chat.avatar ?? round4747;
+  newChat.avatar = chat.avatar ? `${baseFilesUrl}${chat.avatar}` : round4747;
   if (chat.last_message) {
     const time = new Date(chat.last_message.time);
     newChat.last_message.time = `${time.getHours()}:${time.getMinutes()}`;

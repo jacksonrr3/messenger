@@ -12,6 +12,7 @@ import { Modal } from '../Modal';
 import { Conversation } from '../Conversation';
 import { ChatController } from '../../controllers/ChatController';
 import { WSWrapper } from '../../utils/wsWrapper';
+import { baseFilesUrl } from '../../constants/urls';
 
 type Message = {
   chat_id: number,
@@ -75,6 +76,8 @@ export class Chat extends Block {
       messages: [],
     };
 
+    const chatAvatar = state.chat ? `${baseFilesUrl}${state.chat.avatar}` : round3434;
+
     const conversation = new Conversation({
       messages: state.messages,
     });
@@ -92,8 +95,10 @@ export class Chat extends Block {
               content: '0',
               type: 'get old',
             });
+            const newAvatar = state.chat ? `${state.chat.avatar}` : round3434;
+            console.log('newAvatar', newAvatar)
 
-            this.setProps({ ...state });
+            this.setProps({ ...state, chatAvatar: newAvatar });
 
             state.ws.setMessageHandler(makeMessageHandler(conversation, state));
           });
@@ -185,8 +190,8 @@ export class Chat extends Block {
     super('div', {
       attr: { class: 'chat' },
       ...state,
-      round3434,
       append,
+      chatAvatar,
       rightArrow,
       treePointsButton,
       messageInput,

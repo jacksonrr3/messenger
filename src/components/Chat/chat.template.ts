@@ -3,7 +3,7 @@ export default `
     {{{addUserModal}}}
     {{{deleteUserModal}}}
     <div class="user">
-      <img src="{{round3434}}" alt="user_avatar">
+      <img src="{{chatAvatar}}" alt="user_avatar">
       <p>{{chat.title}}</p>
       {{{treePointsButton}}}
       <div class="modal" id="modal">

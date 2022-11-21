@@ -1,25 +1,36 @@
 import Block from '../../core/Block';
 import { InputBlock } from '../../components/InputBlock';
 import './userSettingsPage.scss';
-import defaultAvatar from '../../../static/pictures/default_avatar.svg';
 import userSettingsTemplate from './userSettingsPage.template';
 import { Form } from '../../components/Form';
 import { Link } from '../../components/Link';
 import { Router } from '../../core/Router';
 import { UserController } from '../../controllers/UserController';
 import { makeSubmitHandler } from '../../utils/formHandler';
+import { Avatar } from '../../components/Avatar';
+import { store } from '../../core/Store';
 
 const submitHandler = makeSubmitHandler(UserController.changeUserProfile);
 
 export default class UserSettingsPage extends Block {
   constructor() {
-    // const { user } = store.getState();
+    const { user } = store.getState();
 
     const userProfilePage = new Link({
       events: {
         click: (e) => {
           e.preventDefault();
           Router.getInstanse().go('/user_profile');
+        },
+      },
+    });
+
+    const userAvatar = new Avatar({
+      src: user.avatar,
+      events: {
+        click: () => {
+          console.log('go to avatar');
+          Router.getInstanse().go('/change_avatar');
         },
       },
     });
@@ -93,7 +104,7 @@ export default class UserSettingsPage extends Block {
 
     super('div', {
       attr: { class: 'user-settings-container' },
-      defaultAvatar,
+      userAvatar,
       form,
       userProfilePage,
     });

@@ -3,6 +3,7 @@ export default `
   {{{newChatModal}}}
     <div class="button-block">
       {{{newChatButton}}}
+      {{{deleteChatButton}}}
       {{{userProfileButton}}}
     </div>
     <div class="search">

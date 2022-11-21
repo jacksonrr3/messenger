@@ -3,8 +3,7 @@ import avatarTemplate from './avatar.template';
 import './avatar.scss';
 import defaultAvatar from '../../../static/pictures/default_avatar.svg';
 import { store, StoreEvents } from '../../core/Store';
-
-const baseUrl = `https://ya-praktikum.tech/api/v2/resources`;
+import { baseFilesUrl } from '../../constants/urls';
 
 export class Avatar extends Block {
   constructor(props: Props) {
@@ -12,18 +11,18 @@ export class Avatar extends Block {
 
     store.on(StoreEvents.Updated, () => {
       const { user } = store.getState();
-      this.setProps({
-        src: `${baseUrl}${user.avatar}`,
-      });
+      if (user.avatar) {
+        this.setProps({
+          src: `${baseFilesUrl}${user.avatar}`,
+        });
+      }
     });
-
 
     super('div', {
       attr: {
         class: className,
       },
-      src: `${baseUrl}${src}`,
-      defaultAvatar,
+      src: src ? `${baseFilesUrl}${src}` : defaultAvatar,
       events,
     });
   }
