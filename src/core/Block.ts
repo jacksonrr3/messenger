@@ -117,21 +117,21 @@ export default class Block {
   _makePropsProxy(props: Props) {
     return new Proxy(props, {
       get: (target, prop) => {
-        const value = target[prop];
+        const value = target[prop as keyof object];
         return typeof value === 'function' ? value.bind(target) : value;
       },
       set: (target, prop, value) => {
-        if (target[prop] !== value) {
+        if (target[prop as keyof object] !== value) {
           // eslint-disable-next-line no-param-reassign
-          target[prop] = value;
+          target[prop as keyof object] = value;
           this._setUpdate = true;
         }
         return true;
       },
       deleteProperty: (target, prop) => {
-        if (target[prop]) {
+        if (target[prop as keyof object]) {
           // eslint-disable-next-line no-param-reassign
-          delete target[prop];
+          delete target[prop as keyof object];
           this._setUpdate = true;
           return true;
         }
@@ -159,10 +159,7 @@ export default class Block {
     this._element.appendChild(block);
     this._addEvents();
     this._addAttributes();
-    this.addInnerEvents();
   }
-
-  addInnerEvents() {}
 
   // Может переопределять пользователь, необязательно трогать
   render(): DocumentFragment {
