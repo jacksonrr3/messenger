@@ -1,6 +1,7 @@
 export default `
   <div class="menu">
-  {{{newChatModal}}}
+    {{{newChatModal}}}
+    {{{deleteChatModal}}}
     <div class="button-block">
       {{{newChatButton}}}
       {{{deleteChatButton}}}

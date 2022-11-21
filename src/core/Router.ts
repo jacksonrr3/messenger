@@ -44,13 +44,13 @@ export class Router {
     // TODO extract controle auth logic
     AuthController.getUserInfo()
       .then((user) => {
-        console.log(user);
+        console.log('user', user);
         const { pathname } = window.location;
         const path = ['/', '/reg'].indexOf(pathname) === -1 ? pathname : '/messenger';
         this._onRoute(path);
       })
       .catch((err) => {
-        console.log(err);
+        console.log('router error', err);
         const { pathname } = window.location;
         const path = pathname === '/reg' ? pathname : '/';
         this._onRoute(path);

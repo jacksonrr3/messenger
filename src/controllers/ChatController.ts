@@ -49,10 +49,24 @@ export class ChatController {
     return UserController.getUsersByLogin(userLogin)
       .then((users) => {
         const userIds = users.map((user: any) => user.id);
-        return chatAPI.deleteUsersFromChat(userIds, chatId)
+        return chatAPI.deleteUsersFromChat(userIds, chatId);
       })
       .then(() => {
         console.log(`add new users to chat: ${chatId}`);
+      });
+  }
+
+  static deleteChatByTitle(title: string) {
+    return chatAPI.getChats({ title })
+      .then((res) => {
+        const chats = JSON.parse(res).map((chat: ChatItem) => {
+          const { chatId } = store.getState();
+          if (chatId === chat.id) {
+            store.set('chatId', null);
+          }
+          return chatAPI.deleteChat(chat.id);
+        });
+        return Promise.all(chats);
       });
   }
 

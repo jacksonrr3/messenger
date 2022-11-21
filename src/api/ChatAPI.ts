@@ -28,7 +28,14 @@ export class ChatAPI {
     });
   }
 
-  // deleteChat()
+  deleteChat(id: number) {
+    return this._http.delete('/chats', {
+      body: JSON.stringify({ chatId: id }),
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8',
+      },
+    });
+  }
 
   addUsersToChat(users: string[], chatId: number) {
     console.log('adduser', JSON.stringify({
@@ -64,7 +71,7 @@ export class ChatAPI {
   }
 
   getChatTocken(id: number) {
-    console.log('get tocken ', id)
+    console.log('get tocken ', id);
     return this._http.post(`/chats/token/${id}`)
       .then((data) => JSON.parse(data))
       .then(({ token }) => token);

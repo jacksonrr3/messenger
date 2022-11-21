@@ -39,9 +39,7 @@ export class ChatList extends Block {
       events: {
         click: (event) => {
           const { dataset } = event.target.closest('div.chat-item');
-          // console.log('choose chat with id:', dataset.id);
           store.set('chatId', Number(dataset.id));
-          // console.log(store.getState());
         },
       },
     });

@@ -16,8 +16,6 @@ import { Modal } from '../../components/Modal';
 
 export default class ChatsPage extends Block {
   constructor() {
-    console.log('store from messenger', store.getState());
-
     const userProfileButton = new ButtonBlock({
       text: 'Профиль',
       events: {
@@ -43,6 +41,28 @@ export default class ChatsPage extends Block {
       events: {
         click: () => {
           newChatModal.show();
+        },
+      },
+    });
+
+    const deleteChatModal = new Modal({
+      title: 'Удалиь чат',
+      inputTitle: 'Введите название чата',
+      clickHandler: (title: string) => {
+        console.log(`Delete chat: ${title}`);
+        ChatController.deleteChatByTitle(title).then(() => {
+          deleteChatModal.hide();
+        }).then(() => {
+          ChatController.getChats();
+        });
+      },
+    });
+
+    const deleteChatButton = new ButtonBlock({
+      text: 'Удалить чат',
+      events: {
+        click: () => {
+          deleteChatModal.show();
         },
       },
     });
@@ -77,6 +97,8 @@ export default class ChatsPage extends Block {
       userProfileButton,
       newChatButton,
       newChatModal,
+      deleteChatModal,
+      deleteChatButton,
       chatSearchInput,
       chatList,
       chat,

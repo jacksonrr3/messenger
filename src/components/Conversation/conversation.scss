@@ -30,3 +30,7 @@
         margin-left: auto;
     }
 }
+
+.conversation::-webkit-scrollbar {
+  display: none;
+}

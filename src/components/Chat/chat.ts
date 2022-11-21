@@ -55,7 +55,7 @@ const makeMessageFormatter = (state: State) => (message: Message) => {
   return { ...message, user, time: `${data.getHours()}:${data.getMinutes()}` };
 };
 
-const makeMessageHandler = (conversation: Block, state: State) => (event) => {
+const makeMessageHandler = (conversation: Block, state: State) => (event: Event) => {
   const formatter = makeMessageFormatter(state);
   const data = JSON.parse(event.data);
   if (Array.isArray(data)) {
@@ -83,20 +83,26 @@ export class Chat extends Block {
     });
 
     store.on(StoreEvents.Updated, () => {
-      const { chatId: newChatID, user } = store.getState();
-      console.log(newChatID, state.chat?.id);
+      const { chatId: newChatID, user: newUser } = store.getState();
+      if (!newChatID) {
+        state?.ws?.close();
+        state.chat = getChatFromStateById();
+        state.messages = [];
+        state.token = '';
+        this.setProps({ ...state });
+        return;
+      }
       if (newChatID !== state.chat?.id) {
         ChatController.getToken(newChatID)
           .then((token) => {
+            state?.ws?.close();
             state.chat = getChatFromStateById();
             state.token = token;
-            state?.ws?.close();
-            state.ws = new WSWrapper(user.id, newChatID, token, {
+            state.ws = new WSWrapper(newUser.id, newChatID, token, {
               content: '0',
               type: 'get old',
             });
             const newAvatar = state.chat ? `${state.chat.avatar}` : round3434;
-            console.log('newAvatar', newAvatar)
 
             this.setProps({ ...state, chatAvatar: newAvatar });
 
