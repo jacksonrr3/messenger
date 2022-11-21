@@ -48,7 +48,7 @@ const getChatFromStateById = (): any => {
 
 const makeMessageFormatter = (state: State) => (message: Message) => {
   const { user_id: messUserId, time } = message;
-  const user = Number(messUserId) !== state.userId;
+  const user = Number(messUserId) === state.userId;
 
   const data = new Date(time);
   console.log({ ...message, user, time: `${data.getHours()}:${data.getMinutes()}` });
