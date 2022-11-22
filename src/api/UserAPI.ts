@@ -31,15 +31,16 @@ export class UserAPI {
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
       },
+    }).catch((err) => {
+      console.log('changeProfile error: ', err);
     });
   }
 
   changeAvatar(data: FormData) {
     return this._http.put('/user/profile/avatar', {
       body: data,
-      headers: {
-        // 'Content-Type': 'multipart/form-data',
-      },
+    }).catch((err) => {
+      console.log('changeAvatar error: ', err);
     });
   }
 
@@ -49,11 +50,16 @@ export class UserAPI {
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
       },
+    }).catch((err) => {
+      console.log('changePassword error: ', err);
     });
   }
 
   getUserById(id: string) {
-    return this._http.get(`/user/${id}`);
+    return this._http.get(`/user/${id}`)
+      .catch((err) => {
+        console.log('getIserById error: ', err);
+      });
   }
 
   searchUserByLogin(data: UserLogin) {
@@ -62,6 +68,8 @@ export class UserAPI {
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
       },
+    }).catch((err) => {
+      console.log('search user by login error: ', err);
     });
   }
 }

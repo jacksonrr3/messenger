@@ -21,7 +21,6 @@ export class UserController {
     const passwordData = getObjectFromFormData(formData) as UserPasswordData;
     return userAPI.changePassword(passwordData)
       .then((res) => {
-        // const passwordChanged = JSON.parse(res);
         console.log('passwordChanged', JSON.parse(res));
 
         Router.getInstanse().go('/user_profile');
@@ -31,17 +30,13 @@ export class UserController {
   static changeUserAvatar(formData: FormData) {
     return userAPI.changeAvatar(formData)
       .then((res) => {
-        // const passwordChanged = JSON.parse(res);
-        console.log(res);
+        console.log('avatar changed', res);
       });
   }
 
   static getUsersByLogin(login: string) {
     return userAPI.searchUserByLogin({ login })
-      .then((res) => {
-        console.log('userId', res);
-        return JSON.parse(res);
-      })
+      .then((res) => JSON.parse(res))
       .catch((err) => {
         console.log(`userId, error: ${err.response}`);
       });

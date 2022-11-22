@@ -49,7 +49,10 @@ export class AuthController {
     }
     return authAPI.getUserInfo()
       .then((userString) => JSON.parse(userString))
-      .then((userObj) => store.set('user', userObj));
+      .then((userObj) => store.set('user', userObj))
+      .catch((err) => {
+        console.log('auth err: ', err);
+      });
   }
 
   static logout() {

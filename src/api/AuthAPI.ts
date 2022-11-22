@@ -24,6 +24,8 @@ export class AuthAPI {
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
       },
+    }).catch((err) => {
+      console.log('signUp error: ', err);
     });
   }
 
@@ -33,14 +35,22 @@ export class AuthAPI {
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
       },
+    }).catch((err) => {
+      console.log('signIn error: ', err);
     });
   }
 
   logOut() {
-    return this._http.post('/auth/logout');
+    return this._http.post('/auth/logout')
+      .catch((err) => {
+        console.log('logOut error: ', err);
+      });
   }
 
   getUserInfo() {
-    return this._http.get('/auth/user');
+    return this._http.get('/auth/user')
+      .catch((err) => {
+        console.log('getUserInfo error: ', err);
+      });
   }
 }

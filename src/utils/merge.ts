@@ -5,6 +5,7 @@ type Indexed<T = unknown> = {
 function merge(lhs: Indexed, rhs: Indexed): Indexed {
   Object.keys(rhs).forEach((key) => {
     if (!lhs[key]) {
+      // eslint-disable-next-line no-param-reassign
       lhs[key] = rhs[key];
       return;
     }
