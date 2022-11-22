@@ -1,6 +1,5 @@
 const getObjectFromFormData = (data: FormData) => {
-  const res = {};
-  data.delete('confirm_password');
+  const res: Record<string, any> = {};
   Array.from(data.keys()).forEach((key) => {
     res[key] = data.get(key);
   });

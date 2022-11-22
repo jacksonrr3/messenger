@@ -33,7 +33,6 @@ const queryStringify = (data: StringIndexed): string => {
 
 export default queryStringify;
 
-// // рефакторить (см. теорию)
 // const obj: StringIndexed = {
 //     key: 1,
 //     key2: 'test',
