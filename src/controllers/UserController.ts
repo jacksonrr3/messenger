@@ -11,9 +11,11 @@ export class UserController {
     return userAPI.changeProfile(userData)
       .then((res) => {
         const newUser = JSON.parse(res);
-        console.log(newUser);
         store.set('user', newUser);
         Router.getInstanse().go('/user_profile');
+      })
+      .catch((err) => {
+        console.log('change profile err: ', err);
       });
   }
 
@@ -21,9 +23,12 @@ export class UserController {
     const passwordData = getObjectFromFormData(formData) as UserPasswordData;
     return userAPI.changePassword(passwordData)
       .then((res) => {
-        console.log('passwordChanged', JSON.parse(res));
+        console.log('passwordChanged', res);
 
         Router.getInstanse().go('/user_profile');
+      })
+      .catch((err) => {
+        console.log('change password err: ', err);
       });
   }
 
@@ -31,6 +36,9 @@ export class UserController {
     return userAPI.changeAvatar(formData)
       .then((res) => {
         console.log('avatar changed', res);
+      })
+      .catch((err) => {
+        console.log('change avatar err: ', err);
       });
   }
 
@@ -38,7 +46,7 @@ export class UserController {
     return userAPI.searchUserByLogin({ login })
       .then((res) => JSON.parse(res))
       .catch((err) => {
-        console.log(`userId, error: ${err.response}`);
+        console.log(`get user by id, error: ${err.response}`);
       });
   }
 }

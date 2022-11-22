@@ -51,7 +51,6 @@ const makeMessageFormatter = (state: State) => (message: Message) => {
   const user = Number(messUserId) === state.userId;
 
   const data = new Date(time);
-  console.log({ ...message, user, time: `${data.getHours()}:${data.getMinutes()}` });
   return { ...message, user, time: `${data.getHours()}:${data.getMinutes()}` };
 };
 
@@ -59,8 +58,10 @@ const makeMessageHandler = (conversation: Block, state: State) => (event: Messag
   const formatter = makeMessageFormatter(state);
   const data = JSON.parse(event.data);
   if (Array.isArray(data)) {
+    // eslint-disable-next-line no-param-reassign
     state.messages = data.map((message) => formatter(message));
   } else {
+    // eslint-disable-next-line no-param-reassign
     state.messages = [...state.messages, formatter(data)];
   }
 
@@ -102,8 +103,8 @@ export class Chat extends Block {
               content: '0',
               type: 'get old',
             });
-            const newAvatar = state.chat ? `${state.chat.avatar}` : round3434;
 
+            const newAvatar = state.chat ? `${state.chat.avatar}` : round3434;
             this.setProps({ ...state, chatAvatar: newAvatar });
 
             state.ws.setMessageHandler(makeMessageHandler(conversation, state));
@@ -119,11 +120,6 @@ export class Chat extends Block {
           if (modal) {
             modal.style.display = modal.style.display === 'flex' ? 'none' : 'flex';
           }
-          // if (modal?.style.display === 'flex') {
-          //   modal.style.display = 'none';
-          // } else {
-          //   modal.style.display = 'flex';
-          // }
         },
       },
     });
@@ -141,7 +137,6 @@ export class Chat extends Block {
         click: () => {
           const { inputElement } = messageInput.children;
           const { value } = inputElement.element;
-          console.log('message click', value);
           const { ws } = state;
           if (ws) {
             ws.send({

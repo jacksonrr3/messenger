@@ -16,8 +16,6 @@ export class ChatAPI {
   getChats(data?: ChatsQueryParams) {
     return this._http.get('/chats', {
       data,
-    }).catch((err) => {
-      console.log('getChats error: ', err);
     });
   }
 
@@ -27,8 +25,6 @@ export class ChatAPI {
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
       },
-    }).catch((err) => {
-      console.log('create chat error: ', err);
     });
   }
 
@@ -38,8 +34,6 @@ export class ChatAPI {
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
       },
-    }).catch((err) => {
-      console.log('delete chat error: ', err);
     });
   }
 
@@ -52,8 +46,6 @@ export class ChatAPI {
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
       },
-    }).catch((err) => {
-      console.log('add user error: ', err);
     });
   }
 
@@ -66,18 +58,11 @@ export class ChatAPI {
       headers: {
         'Content-Type': 'application/json; charset=utf-8',
       },
-    }).catch((err) => {
-      console.log('delete user error: ', err);
     });
   }
 
   getChatTocken(id: number) {
     console.log('get tocken ', id);
-    return this._http.post(`/chats/token/${id}`)
-      .then((data) => JSON.parse(data))
-      .then(({ token }) => token)
-      .catch((err) => {
-        console.log('get chat token error: ', err);
-      });
+    return this._http.post(`/chats/token/${id}`);
   }
 }

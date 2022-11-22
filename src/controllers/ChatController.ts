@@ -24,6 +24,9 @@ export class ChatController {
     return chatAPI.getChats(params)
       .then((res) => {
         store.set('chats', JSON.parse(res));
+      })
+      .catch((err) => {
+        console.log('getChats err: ', err);
       });
   }
 
@@ -31,6 +34,9 @@ export class ChatController {
     return chatAPI.createNewChat(title)
       .then((res) => {
         console.log(JSON.parse(res));
+      })
+      .catch((err) => {
+        console.log('addChat err: ', err);
       });
   }
 
@@ -42,6 +48,9 @@ export class ChatController {
       })
       .then(() => {
         console.log(`add new users to chat: ${chatId}`);
+      })
+      .catch((err) => {
+        console.log('addUser err: ', err);
       });
   }
 
@@ -53,6 +62,9 @@ export class ChatController {
       })
       .then(() => {
         console.log(`add new users to chat: ${chatId}`);
+      })
+      .catch((err) => {
+        console.log('delete user err: ', err);
       });
   }
 
@@ -67,10 +79,18 @@ export class ChatController {
           return chatAPI.deleteChat(chat.id);
         });
         return Promise.all(chats);
+      })
+      .catch((err) => {
+        console.log('delete chat err: ', err);
       });
   }
 
   static getToken(chatId: number) {
-    return chatAPI.getChatTocken(chatId);
+    return chatAPI.getChatTocken(chatId)
+      .then((data) => JSON.parse(data))
+      .then(({ token }) => token)
+      .catch((err) => {
+        console.log('get token err: ', err);
+      });
   }
 }
