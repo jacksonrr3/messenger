@@ -1,3 +1,3 @@
-import InputBlock from './inputBlock';
+import { InputBlock } from './inputBlock';
 
-export default InputBlock;
+export { InputBlock };

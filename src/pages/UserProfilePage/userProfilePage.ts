@@ -1,27 +1,90 @@
-import Block, { Props } from '../../core/Block';
-import InputBlock from '../../components/InputBlock/index';
+import Block from '../../core/Block';
+import { InputBlock } from '../../components/InputBlock/index';
 import './userProfilePage.scss';
-import defaultAvatar from '../../../static/pictures/default_avatar.svg';
 import userProfileTemplate from './userProfilePage.template';
+import { Button } from '../../components/Button';
+import { AuthController } from '../../controllers/AuthController';
+import { Link } from '../../components/Link';
+import { Router } from '../../core/Router';
+import { Avatar } from '../../components/Avatar';
+import { store, StoreEvents } from '../../core/Store';
 
 export default class userProfilePage extends Block {
-  constructor(props: Props) {
+  constructor() {
+    const { user } = store.getState();
+
+    store.on(StoreEvents.Updated, () => {
+      // const { user } = store.getState();
+      // console.log('user avatar', user);
+    });
+
+    const messengerLink = new Link({
+      events: {
+        click: (e) => {
+          e.preventDefault();
+          Router.getInstanse().go('/messenger');
+        },
+      },
+    });
+
+    const userAvatar = new Avatar({
+      src: user.avatar,
+      events: {
+        click: () => {
+          console.log('go to avatar');
+          Router.getInstanse().go('/change_avatar');
+        },
+      },
+    });
+
+    const userSettingsLink = new Link({
+      text: 'Изменить данные',
+      events: {
+        click: (e) => {
+          e.preventDefault();
+          Router.getInstanse().go('/user_settings');
+        },
+      },
+    });
+
+    const changePasswordLink = new Link({
+      text: 'Изменить пароль',
+      events: {
+        click: (e) => {
+          e.preventDefault();
+          Router.getInstanse().go('/change_password');
+        },
+      },
+    });
+
+    const userSettings = new Link({
+      events: {
+        click: (e) => {
+          e.preventDefault();
+          console.log('settings');
+          Router.getInstanse().go('/user_settings');
+        },
+      },
+    });
+
     const email = new InputBlock({
       title: 'Почта',
       id: 'email',
       type: 'email',
       label: true,
-      // middleSpan: true,
+      middleSpan: true,
       disabled: 'disabled',
+      valueProp: 'email',
     });
 
     const login = new InputBlock({
-      title: 'Имя',
+      title: 'Логин',
       id: 'login',
       type: 'text',
       label: true,
       middleSpan: true,
       disabled: 'disabled',
+      valueProp: 'login',
     });
 
     const firstName = new InputBlock({
@@ -31,6 +94,7 @@ export default class userProfilePage extends Block {
       label: true,
       middleSpan: true,
       disabled: 'disabled',
+      valueProp: 'first_name',
     });
 
     const secondName = new InputBlock({
@@ -40,6 +104,7 @@ export default class userProfilePage extends Block {
       label: true,
       middleSpan: true,
       disabled: 'disabled',
+      valueProp: 'second_name',
     });
 
     const displayName = new InputBlock({
@@ -49,6 +114,7 @@ export default class userProfilePage extends Block {
       label: true,
       middleSpan: true,
       disabled: 'disabled',
+      valueProp: 'display_name',
     });
 
     const phone = new InputBlock({
@@ -58,18 +124,32 @@ export default class userProfilePage extends Block {
       label: true,
       middleSpan: true,
       disabled: 'disabled',
+      valueProp: 'phone',
+    });
+
+    const exitButton = new Button({
+      text: 'Выйти',
+      events: {
+        click: async () => {
+          await AuthController.logout();
+        },
+      },
     });
 
     super('div', {
-      ...props,
-      attr: [['class', 'user-profile-container']],
-      defaultAvatar,
+      attr: { class: 'user-profile-container' },
+      userAvatar,
       email,
       login,
       firstName,
       secondName,
       displayName,
-      phoneInput: phone,
+      phone,
+      messengerLink,
+      userSettings,
+      userSettingsLink,
+      changePasswordLink,
+      exitButton,
     });
   }
 

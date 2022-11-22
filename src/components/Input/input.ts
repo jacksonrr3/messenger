@@ -2,42 +2,71 @@ import Block, { Props } from '../../core/Block';
 import './input.scss';
 import inputTemplate from './input.template';
 import { validationErrorMessage, isValidInput } from '../../utils/validation';
-import Span from '../Span';
+import { Span } from '../Span';
+import { store, StoreEvents } from '../../core/Store';
 
 const focusBlurHandler = (spanElement = new Span({})) => ({ target } : Event) => {
-  const spanText = isValidInput(target as HTMLInputElement) ? '' : validationErrorMessage[target.id];
+  const spanText = isValidInput(target as HTMLInputElement)
+    ? ''
+    : validationErrorMessage[target.id];
   spanElement.setProps({
     spanText,
   });
 };
 
-export default class Input extends Block {
+export class Input extends Block {
   constructor(props: Props) {
     const {
-      type, id, title, disabled, spanElement,
+      type, id, title, disabled, spanElement, events = {}, accept,
     } = props;
 
-    const attr = [
-      ['type', type],
-      ['id', id],
-      ['name', id],
-      ['placeholder', title],
-    ];
+    const { user } = store.getState();
 
-    if (disabled) {
-      attr.push(['disabled', disabled]);
-    }
+    store.on(StoreEvents.Updated, () => {
+      const { user: newUserData } = store.getState();
+      if (this._props?.attr?.value !== newUserData[props.valueProp]) {
+        this.setProps({
+          attr: {
+            type,
+            id,
+            name: id,
+            placeholder: title,
+            value: props.valueProp ? newUserData[props.valueProp] : '',
+            accept,
+          },
+        });
+      }
+    });
+
+    const inputAttr = {
+      type,
+      id,
+      name: id,
+      placeholder: title,
+      value: props.valueProp ? user[props.valueProp] : '',
+      accept,
+    };
 
     super('input', {
-      attr,
+      attr: inputAttr,
       events: {
         focus: focusBlurHandler(spanElement),
         blur: focusBlurHandler(spanElement),
+        ...events,
       },
+      disabled,
     });
   }
 
   render() {
+    const input = this.getContent() as HTMLInputElement;
+    input.disabled = this._props.disabled;
     return this.compile(inputTemplate, this._props);
+  }
+
+  setDisabled(disabled: boolean) {
+    this.setProps({
+      disabled,
+    });
   }
 }

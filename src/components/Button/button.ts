@@ -1,11 +1,10 @@
 import Block, { Props } from '../../core/Block';
 import buttonTemplate from './button.template';
 
-export default class Button extends Block {
+export class Button extends Block {
   constructor(props: Props) {
-    super('div', {
+    super('button', {
       ...props,
-      attr: [['class', 'btn']],
     });
   }
 

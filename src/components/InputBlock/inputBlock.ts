@@ -1,17 +1,20 @@
 import Block, { Props } from '../../core/Block';
 import './inputBlock.scss';
 import inputTemplate from './inputBlock.template';
-import Span from '../Span';
-import Input from '../Input';
+import { Span } from '../Span';
+import { Input } from '../Input';
 
-export default class InputBlock extends Block {
+export class InputBlock extends Block {
   constructor(props: Props) {
     const messageSpan = new Span({
-      attr: [['class', 'error-message']],
+      attr: { class: 'error-message' },
     });
 
     const inputElement = new Input({
       ...props,
+      attr: {
+        ...props.inputAttr,
+      },
       spanElement: messageSpan,
     });
 
@@ -19,7 +22,7 @@ export default class InputBlock extends Block {
       ...props,
       inputElement,
       messageSpan,
-      attr: [['class', 'input-item']],
+      attr: { class: 'input-item' },
     });
   }
 

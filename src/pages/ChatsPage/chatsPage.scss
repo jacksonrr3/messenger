@@ -13,16 +13,23 @@
 
         border-right: 1px solid #eaeaea;
 
-        .profile {
-            margin: 21px 22px 23px auto;
+        .button-block {
+            display: flex;
+            justify-content: space-between;
 
-            a {
-                font-size: 12px;
-                line-height: 12px;
-                
-                text-decoration: none;
-    
-                color: $gray;
+            padding: 21px;
+
+            .btn {
+                button {
+                    background: none;
+                    border: none;
+                    
+                    font-size: 12px;
+                    line-height: 12px;
+                    
+                    text-decoration: none;
+                    color: $gray;
+                }
             }
         }
 
@@ -44,159 +51,87 @@
             }
         }
 
-        .chat-list {
-            margin-left: 10px;
-            margin-right: 10px;
+        // .chat-list {
+        //     margin-left: 10px;
+        //     margin-right: 10px;
 
-            .chat-item {
-                display: flex;
-                width: 100%;
+        //     .chat-item {
+        //         display: flex;
+        //         width: 100%;
 
-                padding-top: 12px;
-                padding-bottom: 12px;
+        //         padding-top: 12px;
+        //         padding-bottom: 12px;
 
-                border-top: 1px solid #eaeaea;
+        //         border-top: 1px solid #eaeaea;
                 
-                .col-0 {
-                    display: flex;
-                    justify-content: center;        
+        //         .col-0 {
+        //             display: flex;
+        //             justify-content: center;        
                     
-                    img {
-                        width: 47px;
-                        height: 47px;
-                    }
-                }
+        //             img {
+        //                 width: 47px;
+        //                 height: 47px;
+        //             }
+        //         }
 
-                .col-1 {
-                    width: 100%;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-between;
-                    margin: 0px 20px 0px 10px;
+        //         .col-1 {
+        //             width: 100%;
+        //             display: flex;
+        //             flex-direction: column;
+        //             justify-content: space-between;
+        //             margin: 0px 20px 0px 10px;
 
-                    h3 {
-                        font-weight: 600;
-                        font-size: 13px;
-                        line-height: 13px;
+        //             h3 {
+        //                 font-weight: 600;
+        //                 font-size: 13px;
+        //                 line-height: 13px;
 
-                        color: $black;
-                    }
+        //                 color: $black;
+        //             }
 
-                    p {
-                        font-size: 12px;
-                        line-height: 15px;
+        //             p {
+        //                 font-size: 12px;
+        //                 line-height: 15px;
 
-                        color: $gray;
-                    }
-                }
+        //                 color: $gray;
+        //             }
+        //         }
 
-                .col-2 {
-                    width: 30px;
+        //         .col-2 {
+        //             width: 30px;
 
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-between;
+        //             display: flex;
+        //             flex-direction: column;
+        //             justify-content: space-between;
 
-                    p {
-                        font-size: 9px;
-                        line-height: 13px;
+        //             p {
+        //                 font-size: 9px;
+        //                 line-height: 13px;
 
-                        color: $gray;
-                    }
+        //                 color: $gray;
+        //             }
 
-                    .unread-messages {
-                        width: 20px;
-                        height: 20px;
+        //             .unread-messages {
+        //                 width: 20px;
+        //                 height: 20px;
 
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
+        //                 display: flex;
+        //                 align-items: center;
+        //                 justify-content: center;
 
-                        border-radius: 50%;
-                        background: #3369f3;
+        //                 border-radius: 50%;
+        //                 background: #3369f3;
 
-                        p {
-                            font-size: 11px;
-                            line-height: 12px;
+        //                 p {
+        //                     font-size: 11px;
+        //                     line-height: 12px;
     
-                            color: $white;
-                        }
-                    }
-                }
+        //                     color: $white;
+        //                 }
+        //             }
+        //         }
 
-            }
-        }
-    }
-
-    .chat {
-        display: flex;
-        flex: 3;
-        flex-direction: column;
-
-        margin-left: 20px;
-        margin-right: 20px;
-
-        .user {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            padding-top: 10px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #eaeaea;
-
-            p {
-                width: 100%;
-                margin-left: 10px;
-            }
-
-            button {
-                padding: 0px;
-
-                border: none;
-                background: none;
-            }
-        }
-
-        .conversation {
-            height: 100%;
-        }
-
-        .message-block {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            padding-top: 10px;
-            padding-bottom: 10px;
-            border-top: 1px solid #eaeaea;
-
-            .input-item {
-                width: 100%;
-                padding: 10px;
-
-                input {
-                    padding: 10px;    
-
-                    background: #efefef;
-                    border-radius: 30px;
-                    width: 100%;
-                    height: 100%;
-    
-                    text-align: center;
-                    font-size: 12px;
-                    line-height: 12px;
-    
-                    color: $gray;
-                }
-            }
-
-            button {
-                padding: 0px;
-
-                border: none;
-                background: none;
-            }
-        }
+        //     }
+        // }
     }
 }

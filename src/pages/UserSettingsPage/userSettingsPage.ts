@@ -1,18 +1,47 @@
-import Block, { Props } from '../../core/Block';
-import InputBlock from '../../components/InputBlock';
+import Block from '../../core/Block';
+import { InputBlock } from '../../components/InputBlock';
 import './userSettingsPage.scss';
-import defaultAvatar from '../../../static/pictures/default_avatar.svg';
 import userSettingsTemplate from './userSettingsPage.template';
-import Form from '../../components/Form';
+import { Form } from '../../components/Form';
+import { Link } from '../../components/Link';
+import { Router } from '../../core/Router';
+import { UserController } from '../../controllers/UserController';
+import { makeSubmitHandler } from '../../utils/formHandler';
+import { Avatar } from '../../components/Avatar';
+import { store } from '../../core/Store';
+
+const submitHandler = makeSubmitHandler(UserController.changeUserProfile);
 
 export default class UserSettingsPage extends Block {
-  constructor(props: Props) {
+  constructor() {
+    const { user } = store.getState();
+
+    const userProfilePage = new Link({
+      events: {
+        click: (e) => {
+          e.preventDefault();
+          Router.getInstanse().go('/user_profile');
+        },
+      },
+    });
+
+    const userAvatar = new Avatar({
+      src: user.avatar,
+      events: {
+        click: () => {
+          console.log('go to avatar');
+          Router.getInstanse().go('/change_avatar');
+        },
+      },
+    });
+
     const email = new InputBlock({
       title: 'Почта',
       id: 'email',
       type: 'email',
       label: true,
       middleSpan: true,
+      valueProp: 'email',
     });
 
     const login = new InputBlock({
@@ -21,6 +50,7 @@ export default class UserSettingsPage extends Block {
       type: 'text',
       label: true,
       middleSpan: true,
+      valueProp: 'login',
     });
 
     const firstName = new InputBlock({
@@ -29,6 +59,7 @@ export default class UserSettingsPage extends Block {
       type: 'text',
       label: true,
       middleSpan: true,
+      valueProp: 'first_name',
     });
 
     const secondName = new InputBlock({
@@ -37,6 +68,7 @@ export default class UserSettingsPage extends Block {
       type: 'text',
       label: true,
       middleSpan: true,
+      valueProp: 'second_name',
     });
 
     const displayName = new InputBlock({
@@ -45,6 +77,7 @@ export default class UserSettingsPage extends Block {
       type: 'text',
       label: true,
       middleSpan: true,
+      valueProp: 'display_name',
     });
 
     const phone = new InputBlock({
@@ -53,6 +86,7 @@ export default class UserSettingsPage extends Block {
       type: 'tel',
       label: true,
       middleSpan: true,
+      valueProp: 'phone',
     });
 
     const form = new Form({
@@ -64,13 +98,15 @@ export default class UserSettingsPage extends Block {
       secondName,
       displayName,
       phone,
+      formButtonText: 'Сохранить',
+      submitHandler,
     });
 
     super('div', {
-      ...props,
-      attr: [['class', 'user-settings-container']],
-      defaultAvatar,
+      attr: { class: 'user-settings-container' },
+      userAvatar,
       form,
+      userProfilePage,
     });
   }
 

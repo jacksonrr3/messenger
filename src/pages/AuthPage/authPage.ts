@@ -1,9 +1,14 @@
 import Block from '../../core/Block';
 import './auth.scss';
 import authTemplate from './authPage.template';
-import InputBlock from '../../components/InputBlock';
-import Form from '../../components/Form';
-import Link from '../../components/Link';
+import { InputBlock } from '../../components/InputBlock';
+import { Form } from '../../components/Form';
+import { Link } from '../../components/Link';
+import { AuthController } from '../../controllers/AuthController';
+import { Router } from '../../core/Router';
+import { makeSubmitHandler } from '../../utils/formHandler';
+
+const submitHandler = makeSubmitHandler(AuthController.singIn);
 
 export default class AuthPage extends Block {
   constructor() {
@@ -28,16 +33,23 @@ export default class AuthPage extends Block {
       inputs: ['login', 'password'],
       login,
       password,
-      formButtontext: 'Авторизоваться',
+      formButtonText: 'Авторизоваться',
+      submitHandler,
     });
 
     const link = new Link({
       className: 'form-link',
       text: 'Нет аккаунта?',
+      events: {
+        click: (e) => {
+          e.preventDefault();
+          Router.getInstanse().go('/reg');
+        },
+      },
     });
 
     super('div', {
-      attr: [['class', 'auth-container']],
+      attr: { class: 'auth-container' },
       titleText: 'Вход',
       form,
       link,

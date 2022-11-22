@@ -2,11 +2,14 @@ import Block, { Props } from '../../core/Block';
 import linkTemplate from './link.template';
 import './link.scss';
 
-export default class Button extends Block {
+export class Link extends Block {
   constructor(props: Props) {
-    const { className = '' } = props;
+    const { className = '', href = '' } = props;
     super('a', {
-      attr: [['class', `nav-link ${className}`]],
+      attr: {
+        href,
+        class: `nav-link ${className}`,
+      },
       ...props,
     });
   }

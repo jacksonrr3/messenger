@@ -1,11 +1,9 @@
 export default `
   <div class="back">
-      <a href="/chats"></a>
+      {{{messengerLink}}}
   </div>
   <div class="user">
-      <div class="avatar">
-        <img src="{{defaultAvatar}}" alt="user_avatar">
-      </div>
+      {{{userAvatar}}}
       <div class="info">
           {{{email}}}
           {{{login}}}
@@ -16,12 +14,12 @@ export default `
       </div>
       <div class="links">
         <div class="link">
-          <a href="/userSettingsPage">Изменить данные</a>
+          {{{userSettingsLink}}}
         </div>
         <div class="link">
-          <a href="/changePasswordPage">Изменить пароль</a>
+          {{{changePasswordLink}}}
         </div>
-        <a href="/">Выйти</a>
+        {{{exitButton}}}
       </div>
   </div>
 `;

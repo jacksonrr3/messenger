@@ -1,7 +1,7 @@
 {
 	"compilerOptions": {
         "outDir": "dist",
-        "target": "es2022",
+        "target": "ESNext",
         "declaration": true,
         "esModuleInterop": true,
         "strictNullChecks": true,
@@ -10,6 +10,6 @@
         "noUnusedParameters": true,
         "sourceMap": true,
         "baseUrl": "./src",
-        "moduleResolution": "Node"
+        "moduleResolution": "Node",
     }
 }

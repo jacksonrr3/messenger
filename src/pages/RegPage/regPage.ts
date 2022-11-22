@@ -1,9 +1,16 @@
 import Block from '../../core/Block';
 import './regPage.scss';
 import regTemplate from './regPage.template';
-import InputBlock from '../../components/InputBlock';
-import Form from '../../components/Form';
-import Link from '../../components/Link';
+import { InputBlock } from '../../components/InputBlock';
+import { Form } from '../../components/Form';
+import { Link } from '../../components/Link';
+import { AuthController } from '../../controllers/AuthController';
+import { Router } from '../../core/Router';
+import { makeSubmitHandler } from '../../utils/formHandler';
+
+const checkPassword = (formData: FormData) => formData.get('password') === formData.get('confirm_password');
+
+const submitHandler = makeSubmitHandler(AuthController.signUp, checkPassword);
 
 export default class RegPage extends Block {
   constructor() {
@@ -73,17 +80,23 @@ export default class RegPage extends Block {
       phone,
       password,
       confirmPassword,
-      formButtontext: 'Зарегистрироваться',
+      submitHandler,
+      formButtonText: 'Зарегистрироваться',
     });
 
     const link = new Link({
       text: 'Войти',
       className: 'form-link',
+      events: {
+        click: (e) => {
+          e.preventDefault();
+          Router.getInstanse().go('/');
+        },
+      },
     });
 
     super('div', {
-      // ...props,
-      attr: [['class', 'reg-container']],
+      attr: { class: 'reg-container' },
       titleText: 'Регистрация',
       form,
       link,

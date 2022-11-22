@@ -1,0 +1,36 @@
+@import '../../styles/variables.scss';
+
+.conversation {
+    height: 100%;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+
+    .message {
+        max-width: 50%;
+        margin: 10px;
+
+        background: $light;
+        border-radius: 12px;
+
+        width: fit-content;
+        padding: 10px;
+
+        .text {
+            overflow-wrap: break-word;
+        }
+
+        .time {
+            font-size: 8px;
+            text-align: end;
+        }
+    }
+
+    .right {
+        margin-left: auto;
+    }
+}
+
+.conversation::-webkit-scrollbar {
+  display: none;
+}

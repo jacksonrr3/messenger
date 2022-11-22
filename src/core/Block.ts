@@ -3,19 +3,20 @@ import Handlebars from 'handlebars';
 import EventBus from './EventBus';
 
 export type Children = Record<string, any>;
+export type Attrs = Record<string, string>;
 export type Props = {
   [key: string]: any;
   class?: string;
-  children?: Children;
+  // children?: Children;
   events?: Record<string, (...args: any) => void>;
-  attr?: string[][];
+  attr?: Attrs;
 };
 type Meta = {
   tagName: string,
   props: Props,
 };
 
-export default abstract class Block {
+export default class Block {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -116,19 +117,25 @@ export default abstract class Block {
   _makePropsProxy(props: Props) {
     return new Proxy(props, {
       get: (target, prop) => {
-        const value = target[prop];
+        const value = target[prop as keyof object];
         return typeof value === 'function' ? value.bind(target) : value;
       },
       set: (target, prop, value) => {
-        if (target[prop] !== value) {
-          target[prop] = value;
+        if (target[prop as keyof object] !== value) {
+          // eslint-disable-next-line no-param-reassign
+          target[prop as keyof object] = value;
           this._setUpdate = true;
         }
         return true;
-        // return Reflect.set(target, prop, value);
       },
-      deleteProperty: () => {
-        throw new Error('нет доступа');
+      deleteProperty: (target, prop) => {
+        if (target[prop as keyof object]) {
+          // eslint-disable-next-line no-param-reassign
+          delete target[prop as keyof object];
+          this._setUpdate = true;
+          return true;
+        }
+        return false;
       },
     });
   }
@@ -152,13 +159,12 @@ export default abstract class Block {
     this._element.appendChild(block);
     this._addEvents();
     this._addAttributes();
-    this.addInnerEvents();
   }
 
-  addInnerEvents() {}
-
   // Может переопределять пользователь, необязательно трогать
-  abstract render(): DocumentFragment;
+  render(): DocumentFragment {
+    return new DocumentFragment();
+  }
 
   getContent() {
     return this._element;
@@ -187,15 +193,15 @@ export default abstract class Block {
   }
 
   _addAttributes() {
-    const { attr = [] } = this._props;
-    attr.forEach(([key, value]) => {
+    const { attr = {} as Attrs } = this._props;
+    Object.entries(attr).forEach(([key, value]) => {
       this._element.setAttribute(key, value);
     });
   }
 
   _getChildren(propsAndChildren: Props) {
-    const children = {};
-    const props = {};
+    const children = {} as Children;
+    const props = {} as Props;
 
     Object.entries(propsAndChildren).forEach(([key, value]) => {
       if (value instanceof Block) {
@@ -229,7 +235,7 @@ export default abstract class Block {
   }
 
   show() {
-    this.getContent().style.display = 'block';
+    this.getContent().style.display = 'flex';
   }
 
   hide() {

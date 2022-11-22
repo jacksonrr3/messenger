@@ -1,12 +1,43 @@
 import Block from '../../core/Block';
 import './changePasswordPage.scss';
-import defaultAvatar from '../../../static/pictures/default_avatar.svg';
 import changePasswordTemplate from './changePasswordPage.template';
-import InputBlock from '../../components/InputBlock/index';
-import Form from '../../components/Form';
+import { InputBlock } from '../../components/InputBlock/index';
+import { Form } from '../../components/Form';
+import { Link } from '../../components/Link';
+import { Router } from '../../core/Router';
+import { makeSubmitHandler } from '../../utils/formHandler';
+import { UserController } from '../../controllers/UserController';
+import { Avatar } from '../../components/Avatar';
+import { store } from '../../core/Store';
+
+const submitHandler = makeSubmitHandler((formData) => UserController.changeUserPassword(formData)
+  .then(() => {
+    Router.getInstanse().go('/user_profile');
+  }));
 
 export default class ChangePasswordPage extends Block {
   constructor() {
+    const { user } = store.getState();
+
+    const userProfileLink = new Link({
+      events: {
+        click: (e) => {
+          e.preventDefault();
+          Router.getInstanse().go('/user_profile');
+        },
+      },
+    });
+
+    const userAvatar = new Avatar({
+      src: user.avatar,
+      events: {
+        click: () => {
+          console.log('go to avatar');
+          Router.getInstanse().go('/change_avatar');
+        },
+      },
+    });
+
     const oldPassword = new InputBlock({
       title: 'Старый пароль',
       id: 'oldPassword',
@@ -37,13 +68,15 @@ export default class ChangePasswordPage extends Block {
       oldPassword,
       newPassword,
       repeatNewPassword,
-      formButtontext: 'Сохранить',
+      formButtonText: 'Сохранить',
+      submitHandler,
     });
 
     super('div', {
-      attr: [['class', 'change-password-container']],
-      defaultAvatar,
+      attr: { class: 'change-password-container' },
+      userAvatar,
       form,
+      userProfileLink,
     });
   }
 

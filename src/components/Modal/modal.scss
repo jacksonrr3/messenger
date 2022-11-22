@@ -1,0 +1,32 @@
+@import '../../styles/variables.scss';
+
+.modal-container {
+  position: absolute;
+  display: none;
+
+  height: 100%;
+  width: 100%;
+
+  background-color: $dark-black;
+
+  opacity: 0.4;
+
+  z-index: 500;
+
+  .modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    padding: 50px;
+
+    width: 340px;
+    height: 257px;
+    left: 470px;
+    top: 232px;
+
+    background: #FFFFFF;
+    box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
+    border-radius: 12px;
+  }
+}
