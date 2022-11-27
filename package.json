@@ -14,6 +14,12 @@
     "test": "ts-mocha src/**/*.spec.ts -require test/mock.js",
     "precommit": "npm-run-all test lint stylelint"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm-run-all test lint stylelint",
+      "pre-push": "npm run deploy"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jacksonrr3/middle.messenger.praktikum.yandex.git"
