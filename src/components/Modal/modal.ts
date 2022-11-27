@@ -26,7 +26,7 @@ export class Modal extends Block {
         click: () => {
           const { value } = input.element as HTMLInputElement;
           clickHandler(value);
-          input.element.value = '';
+          (input.element as HTMLInputElement).value = '';
         },
       },
     });

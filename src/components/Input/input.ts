@@ -5,10 +5,24 @@ import { validationErrorMessage, isValidInput } from '../../utils/validation';
 import { Span } from '../Span';
 import { store, StoreEvents } from '../../core/Store';
 
-const focusBlurHandler = (spanElement = new Span({})) => ({ target } : Event) => {
+type inputName = 'login'
+  | 'password'
+  | 'confirm_password'
+  | 'oldPassword'
+  | 'newPassword'
+  | 'first_name'
+  | 'second_name'
+  | 'display_name'
+  | 'email'
+  | 'phone'
+  | 'message';
+
+const focusBlurHandler = (spanElement = new Span({})) => ({ target }: Event) => {
+  const { id } = target as HTMLInputElement;
   const spanText = isValidInput(target as HTMLInputElement)
     ? ''
-    : validationErrorMessage[target.id];
+    : validationErrorMessage[id as inputName];
+
   spanElement.setProps({
     spanText,
   });

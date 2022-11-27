@@ -1,6 +1,6 @@
 type ValidationFunc = (value: string) => boolean
 
-type ValidateionObject = {
+type ValidationObject = {
   [key: string]: ValidationFunc
 }
 
@@ -25,7 +25,7 @@ const emailCheck: ValidationFunc = (value) => /^((?!\.)[\w-_.]*[^.])(@\w+)(\.\w+
 const phoneCheck: ValidationFunc = (value) => /^([+]?\d){10,15}$/.test(value);
 const messageCheck: ValidationFunc = (value) => value.length !== 0;
 
-const validate: ValidateionObject = {
+const validate: ValidationObject = {
   login: loginCheck,
   password: passwordFieldCheck,
   confirm_password: passwordFieldCheck,

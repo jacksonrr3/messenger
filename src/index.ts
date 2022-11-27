@@ -8,6 +8,7 @@ import UserProfilePage from './pages/UserProfilePage';
 import UserSettingsPage from './pages/UserSettingsPage';
 import ChangePasswordPage from './pages/ChangePasswordPage';
 import ChangeAvatarPage from './pages/ChangeAvatarPage';
+import './styles/base.scss';
 
 const AppRouter = new Router('#root', '/');
 AppRouter
