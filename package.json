@@ -4,8 +4,8 @@
   "description": "simple messenger",
   "source": "static/index.html",
   "scripts": {
-    "dev": "parcel --no-cache",
-    "build": "node ./node_modules/.bin/webpack",
+    "dev": "webpack serve --config ./webpack/config.dev.js",
+    "build": "webpack --config ./webpack/config.prod.js",
     "start": "npm run build && node ./server.js",
     "lint": "eslint .",
     "lint-fix": "eslint --fix .",
@@ -52,6 +52,7 @@
     "parcel": "2.7.0",
     "sass": "^1.56.1",
     "sass-loader": "^13.2.0",
+    "style-loader": "^3.3.1",
     "stylelint": "14.14.0",
     "stylelint-config-prettier": "9.0.3",
     "stylelint-config-standard": "29.0.0",
