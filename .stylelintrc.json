@@ -1,7 +1,7 @@
 {
     "extends": "stylelint-config-prettier",
     "plugins": [
-        "stylelint-scss"
+        "stylelint-scss",
     ],
     "rules": {
         "at-rule-no-unknown": null,
