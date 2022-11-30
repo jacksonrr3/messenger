@@ -1,4 +1,5 @@
 import { HTTPTransport } from '../utils/HTTPTransport';
+import { baseUrl } from '../constants/urls';
 
 // export type APIMethod = (options?: object) => Promise<any> | void;
 export type UserAuthData = { login: string, password: string };
@@ -15,7 +16,7 @@ export class AuthAPI {
   _http: HTTPTransport;
 
   constructor() {
-    this._http = new HTTPTransport();
+    this._http = new HTTPTransport(baseUrl);
   }
 
   signUp(data: UserRegData) {

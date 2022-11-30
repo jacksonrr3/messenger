@@ -22,8 +22,8 @@ export type HTTPRequest = (url: string, options: RequestOptions, timeout?: numbe
 export class HTTPTransport {
   _baseUrl?: string;
 
-  constructor() {
-    this._baseUrl = 'https://ya-praktikum.tech/api/v2';
+  constructor(baseUrl = '') {
+    this._baseUrl = baseUrl;
   }
 
   get: HTTPMethod = (url, options = {}) => {
@@ -74,7 +74,7 @@ export class HTTPTransport {
       });
 
       xhr.onload = () => {
-        if (xhr.status === 200) {
+        if (/2../.test(xhr.status.toString())) {
           resolve(xhr.responseText);
         } else {
           reject(xhr);
