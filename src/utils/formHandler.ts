@@ -11,7 +11,7 @@ export const makeSubmitHandler = (
   const { target } = e;
   const formData = new FormData(target as HTMLFormElement);
   if (target) {
-    const formInputs = target.querySelectorAll('input');
+    const formInputs = (target as HTMLFormElement).querySelectorAll('input');
 
     if (isValidInputs(formInputs) && additionChecks(formData)) {
       handler(formData);

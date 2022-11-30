@@ -26,7 +26,16 @@ export class Modal extends Block {
         click: () => {
           const { value } = input.element as HTMLInputElement;
           clickHandler(value);
-          input.element.value = '';
+          (input.element as HTMLInputElement).value = '';
+        },
+      },
+    });
+
+    const closeButton = new Button({
+      text: 'Закрыть',
+      events: {
+        click: () => {
+          this.hide();
         },
       },
     });
@@ -38,6 +47,7 @@ export class Modal extends Block {
       },
       input,
       button,
+      closeButton,
     });
   }
 

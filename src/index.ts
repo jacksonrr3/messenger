@@ -8,16 +8,44 @@ import UserProfilePage from './pages/UserProfilePage';
 import UserSettingsPage from './pages/UserSettingsPage';
 import ChangePasswordPage from './pages/ChangePasswordPage';
 import ChangeAvatarPage from './pages/ChangeAvatarPage';
+import './styles/base.scss';
+import { AuthController } from './controllers/AuthController';
+import { ROUTES } from './constants/routs';
 
-const AppRouter = new Router('#root', '/');
-AppRouter
-  .use('/', AuthPage)
-  .use('/reg', RegPage)
-  .use('/messenger', ChatsPage)
-  .use('/404', Page404)
-  .use('/500', Page500)
-  .use('/user_profile', UserProfilePage)
-  .use('/user_settings', UserSettingsPage)
-  .use('/change_password', ChangePasswordPage)
-  .use('/change_avatar', ChangeAvatarPage)
-  .start();
+const AppRouter = new Router('#root', ROUTES.AUTH);
+
+const app = async () => {
+  const checkAuth = async () => {
+    const userInfo = await AuthController.getUserInfo();
+    return userInfo !== undefined;
+  };
+
+  AppRouter
+    .setAuthChecker(checkAuth)
+    .use(ROUTES.AUTH, AuthPage, {
+      redirectIfAuthTo: ROUTES.MESSENGER,
+    })
+    .use(ROUTES.REG, RegPage, {
+      redirectIfAuthTo: ROUTES.MESSENGER,
+    })
+    .use(ROUTES.MESSENGER, ChatsPage, {
+      needAuth: true,
+    })
+    .use(ROUTES.PAGE404, Page404)
+    .use(ROUTES.PAGE500, Page500)
+    .use(ROUTES.USER_PROFILE, UserProfilePage, {
+      needAuth: true,
+    })
+    .use(ROUTES.USER_SETTINGS, UserSettingsPage, {
+      needAuth: true,
+    })
+    .use(ROUTES.CHANGE_PASSWORD, ChangePasswordPage, {
+      needAuth: true,
+    })
+    .use(ROUTES.CHANGE_AVATAR, ChangeAvatarPage, {
+      needAuth: true,
+    })
+    .start();
+};
+
+app();

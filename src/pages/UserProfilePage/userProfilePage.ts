@@ -8,21 +8,21 @@ import { Link } from '../../components/Link';
 import { Router } from '../../core/Router';
 import { Avatar } from '../../components/Avatar';
 import { store, StoreEvents } from '../../core/Store';
+import { ROUTES } from '../../constants/routs';
 
 export default class userProfilePage extends Block {
   constructor() {
     const { user } = store.getState();
 
     store.on(StoreEvents.Updated, () => {
-      // const { user } = store.getState();
-      // console.log('user avatar', user);
+      // TODO split users page into one page
     });
 
     const messengerLink = new Link({
       events: {
         click: (e) => {
           e.preventDefault();
-          Router.getInstanse().go('/messenger');
+          Router.getInstanse().go(ROUTES.MESSENGER);
         },
       },
     });
@@ -32,7 +32,7 @@ export default class userProfilePage extends Block {
       events: {
         click: () => {
           console.log('go to avatar');
-          Router.getInstanse().go('/change_avatar');
+          Router.getInstanse().go(ROUTES.CHANGE_AVATAR);
         },
       },
     });
@@ -42,7 +42,7 @@ export default class userProfilePage extends Block {
       events: {
         click: (e) => {
           e.preventDefault();
-          Router.getInstanse().go('/user_settings');
+          Router.getInstanse().go(ROUTES.USER_SETTINGS);
         },
       },
     });
@@ -52,7 +52,7 @@ export default class userProfilePage extends Block {
       events: {
         click: (e) => {
           e.preventDefault();
-          Router.getInstanse().go('/change_password');
+          Router.getInstanse().go(ROUTES.CHANGE_PASSWORD);
         },
       },
     });
@@ -61,8 +61,7 @@ export default class userProfilePage extends Block {
       events: {
         click: (e) => {
           e.preventDefault();
-          console.log('settings');
-          Router.getInstanse().go('/user_settings');
+          Router.getInstanse().go(ROUTES.USER_SETTINGS);
         },
       },
     });

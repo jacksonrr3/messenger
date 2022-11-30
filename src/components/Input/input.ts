@@ -5,10 +5,24 @@ import { validationErrorMessage, isValidInput } from '../../utils/validation';
 import { Span } from '../Span';
 import { store, StoreEvents } from '../../core/Store';
 
-const focusBlurHandler = (spanElement = new Span({})) => ({ target } : Event) => {
+type inputName = 'login'
+  | 'password'
+  | 'confirm_password'
+  | 'oldPassword'
+  | 'newPassword'
+  | 'first_name'
+  | 'second_name'
+  | 'display_name'
+  | 'email'
+  | 'phone'
+  | 'message';
+
+const focusBlurHandler = (spanElement = new Span({})) => ({ target }: Event) => {
+  const { id } = target as HTMLInputElement;
   const spanText = isValidInput(target as HTMLInputElement)
     ? ''
-    : validationErrorMessage[target.id];
+    : validationErrorMessage[id as inputName];
+
   spanElement.setProps({
     spanText,
   });
@@ -24,14 +38,15 @@ export class Input extends Block {
 
     store.on(StoreEvents.Updated, () => {
       const { user: newUserData } = store.getState();
-      if (this._props?.attr?.value !== newUserData[props.valueProp]) {
+      if (!newUserData || this._props?.attr?.value !== newUserData[props.valueProp]) {
+        const value = newUserData ? newUserData[props.valueProp] : '';
         this.setProps({
           attr: {
             type,
             id,
             name: id,
             placeholder: title,
-            value: props.valueProp ? newUserData[props.valueProp] : '',
+            value: props.valueProp ? value : '',
             accept,
           },
         });

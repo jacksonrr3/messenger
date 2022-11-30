@@ -47,11 +47,13 @@ const getChatFromStateById = (): any => {
 };
 
 const makeMessageFormatter = (state: State) => (message: Message) => {
-  const { user_id: messUserId, time } = message;
-  const user = Number(messUserId) === state.userId;
+  const { user_id: messageUserId, time } = message;
+  const user = Number(messageUserId) === state.userId;
 
   const data = new Date(time);
-  return { ...message, user, time: `${data.getHours()}:${data.getMinutes()}` };
+  return {
+    ...message, user, time: `${data.getHours()}:${data.getMinutes()}`, timems: data.getTime(),
+  };
 };
 
 const makeMessageHandler = (conversation: Block, state: State) => (event: MessageEvent<any>) => {
@@ -59,11 +61,13 @@ const makeMessageHandler = (conversation: Block, state: State) => (event: Messag
   const data = JSON.parse(event.data);
   if (Array.isArray(data)) {
     // eslint-disable-next-line no-param-reassign
-    state.messages = data.map((message) => formatter(message));
-  } else {
-    // eslint-disable-next-line no-param-reassign
-    state.messages = [...state.messages, formatter(data)];
-  }
+    state.messages = data
+      .map((message) => formatter(message))
+      .sort((m1, m2) => Number(m1.timems) - Number(m2.timems));
+  } else if (data.type === 'message') {
+      // eslint-disable-next-line no-param-reassign
+      state.messages = [...state.messages, formatter(data)];
+    }
 
   conversation.setProps({ messages: state.messages });
 };
@@ -73,7 +77,7 @@ export class Chat extends Block {
     const { user } = store.getState();
 
     const state: State = {
-      userId: user.id,
+      userId: user?.id,
       messages: [],
     };
 
@@ -85,14 +89,14 @@ export class Chat extends Block {
 
     store.on(StoreEvents.Updated, () => {
       const { chatId: newChatID, user: newUser } = store.getState();
-      if (!newChatID) {
-        state?.ws?.close();
-        state.chat = getChatFromStateById();
-        state.messages = [];
-        state.token = '';
-        this.setProps({ ...state });
-        return;
-      }
+      // if (!newChatID) {
+      //   state?.ws?.close();
+      //   state.chat = getChatFromStateById();
+      //   state.messages = [];
+      //   state.token = '';
+      //   this.setProps({ ...state });
+      //   return;
+      // }
       if (newChatID !== state.chat?.id) {
         ChatController.getToken(newChatID)
           .then((token) => {

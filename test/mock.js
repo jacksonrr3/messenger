@@ -10,3 +10,4 @@ const { document } = window;
 
 global.window = window;
 global.document = document;
+global.XMLHttpRequest = window.XMLHttpRequest;

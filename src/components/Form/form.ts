@@ -9,7 +9,7 @@ const defaultSubmitHandler = (e: Event) => {
   if (target) {
     const formData = new FormData(target as HTMLFormElement);
     const formDataObject = Object.fromEntries(formData.entries());
-    const formInputs = target.querySelectorAll('input');
+    const formInputs = (target as HTMLFormElement).querySelectorAll('input');
     const isValid = Array.from(formInputs)
       .reduce((acc, input) => (acc && isValidInput(input as HTMLInputElement)), true);
 

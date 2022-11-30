@@ -1,4 +1,5 @@
 import { HTTPTransport } from '../utils/HTTPTransport';
+import { baseUrl } from '../constants/urls';
 
 export type UserProfileData = {
   first_name: string,
@@ -22,7 +23,7 @@ export class UserAPI {
   _http: HTTPTransport;
 
   constructor() {
-    this._http = new HTTPTransport();
+    this._http = new HTTPTransport(baseUrl);
   }
 
   changeProfile(data: UserProfileData) {

@@ -4,14 +4,20 @@
   "description": "simple messenger",
   "source": "static/index.html",
   "scripts": {
-    "dev": "parcel --no-cache",
-    "build": "parcel build --no-cache",
+    "dev": "webpack serve --config ./webpack/config.dev.js",
+    "build": "webpack --config ./webpack/config.prod.js",
     "start": "npm run build && node ./server.js",
     "lint": "eslint .",
     "lint-fix": "eslint --fix .",
     "stylelint": "stylelint \"**/*.scss\"",
     "stylelint-fix": "stylelint --fix .",
-    "test": "ts-mocha src/**/*.spec.ts -require test/mock.js"
+    "test": "ts-mocha src/**/*.spec.ts -require test/mock.js",
+    "prepare": "husky install"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
   },
   "repository": {
     "type": "git",
@@ -24,28 +30,42 @@
   },
   "homepage": "https://github.com/jacksonrr3/middle.messenger.praktikum.yandex#readme",
   "devDependencies": {
-    "@babel/preset-env": "7.20.2",
-    "@babel/preset-typescript": "7.18.6",
-    "@babel/register": "7.18.9",
     "@parcel/transformer-sass": "2.7.0",
     "@types/chai": "4.3.4",
     "@types/expect": "24.3.0",
+    "@types/json-server": "^0.14.4",
     "@types/mocha": "10.0.0",
+    "@types/node": "18.11.9",
     "@types/uuid": "8.3.4",
     "@typescript-eslint/eslint-plugin": "5.41.0",
     "@typescript-eslint/parser": "5.41.0",
     "chai": "4.3.7",
+    "clean-webpack-plugin": "4.0.0",
+    "css-loader": "6.7.2",
     "eslint": "8.26.0",
     "eslint-config-airbnb": "19.0.4",
-    "jsdom": "^20.0.3",
+    "html-webpack-plugin": "5.5.0",
+    "husky": "8.0.2",
+    "jsdom": "20.0.3",
+    "json-server": "^0.17.1",
+    "mini-css-extract-plugin": "2.7.0",
     "mocha": "10.1.0",
+    "npm-run-all": "4.1.5",
     "parcel": "2.7.0",
+    "sass": "1.56.1",
+    "sass-loader": "13.2.0",
+    "style-loader": "3.3.1",
     "stylelint": "14.14.0",
     "stylelint-config-prettier": "9.0.3",
     "stylelint-config-standard": "29.0.0",
     "stylelint-scss": "4.3.0",
+    "ts-loader": "9.4.1",
     "ts-mocha": "10.0.0",
-    "typescript": "4.8.4"
+    "typescript": "4.8.4",
+    "webpack": "5.75.0",
+    "webpack-cli": "5.0.0",
+    "webpack-dev-server": "4.11.1",
+    "webpack-merge": "5.8.0"
   },
   "dependencies": {
     "express": "4.18.2",

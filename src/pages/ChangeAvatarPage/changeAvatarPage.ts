@@ -5,6 +5,7 @@ import { InputBlock } from '../../components/InputBlock/index';
 import { Router } from '../../core/Router';
 import { Form } from '../../components/Form';
 import { UserController } from '../../controllers/UserController';
+import { ROUTES } from '../../constants/routs';
 
 export default class ChangeAvatarPage extends Block {
   constructor() {
@@ -23,10 +24,13 @@ export default class ChangeAvatarPage extends Block {
       formButtonText: 'Сохранить',
       submitHandler: (e: Event) => {
         e.preventDefault();
-        const formData = new FormData(e.target);
-        UserController.changeUserAvatar(formData).then(() => {
-          Router.getInstanse().go('/user_profile');
-        });
+        const { target } = e;
+        if (target) {
+          const formData = new FormData(target as HTMLFormElement);
+          UserController.changeUserAvatar(formData).then(() => {
+            Router.getInstanse().go(ROUTES.USER_PROFILE);
+          });
+        }
       },
     });
 

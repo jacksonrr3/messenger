@@ -9,10 +9,11 @@ import { makeSubmitHandler } from '../../utils/formHandler';
 import { UserController } from '../../controllers/UserController';
 import { Avatar } from '../../components/Avatar';
 import { store } from '../../core/Store';
+import { ROUTES } from '../../constants/routs';
 
 const submitHandler = makeSubmitHandler((formData) => UserController.changeUserPassword(formData)
   .then(() => {
-    Router.getInstanse().go('/user_profile');
+    Router.getInstanse().go(ROUTES.USER_PROFILE);
   }));
 
 export default class ChangePasswordPage extends Block {
@@ -23,7 +24,7 @@ export default class ChangePasswordPage extends Block {
       events: {
         click: (e) => {
           e.preventDefault();
-          Router.getInstanse().go('/user_profile');
+          Router.getInstanse().go(ROUTES.USER_PROFILE);
         },
       },
     });
@@ -32,8 +33,7 @@ export default class ChangePasswordPage extends Block {
       src: user.avatar,
       events: {
         click: () => {
-          console.log('go to avatar');
-          Router.getInstanse().go('/change_avatar');
+          Router.getInstanse().go(ROUTES.CHANGE_AVATAR);
         },
       },
     });

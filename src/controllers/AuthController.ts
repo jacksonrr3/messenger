@@ -2,6 +2,7 @@ import { AuthAPI, UserRegData } from '../api/AuthAPI';
 import { Router } from '../core/Router';
 import { store } from '../core/Store';
 import getObjectFromFormData from '../utils/getObjectFromFormData';
+import { ROUTES } from '../constants/routs';
 
 const authAPI = new AuthAPI();
 
@@ -12,7 +13,7 @@ export class AuthController {
       .signUp(userData)
       .then((res) => {
         console.log(res);
-        Router.getInstanse().go('/messenger');
+        Router.getInstanse().go(ROUTES.MESSENGER);
       })
       .catch((err) => {
         console.log('signup err', err);
@@ -34,7 +35,7 @@ export class AuthController {
       .then((user) => {
         store.set('user', user);
         console.log('store', store.getState());
-        Router.getInstanse().go('/messenger');
+        Router.getInstanse().go(ROUTES.MESSENGER);
       })
       .catch((err) => {
         console.log('login err', err);
@@ -49,7 +50,10 @@ export class AuthController {
     }
     return authAPI.getUserInfo()
       .then((userString) => JSON.parse(userString))
-      .then((userObj) => store.set('user', userObj))
+      .then((userObj) => {
+        store.set('user', userObj);
+        return userObj;
+      })
       .catch((err) => {
         console.log('auth err: ', err);
       });
@@ -58,7 +62,9 @@ export class AuthController {
   static logout() {
     return authAPI.logOut()
       .then(() => {
-        Router.getInstanse().go('/');
+        console.log('logout store', store);
+        store.set('user', undefined);
+        Router.getInstanse().go(ROUTES.AUTH);
       })
       .catch((err) => {
         console.log('logout err', err);

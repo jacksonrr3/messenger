@@ -7,6 +7,7 @@ import { Link } from '../../components/Link';
 import { AuthController } from '../../controllers/AuthController';
 import { Router } from '../../core/Router';
 import { makeSubmitHandler } from '../../utils/formHandler';
+import { ROUTES } from '../../constants/routs';
 
 const checkPassword = (formData: FormData) => formData.get('password') === formData.get('confirm_password');
 
@@ -90,7 +91,7 @@ export default class RegPage extends Block {
       events: {
         click: (e) => {
           e.preventDefault();
-          Router.getInstanse().go('/');
+          Router.getInstanse().go(ROUTES.AUTH);
         },
       },
     });

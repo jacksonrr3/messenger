@@ -3,5 +3,6 @@ export default `
     <h2>{{title}}</h2>
     {{{input}}}
     {{{button}}}
+    {{{closeButton}}}
   </div>
 `;
