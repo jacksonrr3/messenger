@@ -1,3 +1,4 @@
+import { ROUTES } from '../constants/routs';
 import { UserAPI, UserProfileData, UserPasswordData } from '../api/UserAPI';
 import { Router } from '../core/Router';
 import { store } from '../core/Store';
@@ -12,7 +13,7 @@ export class UserController {
       .then((res) => {
         const newUser = JSON.parse(res);
         store.set('user', newUser);
-        Router.getInstanse().go('/user_profile');
+        Router.getInstanse().go(ROUTES.USER_PROFILE);
       })
       .catch((err) => {
         console.log('change profile err: ', err);
@@ -25,7 +26,7 @@ export class UserController {
       .then((res) => {
         console.log('passwordChanged', res);
 
-        Router.getInstanse().go('/user_profile');
+        Router.getInstanse().go(ROUTES.USER_PROFILE);
       })
       .catch((err) => {
         console.log('change password err: ', err);

@@ -13,6 +13,7 @@ import { Router } from '../../core/Router';
 import { ChatController } from '../../controllers/ChatController';
 import { Chat } from '../../components/Chat';
 import { Modal } from '../../components/Modal';
+import { ROUTES } from '../../constants/routs';
 
 export default class ChatsPage extends Block {
   constructor() {
@@ -20,7 +21,7 @@ export default class ChatsPage extends Block {
       text: 'Профиль',
       events: {
         click: () => {
-          Router.getInstanse().go('/user_profile');
+          Router.getInstanse().go(ROUTES.USER_PROFILE);
         },
       },
     });

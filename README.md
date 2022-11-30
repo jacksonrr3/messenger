@@ -2,10 +2,12 @@
 
 Training project, without third-party libraries.
 Main language: typescript.
-Core components:
+Main implemented components :
 - Block: implements reactive elements,
 - Router: implements routing between pages,
-- HTTPTransport: http-client.
+- HTTPTransport: http-client, corresponding to Fetch API.
+- Store: data storage.
+- EventEmitter: create, subscribe and emit events. 
 
 ### Installing
 

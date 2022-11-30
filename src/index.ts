@@ -10,39 +10,39 @@ import ChangePasswordPage from './pages/ChangePasswordPage';
 import ChangeAvatarPage from './pages/ChangeAvatarPage';
 import './styles/base.scss';
 import { AuthController } from './controllers/AuthController';
+import { ROUTES } from './constants/routs';
 
-const AppRouter = new Router('#root', '/');
+const AppRouter = new Router('#root', ROUTES.AUTH);
 
 const app = async () => {
   const checkAuth = async () => {
     const userInfo = await AuthController.getUserInfo();
-    console.log('userInfo', userInfo);
     return userInfo !== undefined;
   };
 
   AppRouter
     .setAuthChecker(checkAuth)
-    .use('/', AuthPage, {
-      redirectIfAuthTo: '/messenger',
+    .use(ROUTES.AUTH, AuthPage, {
+      redirectIfAuthTo: ROUTES.MESSENGER,
     })
-    .use('/reg', RegPage, {
-      redirectIfAuthTo: '/messenger',
+    .use(ROUTES.REG, RegPage, {
+      redirectIfAuthTo: ROUTES.MESSENGER,
     })
-    .use('/messenger', ChatsPage, {
+    .use(ROUTES.MESSENGER, ChatsPage, {
       needAuth: true,
     })
-    .use('/404', Page404)
-    .use('/500', Page500)
-    .use('/user_profile', UserProfilePage, {
+    .use(ROUTES.PAGE404, Page404)
+    .use(ROUTES.PAGE500, Page500)
+    .use(ROUTES.USER_PROFILE, UserProfilePage, {
       needAuth: true,
     })
-    .use('/user_settings', UserSettingsPage, {
+    .use(ROUTES.USER_SETTINGS, UserSettingsPage, {
       needAuth: true,
     })
-    .use('/change_password', ChangePasswordPage, {
+    .use(ROUTES.CHANGE_PASSWORD, ChangePasswordPage, {
       needAuth: true,
     })
-    .use('/change_avatar', ChangeAvatarPage, {
+    .use(ROUTES.CHANGE_AVATAR, ChangeAvatarPage, {
       needAuth: true,
     })
     .start();

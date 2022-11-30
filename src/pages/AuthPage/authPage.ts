@@ -7,6 +7,7 @@ import { Link } from '../../components/Link';
 import { AuthController } from '../../controllers/AuthController';
 import { Router } from '../../core/Router';
 import { makeSubmitHandler } from '../../utils/formHandler';
+import { ROUTES } from '../../constants/routs';
 
 const submitHandler = makeSubmitHandler(AuthController.singIn);
 
@@ -43,7 +44,7 @@ export default class AuthPage extends Block {
       events: {
         click: (e) => {
           e.preventDefault();
-          Router.getInstanse().go('/reg');
+          Router.getInstanse().go(ROUTES.REG);
         },
       },
     });
