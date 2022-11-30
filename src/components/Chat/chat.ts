@@ -51,7 +51,9 @@ const makeMessageFormatter = (state: State) => (message: Message) => {
   const user = Number(messUserId) === state.userId;
 
   const data = new Date(time);
-  return { ...message, user, time: `${data.getHours()}:${data.getMinutes()}` };
+  return {
+    ...message, user, time: `${data.getHours()}:${data.getMinutes()}`, timems: data.getTime(),
+  };
 };
 
 const makeMessageHandler = (conversation: Block, state: State) => (event: MessageEvent<any>) => {
@@ -59,7 +61,9 @@ const makeMessageHandler = (conversation: Block, state: State) => (event: Messag
   const data = JSON.parse(event.data);
   if (Array.isArray(data)) {
     // eslint-disable-next-line no-param-reassign
-    state.messages = data.map((message) => formatter(message));
+    state.messages = data
+      .map((message) => formatter(message))
+      .sort((m1, m2) => Number(m1.timems) - Number(m2.timems));
   } else {
     // eslint-disable-next-line no-param-reassign
     state.messages = [...state.messages, formatter(data)];
