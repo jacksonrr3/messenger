@@ -41,7 +41,6 @@ export class Router {
   }
 
   use(pathname: string, block: typeof Block, options: RouteOptions = {}) {
-    console.log(options);
     const { needAuth, redirectIfAuthTo } = options;
     const route = new Route(pathname, block, {
       rootQuery: this._rootQuery,

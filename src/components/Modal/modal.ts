@@ -31,6 +31,15 @@ export class Modal extends Block {
       },
     });
 
+    const closeButton = new Button({
+      text: 'Закрыть',
+      events: {
+        click: () => {
+          this.hide();
+        },
+      },
+    });
+
     super('div', {
       title,
       attr: {
@@ -38,11 +47,7 @@ export class Modal extends Block {
       },
       input,
       button,
-      events: {
-        click: () => {
-          this.hide();
-        },
-      },
+      closeButton,
     });
   }
 

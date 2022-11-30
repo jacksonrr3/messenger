@@ -33,10 +33,6 @@ export class WSWrapper {
 
   send(data: Record<string, any>) {
     this._socket.send(JSON.stringify(data));
-    // this._socket.send(JSON.stringify({
-    //   content,
-    //   type: 'message',
-    // }));
   }
 
   close() {
