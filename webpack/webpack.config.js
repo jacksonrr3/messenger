@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
-const { CleanWebpackPlugin } = require('clean-webpack-plugin'); // installed via npm
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
@@ -33,11 +33,6 @@ module.exports = {
 				],
 				exclude: /(node_modules)/,
 			},
-			// {
-			// 	test: /\.s[ac]ss$/i,
-			// 	use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
-			// 	exclude: /(node_modules)/,
-			// },
 			{
 				test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
 				type: 'asset/resource',
@@ -49,9 +44,6 @@ module.exports = {
 		],
 	},
 	plugins: [
-		// new MiniCssExtractPlugin({
-		// 	filename: 'style.css',
-		// }),
 		new CleanWebpackPlugin(),
 		new HtmlWebpackPlugin({ template: './static/index.html' }),
 	],

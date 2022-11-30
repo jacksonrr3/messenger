@@ -1,5 +1,4 @@
-FROM ubuntu:20.04
-RUN apt update && apt install -y nodejs && apt install -y npm
+FROM node:16
 WORKDIR /var/www
 COPY package*.json ./
 RUN npm ci
