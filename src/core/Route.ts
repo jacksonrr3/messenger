@@ -6,7 +6,6 @@ function isEqualPath(lhs: string, rhs: string): boolean {
 
 function render(query: string, block: Block | null) {
   const root = document.querySelector(query);
-  // root.textContent = block.getContent();
   if (block) {
     root?.appendChild(block?.getContent());
   }
@@ -15,16 +14,20 @@ function render(query: string, block: Block | null) {
 
 export class Route {
   _pathname: string;
-  // _blockClass: (tagName?: string, props?: Props) => Block;
   _blockClass: typeof Block;
   _block: null | Block;
   _props: Props;
+  needAuth: boolean;
+  redirectIfAuthTo: string;
 
   constructor(pathname: string, view: typeof Block, props: Props) {
+    const { needAuth, redirectIfAuthTo, ...rest } = props;
     this._pathname = pathname;
     this._blockClass = view;
     this._block = null;
-    this._props = props;
+    this._props = rest;
+    this.needAuth = props.needAuth;
+    this.redirectIfAuthTo = props.redirectIfAuthTo;
   }
 
   navigate(pathname: string) {

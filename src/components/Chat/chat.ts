@@ -73,7 +73,7 @@ export class Chat extends Block {
     const { user } = store.getState();
 
     const state: State = {
-      userId: user.id,
+      userId: user?.id,
       messages: [],
     };
 

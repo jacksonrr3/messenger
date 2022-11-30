@@ -1,12 +1,17 @@
 import Block from './Block';
 import { Route } from './Route';
-import { AuthController } from '../controllers/AuthController';
+
+type RouteOptions = {
+  needAuth?: boolean;
+  redirectIfAuthTo?: string,
+};
 
 export class Router {
   static __instance: any;
 
   routes: Route[];
   history: History;
+  checkAuth: () => Promise<boolean>;
   _defaultPath: string;
   _currentRoute: null | Route;
   _rootQuery: string;
@@ -30,8 +35,19 @@ export class Router {
     return Router.__instance;
   }
 
-  use(pathname: string, block: typeof Block) {
-    const route = new Route(pathname, block, { rootQuery: this._rootQuery });
+  setAuthChecker(checkAuth: () => Promise<boolean>) {
+    this.checkAuth = checkAuth;
+    return this;
+  }
+
+  use(pathname: string, block: typeof Block, options: RouteOptions = {}) {
+    console.log(options);
+    const { needAuth, redirectIfAuthTo } = options;
+    const route = new Route(pathname, block, {
+      rootQuery: this._rootQuery,
+      needAuth,
+      redirectIfAuthTo,
+    });
     this.routes.push(route);
 
     return this;
@@ -41,24 +57,23 @@ export class Router {
     window.onpopstate = () => {
       this._onRoute(window.location.pathname);
     };
-    // TODO extract controle auth logic
-    AuthController.getUserInfo()
-      .then((user) => {
-        console.log('user', user);
-        const { pathname } = window.location;
-        const path = ['/', '/reg'].indexOf(pathname) === -1 ? pathname : '/messenger';
-        this._onRoute(path);
-      })
-      .catch((err) => {
-        console.log('router error', err);
-        const { pathname } = window.location;
-        const path = pathname === '/reg' ? pathname : '/';
-        this._onRoute(path);
-      });
+
+    this._onRoute(window.location.pathname);
   }
 
-  _onRoute(pathname: string) {
+  async _onRoute(pathname: string) {
     const route = this.getRoute(pathname);
+    const isAuth = await this.checkAuth();
+
+    if (route?.needAuth && !isAuth) {
+      this.go(this._defaultPath);
+      return;
+    }
+
+    if (route?.redirectIfAuthTo && isAuth) {
+      this.go(route?.redirectIfAuthTo);
+      return;
+    }
 
     if (this._currentRoute && this._currentRoute !== route) {
       this._currentRoute.leave();

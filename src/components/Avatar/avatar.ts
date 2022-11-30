@@ -11,11 +11,9 @@ export class Avatar extends Block {
 
     store.on(StoreEvents.Updated, () => {
       const { user } = store.getState();
-      if (user.avatar) {
         this.setProps({
-          src: `${baseFilesUrl}${user.avatar}`,
+          src: user?.avatar ? `${baseFilesUrl}${user.avatar}` : defaultAvatar,
         });
-      }
     });
 
     super('div', {

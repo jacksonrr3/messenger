@@ -38,14 +38,15 @@ export class Input extends Block {
 
     store.on(StoreEvents.Updated, () => {
       const { user: newUserData } = store.getState();
-      if (this._props?.attr?.value !== newUserData[props.valueProp]) {
+      if (!newUserData || this._props?.attr?.value !== newUserData[props.valueProp]) {
+        const value = newUserData ? newUserData[props.valueProp] : '';
         this.setProps({
           attr: {
             type,
             id,
             name: id,
             placeholder: title,
-            value: props.valueProp ? newUserData[props.valueProp] : '',
+            value: props.valueProp ? value : '',
             accept,
           },
         });

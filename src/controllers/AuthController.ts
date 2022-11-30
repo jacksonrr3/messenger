@@ -49,7 +49,10 @@ export class AuthController {
     }
     return authAPI.getUserInfo()
       .then((userString) => JSON.parse(userString))
-      .then((userObj) => store.set('user', userObj))
+      .then((userObj) => {
+        store.set('user', userObj);
+        return userObj;
+      })
       .catch((err) => {
         console.log('auth err: ', err);
       });
@@ -58,6 +61,8 @@ export class AuthController {
   static logout() {
     return authAPI.logOut()
       .then(() => {
+        console.log('logout store', store);
+        store.set('user', undefined);
         Router.getInstanse().go('/');
       })
       .catch((err) => {
