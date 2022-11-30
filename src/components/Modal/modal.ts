@@ -38,6 +38,11 @@ export class Modal extends Block {
       },
       input,
       button,
+      events: {
+        click: () => {
+          this.hide();
+        },
+      },
     });
   }
 
