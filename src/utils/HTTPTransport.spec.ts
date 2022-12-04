@@ -1,15 +1,20 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { expect } from 'chai';
 import { HTTPTransport } from './HTTPTransport';
-import server from '../../test/server';
+import app from '../../test/server';
 
 const baseUrl = 'http://localhost:5000';
+let server: any;
 
 describe('HTTP module ', () => {
   before(() => {
-    server.listen(5000, () => {
+    server = app.listen(5000, () => {
       console.log('JSON Server is running on port 5000');
     });
+  });
+
+  after(() => {
+    server.close();
   });
 
   it('do HTTP GET requests', async () => {
